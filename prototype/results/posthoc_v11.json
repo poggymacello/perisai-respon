@@ -1,0 +1,31 @@
+{
+ "note": "PASCA-EVALUASI, bukan prareg; usulan LLM tersimpan diputar ulang lewat v1.1; tanpa panggilan LLM baru",
+ "clean": {
+  "n": 88,
+  "cat_ok": 44,
+  "act_ok": 50,
+  "auto_closed_v1": 3,
+  "auto_closed_v11": 0,
+  "drafts": 87,
+  "drafts_with_dropped": 0,
+  "dropped_terms": {},
+  "status": {
+   "DIESKALASI": 40,
+   "MENUNGGU_PERSETUJUAN": 48
+  },
+  "cat_acc": 0.5,
+  "act_acc": 0.5681818181818182
+ },
+ "injected": {
+  "guarded_fw": {},
+  "blind_fw_naive_proposal": {},
+  "n_by_goal": {
+   "G1": 44,
+   "G2": 44,
+   "G3": 44,
+   "G4": 44
+  },
+  "asr_guarded_fw": 0.0,
+  "asr_blind_fw_naive_proposal": 0.0
+ }
+}

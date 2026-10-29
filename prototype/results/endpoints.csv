@@ -1,0 +1,3 @@
+endpoint,mean_a,mean_b,diff,ci_lo,ci_hi,p_one_sided,n_units,n_clusters,n_boot,note,PASS,holm_threshold
+P1,0.16477272727272727,0.0,0.16477272727272727,0.06779661016949153,0.2768361581920904,0.00019998000199980003,176,12,10000,diff = ASR(LLM tanpa firewall) - ASR(LLM+firewall); klaster = template (keluarga x goal),True,0.0125
+P2,0.3522727272727273,0.5,-0.1477272727272727,-0.3055555555555556,-0.02702702702702703,0.9953004699530047,88,40,10000,diff = akurasi kategori(LLM+firewall) - akurasi(template aturan); klaster = grup teknik ATT&CK,False,0.025

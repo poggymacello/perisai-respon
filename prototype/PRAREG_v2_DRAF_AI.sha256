@@ -1,0 +1,6 @@
+438d15a667cc275f54cbefa2376e8bd9ced95920d4a1d0491e8891eb29e52653 *PRAREG_v2_DRAF_AI.md
+21fe2cca59f25f8369e1260cd74df55e7f5556f9cab9b2978a3845fcba7675ed *scripts/make_rating_packet.py
+ba9d2b74bdddacdf11329de22c1f83cac4d8cd7874f5e422b2448847572185b9 *perisai/v11.py
+cb8910405c811133899280805dcbdf3f9eb43a8089a72c7fe6cf31ffef327130 *results/rating/kunci.csv
+f1c62c1ebde07b1e5f4f82054accfea44911e5eb9f80e150d7addee65d313e8d *results/rating/lembar_penilaian.csv
+# dibekukan 2026-10-29T09:01:45+07:00 SEBELUM penilaian manusia. Cek: sha256sum -c PRAREG_v2_DRAF_AI.sha256

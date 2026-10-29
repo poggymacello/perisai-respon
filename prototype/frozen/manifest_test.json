@@ -1,0 +1,1762 @@
+[
+ {
+  "case_id": "credential_access__cmd_dumping_ntds_dit_file_ntdsutil",
+  "dataset": "credential_access__cmd_dumping_ntds_dit_file_ntdsutil.zip",
+  "label": "credential_access",
+  "group": "T1003.003",
+  "side": "test",
+  "n_events_recording": 11184,
+  "primary_host": "DC01.pandalab.com",
+  "positions": [
+   53,
+   63,
+   178,
+   946,
+   6296,
+   10965,
+   8,
+   61
+  ],
+  "sha256": "1eb822f59ca778588ccdd8aee186cb9042dedfd07260f5bc9c7dbf0c13c68cb4"
+ },
+ {
+  "case_id": "credential_access__cmd_lsass_memory_dumpert_syscalls",
+  "dataset": "credential_access__cmd_lsass_memory_dumpert_syscalls.zip",
+  "label": "credential_access",
+  "group": "T1003.001",
+  "side": "test",
+  "n_events_recording": 118,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   50,
+   22,
+   19,
+   45,
+   51,
+   73,
+   100,
+   60
+  ],
+  "sha256": "9b8cc51e02b03e7504723e10d76470ff157f1a6e1450219a23a9e290a5637570"
+ },
+ {
+  "case_id": "credential_access__cmd_sam_copy_esentutl",
+  "dataset": "credential_access__cmd_sam_copy_esentutl.zip",
+  "label": "credential_access",
+  "group": "T1003.002",
+  "side": "test",
+  "n_events_recording": 915,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   913,
+   201,
+   914,
+   198,
+   273,
+   311,
+   656,
+   889
+  ],
+  "sha256": "91f09eb5007f32b255e2ddc537426855e5ff9624b785d1e512dc0da6a8c84b79"
+ },
+ {
+  "case_id": "credential_access__covenant_dcsync_dcerpc_drsuapi_DsGetNCChanges",
+  "dataset": "credential_access__covenant_dcsync_dcerpc_drsuapi_DsGetNCChanges.zip",
+  "label": "credential_access",
+  "group": "T1003.006",
+  "side": "test",
+  "n_events_recording": 869,
+  "primary_host": "MORDORDC.theshire.local",
+  "positions": [
+   28,
+   42,
+   43,
+   360,
+   739,
+   135,
+   148,
+   119
+  ],
+  "sha256": "0c2d30fb8752e8df241f7237d4d63a0ad812f5eb6846924f8febbac134118686"
+ },
+ {
+  "case_id": "credential_access__empire_dcsync_dcerpc_drsuapi_DsGetNCChanges",
+  "dataset": "credential_access__empire_dcsync_dcerpc_drsuapi_DsGetNCChanges.zip",
+  "label": "credential_access",
+  "group": "T1003.006",
+  "side": "test",
+  "n_events_recording": 8465,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   6816,
+   557,
+   571,
+   362,
+   563,
+   357,
+   553,
+   612
+  ],
+  "sha256": "e66bc526aadf061ca2899557a0a2bae2a694286936056ce558d0e50493608c92"
+ },
+ {
+  "case_id": "credential_access__empire_mimikatz_backupkeys_dcerpc_smb_lsarpc",
+  "dataset": "credential_access__empire_mimikatz_backupkeys_dcerpc_smb_lsarpc.zip",
+  "label": "credential_access",
+  "group": "T1003",
+  "side": "test",
+  "n_events_recording": 7887,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   6758,
+   229,
+   317,
+   406,
+   5277,
+   328,
+   370,
+   207
+  ],
+  "sha256": "d9e882bce7f4a6c655115708fe492d87d534b81bef40a85d3167f3e8b429b570"
+ },
+ {
+  "case_id": "credential_access__empire_mimikatz_logonpasswords",
+  "dataset": "credential_access__empire_mimikatz_logonpasswords.zip",
+  "label": "credential_access",
+  "group": "T1003.001",
+  "side": "test",
+  "n_events_recording": 6026,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   2450,
+   281,
+   302,
+   385,
+   294,
+   313,
+   379,
+   194
+  ],
+  "sha256": "619dd02f86638671791459f7d6e3ebbbe8a3bd2bee3ccafd2b91d047f747e95d"
+ },
+ {
+  "case_id": "credential_access__empire_mimikatz_lsadump_patch",
+  "dataset": "credential_access__empire_mimikatz_lsadump_patch.zip",
+  "label": "credential_access",
+  "group": "T1003.001",
+  "side": "test",
+  "n_events_recording": 6982,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   3366,
+   4621,
+   254,
+   259,
+   347,
+   270,
+   301,
+   341
+  ],
+  "sha256": "6c9a018a020321fec013c287bd18c0605e0edbae729d24dcc377dfa4a8e8c416"
+ },
+ {
+  "case_id": "credential_access__empire_mimikatz_sam_access",
+  "dataset": "credential_access__empire_mimikatz_sam_access.zip",
+  "label": "credential_access",
+  "group": "T1003.002",
+  "side": "test",
+  "n_events_recording": 12349,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   7791,
+   4586,
+   850,
+   862,
+   613,
+   798,
+   612,
+   804
+  ],
+  "sha256": "44a63408aa99fb59cb9a7ba98e2a2f9295820932983a33621150d0f1943c4b44"
+ },
+ {
+  "case_id": "credential_access__empire_ninjacopy_dumping_ntds_dit_file",
+  "dataset": "credential_access__empire_ninjacopy_dumping_ntds_dit_file.zip",
+  "label": "credential_access",
+  "group": "T1003.003",
+  "side": "test",
+  "n_events_recording": 13969,
+  "primary_host": "DC01.pandalab.com",
+  "positions": [
+   12809,
+   12209,
+   752,
+   11814,
+   11905,
+   11919,
+   75,
+   1477
+  ],
+  "sha256": "a2c349bb6414222f806d9d0a236247f450f462a9d800c58c579b77cf686e7b57"
+ },
+ {
+  "case_id": "credential_access__empire_over_pth_patch_lsass",
+  "dataset": "credential_access__empire_over_pth_patch_lsass.zip",
+  "label": "credential_access",
+  "group": "T1550.002",
+  "side": "test",
+  "n_events_recording": 10271,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   5114,
+   7209,
+   482,
+   492,
+   281,
+   494,
+   541,
+   288
+  ],
+  "sha256": "3f05fc2c89ad1f4ecf484f046562da750585e17426bb41af2f5eedc7c5d78f41"
+ },
+ {
+  "case_id": "credential_access__empire_powerdump_sam_access",
+  "dataset": "credential_access__empire_powerdump_sam_access.zip",
+  "label": "credential_access",
+  "group": "T1003.002",
+  "side": "test",
+  "n_events_recording": 1182,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   417,
+   120,
+   136,
+   229,
+   455,
+   111,
+   113,
+   114
+  ],
+  "sha256": "cc1119e6c085b9c83eb443d692a6fbff408f1c1ecab92da57c76eb7861512264"
+ },
+ {
+  "case_id": "credential_access__empire_shell_reg_dump_sam",
+  "dataset": "credential_access__empire_shell_reg_dump_sam.zip",
+  "label": "credential_access",
+  "group": "T1003.002",
+  "side": "test",
+  "n_events_recording": 738,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   189,
+   226,
+   16,
+   18,
+   178,
+   241,
+   250,
+   379
+  ],
+  "sha256": "dd5f92cafa0851fd7d6fa1cb6bf73cae454ca9eedf904fa258d43e2816b3469b"
+ },
+ {
+  "case_id": "credential_access__empire_shell_rubeus_asktgt_createnetonly",
+  "dataset": "credential_access__empire_shell_rubeus_asktgt_createnetonly.zip",
+  "label": "credential_access",
+  "group": "T1003.003",
+  "side": "test",
+  "n_events_recording": 3590,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   1988,
+   2069,
+   2535,
+   306,
+   640,
+   298,
+   691,
+   18
+  ],
+  "sha256": "18d5aa597b072a1839efdc6d34111d7f39f2a19f46a97095ddb483767cfe6f73"
+ },
+ {
+  "case_id": "credential_access__empire_shell_rubeus_asktgt_ptt",
+  "dataset": "credential_access__empire_shell_rubeus_asktgt_ptt.zip",
+  "label": "credential_access",
+  "group": "T1003.003",
+  "side": "test",
+  "n_events_recording": 1179,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   174,
+   505,
+   291,
+   6,
+   8,
+   166,
+   122,
+   177
+  ],
+  "sha256": "5e0929f804fe40208c42509f09e26083bbfdc6fed26597baed1a633515159bde"
+ },
+ {
+  "case_id": "credential_access__psh_input_capture_promptforcreds",
+  "dataset": "credential_access__psh_input_capture_promptforcreds.zip",
+  "label": "credential_access",
+  "group": "T1056.002",
+  "side": "test",
+  "n_events_recording": 163,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   0,
+   162,
+   62,
+   106,
+   107,
+   108,
+   18,
+   35
+  ],
+  "sha256": "47f7e093012e3ad45ab6018a87fbb54a34277911a339fdc3d8fa12afc6bb1bed"
+ },
+ {
+  "case_id": "credential_access__psh_lsass_memory_dump_comsvcs",
+  "dataset": "credential_access__psh_lsass_memory_dump_comsvcs.zip",
+  "label": "credential_access",
+  "group": "T1003.001",
+  "side": "test",
+  "n_events_recording": 184,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   16,
+   106,
+   73,
+   35,
+   62,
+   74,
+   93,
+   164
+  ],
+  "sha256": "71d78e71aecc5486d7a3248d96090295d4c22b74ddd0fbc13f431f734114b3f3"
+ },
+ {
+  "case_id": "credential_access__rdp_interactive_taskmanager_lsass_dump",
+  "dataset": "credential_access__rdp_interactive_taskmanager_lsass_dump.zip",
+  "label": "credential_access",
+  "group": "T1003.001",
+  "side": "test",
+  "n_events_recording": 5489,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   1877,
+   533,
+   634,
+   199,
+   139,
+   222,
+   248,
+   251
+  ],
+  "sha256": "f080a063925245f2b45e26fba494270ffa502e391d0dbbef688d254ca99298ae"
+ },
+ {
+  "case_id": "defense_evasion__auditpol_system_user_auditpolicy_modification",
+  "dataset": "defense_evasion__auditpol_system_user_auditpolicy_modification.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 13645,
+  "primary_host": "pedro-computer",
+  "positions": [
+   310,
+   58,
+   12798,
+   12799,
+   12800,
+   12801,
+   7105,
+   8853
+  ],
+  "sha256": "80b6a3af53993408de8f50ce5ae0d289e9d7cbd2b549abe586bc4a6f504eb8c7"
+ },
+ {
+  "case_id": "defense_evasion__cmd_disable_eventlog_service_startuptype_modification_via_registry",
+  "dataset": "defense_evasion__cmd_disable_eventlog_service_startuptype_modification_via_registry.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 7491,
+  "primary_host": "Pedro01",
+  "positions": [
+   240,
+   41,
+   0,
+   11,
+   17,
+   65,
+   66,
+   81
+  ],
+  "sha256": "5fb02508905df9598175aac2236f65824d4d72ffe0b1bad952f8c037f592e5f2"
+ },
+ {
+  "case_id": "defense_evasion__cmd_mshta_javascript_getobject_sct",
+  "dataset": "defense_evasion__cmd_mshta_javascript_getobject_sct.zip",
+  "label": "defense_evasion",
+  "group": "T1218.005",
+  "side": "test",
+  "n_events_recording": 1151,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   4,
+   201,
+   376,
+   409,
+   13,
+   204,
+   212,
+   219
+  ],
+  "sha256": "bc932aa8c259a9d61dc92894d4c721f91ebf67456a425d902242d2eb1a1426ac"
+ },
+ {
+  "case_id": "defense_evasion__cmd_mshta_vbscript_execute_psh",
+  "dataset": "defense_evasion__cmd_mshta_vbscript_execute_psh.zip",
+  "label": "defense_evasion",
+  "group": "T1218.005",
+  "side": "test",
+  "n_events_recording": 1127,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   3,
+   274,
+   397,
+   451,
+   277,
+   282,
+   284,
+   310
+  ],
+  "sha256": "c0d7af72aa7ef71406cd683db91abc4f520d56666a255bf74c78f6497377157b"
+ },
+ {
+  "case_id": "defense_evasion__cmd_netsh_fw_mod_open_ports",
+  "dataset": "defense_evasion__cmd_netsh_fw_mod_open_ports.zip",
+  "label": "defense_evasion",
+  "group": "T1562.004",
+  "side": "test",
+  "n_events_recording": 2366,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   0,
+   2365,
+   840,
+   1707,
+   1730,
+   1971,
+   2065,
+   1
+  ],
+  "sha256": "db8dacafc4c823a0f9c4ce3c31ffd23cc99d9c2e0a9d61bdeeb5dac0815a7237"
+ },
+ {
+  "case_id": "defense_evasion__cmd_process_herpaderping_mimiexplorer",
+  "dataset": "defense_evasion__cmd_process_herpaderping_mimiexplorer.zip",
+  "label": "defense_evasion",
+  "group": "nometa:cmd_process_herpaderping_mimiexplorer.zip",
+  "side": "test",
+  "n_events_recording": 265,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   1,
+   45,
+   57,
+   0,
+   2,
+   3,
+   44,
+   54
+  ],
+  "sha256": "70949234fa6fc75a4ddccee164ac009e42b7c0af53621c60f75757cb1efa1505"
+ },
+ {
+  "case_id": "defense_evasion__cmd_psh_stop_netprofm_eventlog_after_reboot",
+  "dataset": "defense_evasion__cmd_psh_stop_netprofm_eventlog_after_reboot.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 12704,
+  "primary_host": "Pedro01",
+  "positions": [
+   979,
+   94,
+   12478,
+   12479,
+   46,
+   52,
+   118,
+   124
+  ],
+  "sha256": "6cde4e161e72cc9881ad19c381c012a82311fcc1a3ef2a4068303d2235513ceb"
+ },
+ {
+  "case_id": "defense_evasion__cmd_psh_stop_netprofm_eventlog_before_reboot",
+  "dataset": "defense_evasion__cmd_psh_stop_netprofm_eventlog_before_reboot.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 7511,
+  "primary_host": "Pedro01",
+  "positions": [
+   250,
+   64,
+   5,
+   12,
+   88,
+   89,
+   93,
+   94
+  ],
+  "sha256": "6c03c37dddf2e40ecfcab16afafd819bba9d2a6a10125a670bbce52a9f19c99b"
+ },
+ {
+  "case_id": "defense_evasion__cmd_stop_event_logging_controlset001_minint_key",
+  "dataset": "defense_evasion__cmd_stop_event_logging_controlset001_minint_key.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 16010,
+  "primary_host": "Pedro01",
+  "positions": [
+   230,
+   159,
+   16,
+   30,
+   31,
+   32,
+   33,
+   41
+  ],
+  "sha256": "d3f53135cd267db1b2f40d5a02c1349b94be4925fc7941529b4338d58166b449"
+ },
+ {
+  "case_id": "defense_evasion__cmd_stop_event_logging_controlset_minint_key",
+  "dataset": "defense_evasion__cmd_stop_event_logging_controlset_minint_key.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 5778,
+  "primary_host": "Pedro01",
+  "positions": [
+   441,
+   47,
+   6,
+   17,
+   23,
+   71,
+   72,
+   76
+  ],
+  "sha256": "4035597504267a5e3cc1f29a4b83252a87275a668df16147cdf7b20754563a08"
+ },
+ {
+  "case_id": "defense_evasion__cmd_wevtutil_modify_security_eventlog_path",
+  "dataset": "defense_evasion__cmd_wevtutil_modify_security_eventlog_path.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 25208,
+  "primary_host": "DESKTOP-CQF82L6",
+  "positions": [
+   25206,
+   794,
+   103,
+   123,
+   142,
+   159,
+   195,
+   446
+  ],
+  "sha256": "ad9ab38cad43c3834553cf09c1e38f4a04a222b70ae4f8eb10c88d76f518ac44"
+ },
+ {
+  "case_id": "defense_evasion__covenant_installutil",
+  "dataset": "defense_evasion__covenant_installutil.zip",
+  "label": "defense_evasion",
+  "group": "T1218.004",
+  "side": "test",
+  "n_events_recording": 1730,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   576,
+   585,
+   625,
+   636,
+   664,
+   822,
+   863,
+   44
+  ],
+  "sha256": "f73cdfbfc265861d5f1f49b0bc0aaf551dcbd54874f0741df006446518272689"
+ },
+ {
+  "case_id": "defense_evasion__covenant_lolbin_wuauclt_createremotethread",
+  "dataset": "defense_evasion__covenant_lolbin_wuauclt_createremotethread.zip",
+  "label": "defense_evasion",
+  "group": "T1218",
+  "side": "test",
+  "n_events_recording": 1326,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   613,
+   97,
+   87,
+   440,
+   527,
+   529,
+   539,
+   541
+  ],
+  "sha256": "bfd0a77fc1c8712e0ab43d3c7173b24ec89565ff66e8dcc3655379cf8adc4fab"
+ },
+ {
+  "case_id": "defense_evasion__empire_enable_rdp",
+  "dataset": "defense_evasion__empire_enable_rdp.tar.gz",
+  "label": "defense_evasion",
+  "group": "T1112",
+  "side": "test",
+  "n_events_recording": 2668,
+  "primary_host": "HR001.shire.com",
+  "positions": [
+   288,
+   296,
+   271,
+   2174,
+   153,
+   7,
+   8,
+   11
+  ],
+  "sha256": "631dc1c15584d8ef21f234ba50eef3a3665a51e7a1a13915644ab69a19ef67e9"
+ },
+ {
+  "case_id": "defense_evasion__empire_launcher_sct_regsvr32",
+  "dataset": "defense_evasion__empire_launcher_sct_regsvr32.zip",
+  "label": "defense_evasion",
+  "group": "T1218.010",
+  "side": "test",
+  "n_events_recording": 2390,
+  "primary_host": "WORKSTATION5.mordor.local",
+  "positions": [
+   96,
+   218,
+   223,
+   356,
+   219,
+   239,
+   282,
+   205
+  ],
+  "sha256": "63b42c3a6cce2d651f5da9aecba2e01dd2a9da588cece9b21ae2f1125533801c"
+ },
+ {
+  "case_id": "defense_evasion__empire_monologue_netntlm_downgrade",
+  "dataset": "defense_evasion__empire_monologue_netntlm_downgrade.zip",
+  "label": "defense_evasion",
+  "group": "T1112",
+  "side": "test",
+  "n_events_recording": 1635,
+  "primary_host": "IT001.shire.com",
+  "positions": [
+   376,
+   504,
+   505,
+   546,
+   549,
+   564,
+   608,
+   187
+  ],
+  "sha256": "800f8364ee920f1d2372feeb427179b9aeb190c7da9db0d80fdf4e546651cc7b"
+ },
+ {
+  "case_id": "defense_evasion__empire_powerview_ldap_ntsecuritydescriptor",
+  "dataset": "defense_evasion__empire_powerview_ldap_ntsecuritydescriptor.zip",
+  "label": "defense_evasion",
+  "group": "T1222.001",
+  "side": "test",
+  "n_events_recording": 9002,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   2462,
+   2366,
+   2368,
+   2370,
+   2372,
+   2375,
+   2382,
+   2384
+  ],
+  "sha256": "f381598fd41eb51d180acc69f5a5f8e95ea0a6f0d46046cb34936921d74a7eb9"
+ },
+ {
+  "case_id": "defense_evasion__empire_scm_dll_hijack_ikeext",
+  "dataset": "defense_evasion__empire_scm_dll_hijack_ikeext.tar.gz",
+  "label": "defense_evasion",
+  "group": "nometa:empire_scm_dll_hijack_ikeext.tar.gz",
+  "side": "test",
+  "n_events_recording": 14722,
+  "primary_host": "HR001.shire.com",
+  "positions": [
+   13107,
+   13199,
+   13247,
+   13249,
+   13126,
+   6013,
+   6017,
+   10332
+  ],
+  "sha256": "7daeae338799f3a0decedb770e27a60f6a5c57b7b3022d6b682ecbba3236739c"
+ },
+ {
+  "case_id": "defense_evasion__empire_wdigest_downgrade",
+  "dataset": "defense_evasion__empire_wdigest_downgrade.tar.gz",
+  "label": "defense_evasion",
+  "group": "T1112",
+  "side": "test",
+  "n_events_recording": 2710,
+  "primary_host": "HR001.shire.com",
+  "positions": [
+   343,
+   583,
+   1,
+   3,
+   5,
+   318,
+   326,
+   0
+  ],
+  "sha256": "277b1a5db059c873866be7a26da226400d67da7ef1de13dd494ed19a44b88596"
+ },
+ {
+  "case_id": "defense_evasion__empire_wmic_add_user_backdoor",
+  "dataset": "defense_evasion__empire_wmic_add_user_backdoor.zip",
+  "label": "defense_evasion",
+  "group": "T1047",
+  "side": "test",
+  "n_events_recording": 12278,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   164,
+   413,
+   590,
+   633,
+   695,
+   762,
+   7308,
+   436
+  ],
+  "sha256": "b45137d1eaa5055f7360a2fa372a2f9b435a790132721e95bddc71a6612e434c"
+ },
+ {
+  "case_id": "defense_evasion__psh_cmstp_execution_bypassuac",
+  "dataset": "defense_evasion__psh_cmstp_execution_bypassuac.zip",
+  "label": "defense_evasion",
+  "group": "T1218.003",
+  "side": "test",
+  "n_events_recording": 1166,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   180,
+   383,
+   522,
+   1019,
+   1047,
+   1022,
+   1027,
+   1043
+  ],
+  "sha256": "2a84e2ca4b082e2d938d7671f734a839716f142eb5760c576fce17960a6b7c54"
+ },
+ {
+  "case_id": "defense_evasion__psh_disable_eventlog_service_startuptype_modification",
+  "dataset": "defense_evasion__psh_disable_eventlog_service_startuptype_modification.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 6563,
+  "primary_host": "Pedro01",
+  "positions": [
+   6497,
+   6505,
+   6513,
+   6500,
+   295,
+   44,
+   6479,
+   6487
+  ],
+  "sha256": "0b0cd1db5c96641005a100fd0a15e13c062e88d21f3dc7eb783b3086dc2cf075"
+ },
+ {
+  "case_id": "defense_evasion__psh_hh_local_html_payload",
+  "dataset": "defense_evasion__psh_hh_local_html_payload.zip",
+  "label": "defense_evasion",
+  "group": "T1218.001",
+  "side": "test",
+  "n_events_recording": 1221,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   0,
+   1220,
+   16,
+   31,
+   32,
+   43,
+   55,
+   69
+  ],
+  "sha256": "c7c765cad09695c56c2253f8dadb28deeadb4510df4a753b1f420437db9facf2"
+ },
+ {
+  "case_id": "defense_evasion__psh_metasploit_stop_netprofm_eventlog_after_reboot",
+  "dataset": "defense_evasion__psh_metasploit_stop_netprofm_eventlog_after_reboot.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 10854,
+  "primary_host": "Pedro01",
+  "positions": [
+   10742,
+   10750,
+   10758,
+   10745,
+   656,
+   111,
+   10641,
+   10724
+  ],
+  "sha256": "002e843c64a4da406f4e882b5aa7f20f11ff0f95e24f52be9de670d7b397deb3"
+ },
+ {
+  "case_id": "defense_evasion__psh_metasploit_stop_netprofm_eventlog_before_reboot",
+  "dataset": "defense_evasion__psh_metasploit_stop_netprofm_eventlog_before_reboot.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 24252,
+  "primary_host": "Pedro01",
+  "positions": [
+   24186,
+   24194,
+   24202,
+   24189,
+   1546,
+   489,
+   24168,
+   24176
+  ],
+  "sha256": "206595446e8d8d002d4182118c3cefcf45dc0f5207bf78361b83e0f5f7336b06"
+ },
+ {
+  "case_id": "defense_evasion__psh_mshta_html_application_execution",
+  "dataset": "defense_evasion__psh_mshta_html_application_execution.zip",
+  "label": "defense_evasion",
+  "group": "T1218.005",
+  "side": "test",
+  "n_events_recording": 1553,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   200,
+   437,
+   439,
+   619,
+   654,
+   442,
+   443,
+   449
+  ],
+  "sha256": "1d93f1d51e3e46abf9ac0ed171aac89fd0927bfc7bfb2675080b02eb3b6d40c4"
+ },
+ {
+  "case_id": "defense_evasion__psh_register_cimprovider_execute_dll",
+  "dataset": "defense_evasion__psh_register_cimprovider_execute_dll.zip",
+  "label": "defense_evasion",
+  "group": "T1218",
+  "side": "test",
+  "n_events_recording": 1316,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   0,
+   1314,
+   1315,
+   19,
+   44,
+   61,
+   70,
+   83
+  ],
+  "sha256": "a8ab1ed07a0fda16acfd16632fa66943d24efb30c1a474ee870874b2c8e838de"
+ },
+ {
+  "case_id": "defense_evasion__psh_stop_event_logging_controlset001_minint_key",
+  "dataset": "defense_evasion__psh_stop_event_logging_controlset001_minint_key.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 8285,
+  "primary_host": "Pedro01",
+  "positions": [
+   8214,
+   8222,
+   8230,
+   8217,
+   1497,
+   84,
+   8196,
+   8204
+  ],
+  "sha256": "9a40a45bee407ede00897384c0ebafe518622d81c4840cba59483af086cb31cc"
+ },
+ {
+  "case_id": "defense_evasion__psh_stop_event_logging_controlset_minint_key",
+  "dataset": "defense_evasion__psh_stop_event_logging_controlset_minint_key.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 6367,
+  "primary_host": "Pedro01",
+  "positions": [
+   6296,
+   6304,
+   6312,
+   6299,
+   108,
+   46,
+   6278,
+   6286
+  ],
+  "sha256": "ef4f28d895e49177d2182f95c134691bdbf70f2fea4c301507dd9a8141637793"
+ },
+ {
+  "case_id": "defense_evasion__purplesharp_pe_injection_createremotethread",
+  "dataset": "defense_evasion__purplesharp_pe_injection_createremotethread.zip",
+  "label": "defense_evasion",
+  "group": "T1055.002",
+  "side": "test",
+  "n_events_recording": 692,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   238,
+   0,
+   690,
+   691,
+   5,
+   51,
+   94,
+   95
+  ],
+  "sha256": "d28745d4b6f259a27dc7f77e39ccadbbc2d86b6893dc531245bafd6057ca9b05"
+ },
+ {
+  "case_id": "defense_evasion__reg_cmd_process_commandline_logging_disabled",
+  "dataset": "defense_evasion__reg_cmd_process_commandline_logging_disabled.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 8705,
+  "primary_host": "pedro-computer",
+  "positions": [
+   207,
+   35,
+   8615,
+   8616,
+   5,
+   12,
+   59,
+   60
+  ],
+  "sha256": "5dc2e8ee4266dce54dd11f87752c6c197d7375bb2d9f515f4c0165f374996920"
+ },
+ {
+  "case_id": "defense_evasion__reg_disable_eventlog_service_startuptype_modification_via_registry",
+  "dataset": "defense_evasion__reg_disable_eventlog_service_startuptype_modification_via_registry.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 3872,
+  "primary_host": "Pedro01",
+  "positions": [
+   240,
+   43,
+   2,
+   13,
+   20,
+   67,
+   68,
+   567
+  ],
+  "sha256": "6d4096cc7b5b880e6276951d2727802ea7e89b541c103540295e0a042da007b8"
+ },
+ {
+  "case_id": "defense_evasion__reg_meterpreter_process_commandline_logging_disabled",
+  "dataset": "defense_evasion__reg_meterpreter_process_commandline_logging_disabled.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 12752,
+  "primary_host": "pedro-computer",
+  "positions": [
+   120,
+   35,
+   12657,
+   12658,
+   12659,
+   5,
+   12,
+   59
+  ],
+  "sha256": "609b151d1fdcc8c1884a536c6825fa4bbcaf6eedc477438006c2ec925f080d72"
+ },
+ {
+  "case_id": "defense_evasion__reg_stop_event_logging_controlset001_minint_key",
+  "dataset": "defense_evasion__reg_stop_event_logging_controlset001_minint_key.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 4923,
+  "primary_host": "Pedro01",
+  "positions": [
+   107,
+   42,
+   1,
+   12,
+   18,
+   66,
+   67,
+   71
+  ],
+  "sha256": "7076f4477b4d50548e235d74f159821f5325f616edbc08e2fb9c6ede806e6f97"
+ },
+ {
+  "case_id": "defense_evasion__reg_stop_event_logging_controlset_minint_key",
+  "dataset": "defense_evasion__reg_stop_event_logging_controlset_minint_key.zip",
+  "label": "defense_evasion",
+  "group": "T1562.002",
+  "side": "test",
+  "n_events_recording": 6133,
+  "primary_host": "Pedro01",
+  "positions": [
+   146,
+   45,
+   4,
+   15,
+   21,
+   69,
+   70,
+   74
+  ],
+  "sha256": "5059dfe11398d845929ded4235efd6320a1b26dc3b83e4f7d8224328629a303d"
+ },
+ {
+  "case_id": "discovery__cmd_discover_iexplorer_version_registry",
+  "dataset": "discovery__cmd_discover_iexplorer_version_registry.zip",
+  "label": "discovery",
+  "group": "T1518",
+  "side": "test",
+  "n_events_recording": 68,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   0,
+   67,
+   1,
+   8,
+   9,
+   29,
+   30,
+   10
+  ],
+  "sha256": "eac39feafaba8513efb8ee313f8caa537f1737bed4683bd8f064c29cd60adee8"
+ },
+ {
+  "case_id": "discovery__cmd_seatbelt_group_user",
+  "dataset": "discovery__cmd_seatbelt_group_user.zip",
+  "label": "discovery",
+  "group": "T1012",
+  "side": "test",
+  "n_events_recording": 451,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   0,
+   5,
+   76,
+   146,
+   147,
+   339,
+   423,
+   111
+  ],
+  "sha256": "bbae13f6258d22a0066af1cab992446f7c898fd7721cfab2426fc3ad0ef904b2"
+ },
+ {
+  "case_id": "discovery__covenant_getdomaingroup_ldap_searchrequest_domain_admins",
+  "dataset": "discovery__covenant_getdomaingroup_ldap_searchrequest_domain_admins.zip",
+  "label": "discovery",
+  "group": "T1069.002",
+  "side": "test",
+  "n_events_recording": 619,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   49,
+   9,
+   46,
+   76,
+   91,
+   223,
+   224,
+   280
+  ],
+  "sha256": "40fddf5936061c94f031a93ddee429ac702146f37ba2dd9c144420f8d420dd47"
+ },
+ {
+  "case_id": "discovery__empire_find_localadmin_smb_svcctl_OpenSCManager",
+  "dataset": "discovery__empire_find_localadmin_smb_svcctl_OpenSCManager.zip",
+  "label": "discovery",
+  "group": "T1069.001",
+  "side": "test",
+  "n_events_recording": 4570,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   1371,
+   213,
+   216,
+   217,
+   219,
+   221,
+   229,
+   232
+  ],
+  "sha256": "0a4aab0851f77abd9f86d845b44e3b8dffdef2e5a63a1d20a133ff3c4c9f631c"
+ },
+ {
+  "case_id": "discovery__empire_getsession_dcerpc_smb_srvsvc_NetSessEnum",
+  "dataset": "discovery__empire_getsession_dcerpc_smb_srvsvc_NetSessEnum.zip",
+  "label": "discovery",
+  "group": "T1049",
+  "side": "test",
+  "n_events_recording": 5047,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   3978,
+   3835,
+   3837,
+   3839,
+   3841,
+   3842,
+   3850,
+   3852
+  ],
+  "sha256": "e6ad400defd0601507e732116efaf093063caefa6a29dae7a9a83701a2b5566f"
+ },
+ {
+  "case_id": "discovery__empire_shell_net_localgroup_administrators",
+  "dataset": "discovery__empire_shell_net_localgroup_administrators.zip",
+  "label": "discovery",
+  "group": "T1069.001",
+  "side": "test",
+  "n_events_recording": 884,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   112,
+   172,
+   72,
+   82,
+   717,
+   17,
+   19,
+   57
+  ],
+  "sha256": "5673cb4a70a64f1740b05aa152a77959929f167d4c5d9f90d9cb666a55f07060"
+ },
+ {
+  "case_id": "discovery__empire_shell_rpc_samr_smb_group_domain_admins_standard_user",
+  "dataset": "discovery__empire_shell_rpc_samr_smb_group_domain_admins_standard_user.zip",
+  "label": "discovery",
+  "group": "T1069.002",
+  "side": "test",
+  "n_events_recording": 1749,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   535,
+   675,
+   711,
+   526,
+   509,
+   33,
+   2,
+   4
+  ],
+  "sha256": "4cb2acd90d45c2d24a9560331f5f45fb0394b0146f01bbc93b5d88afe056f38e"
+ },
+ {
+  "case_id": "execution__cmd_sharpview_pcre_net",
+  "dataset": "execution__cmd_sharpview_pcre_net.zip",
+  "label": "execution",
+  "group": "T1059",
+  "side": "test",
+  "n_events_recording": 267,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   0,
+   1,
+   103,
+   119,
+   120,
+   217,
+   244,
+   261
+  ],
+  "sha256": "43715e1e315b08cd83e8d75a58dd16a94cf629c8119e08cf8a4fd47aec82af5a"
+ },
+ {
+  "case_id": "execution__psh_python_webserver",
+  "dataset": "execution__psh_python_webserver.zip",
+  "label": "execution",
+  "group": "T1059",
+  "side": "test",
+  "n_events_recording": 2395,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   0,
+   1243,
+   2074,
+   3,
+   1660,
+   1783,
+   1786,
+   2386
+  ],
+  "sha256": "d3dd62f558aba8a5b7ad252995e63f929842f0a289d8d0d2b95dc060b78b1e94"
+ },
+ {
+  "case_id": "lateral_movement__covenant_com_wsman_automation",
+  "dataset": "lateral_movement__covenant_com_wsman_automation.zip",
+  "label": "lateral_movement",
+  "group": "nometa:covenant_com_wsman_automation.zip",
+  "side": "test",
+  "n_events_recording": 811,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   592,
+   599,
+   670,
+   707,
+   596,
+   640,
+   662,
+   111
+  ],
+  "sha256": "6bd2edf0820a6b0ef883c875ceb40a755988fb9f3218c31cb541ba73d4dd38cb"
+ },
+ {
+  "case_id": "lateral_movement__covenant_dcom_executeexcel4macro_allowed",
+  "dataset": "lateral_movement__covenant_dcom_executeexcel4macro_allowed.zip",
+  "label": "lateral_movement",
+  "group": "T1021.003",
+  "side": "test",
+  "n_events_recording": 8121,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   2995,
+   3030,
+   1,
+   1143,
+   1151,
+   1191,
+   1210,
+   1213
+  ],
+  "sha256": "1c612ac8a4e957fc51bd9d9a66801fde38cd328457b177a345c4ce2cf6476297"
+ },
+ {
+  "case_id": "lateral_movement__covenant_dcom_iertutil_dll_hijack",
+  "dataset": "lateral_movement__covenant_dcom_iertutil_dll_hijack.zip",
+  "label": "lateral_movement",
+  "group": "T1021.003",
+  "side": "test",
+  "n_events_recording": 37814,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   21279,
+   13977,
+   14051,
+   12882,
+   12884,
+   9354,
+   9495,
+   9933
+  ],
+  "sha256": "257f9792d243d006db2eb1cd2e4281b272d0050f94828ddd5c3666b17977bb1a"
+ },
+ {
+  "case_id": "lateral_movement__covenant_dcom_registerxll",
+  "dataset": "lateral_movement__covenant_dcom_registerxll.zip",
+  "label": "lateral_movement",
+  "group": "T1021.003",
+  "side": "test",
+  "n_events_recording": 5504,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   2920,
+   5050,
+   5064,
+   144,
+   2619,
+   2620,
+   2625,
+   2670
+  ],
+  "sha256": "f6c48347a85a3b1a37f03b28c0d22642542b633c057c385e5b99d100a4899f3f"
+ },
+ {
+  "case_id": "lateral_movement__covenant_psremoting_command",
+  "dataset": "lateral_movement__covenant_psremoting_command.zip",
+  "label": "lateral_movement",
+  "group": "T1021.006",
+  "side": "test",
+  "n_events_recording": 4284,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   656,
+   692,
+   724,
+   872,
+   3311,
+   3317,
+   3415,
+   866
+  ],
+  "sha256": "60a4ab0ea92122acc8fa7722e1b68df62494d764405ae50fcc21a7c6eeee5444"
+ },
+ {
+  "case_id": "lateral_movement__covenant_sharpwmi_create_dcerpc_wmi",
+  "dataset": "lateral_movement__covenant_sharpwmi_create_dcerpc_wmi.zip",
+  "label": "lateral_movement",
+  "group": "T1047",
+  "side": "test",
+  "n_events_recording": 2343,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   995,
+   292,
+   792,
+   844,
+   976,
+   1131,
+   1179,
+   1949
+  ],
+  "sha256": "3292aad94da29d18144ba35726173261a57e9688561f401e019894faceef99fb"
+ },
+ {
+  "case_id": "lateral_movement__covenant_wmi_remote_event_subscription_ActiveScriptEventConsumers",
+  "dataset": "lateral_movement__covenant_wmi_remote_event_subscription_ActiveScriptEventConsumers.zip",
+  "label": "lateral_movement",
+  "group": "T1047",
+  "side": "test",
+  "n_events_recording": 3719,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   156,
+   125,
+   157,
+   476,
+   3303,
+   3307,
+   3308,
+   1794
+  ],
+  "sha256": "5e7503069aea2cc2a0d47ac0f4fe02246e676f483abddb4f9833e8a90c7e3f1c"
+ },
+ {
+  "case_id": "lateral_movement__covenant_wmi_wbemcomn_dll_hijack",
+  "dataset": "lateral_movement__covenant_wmi_wbemcomn_dll_hijack.zip",
+  "label": "lateral_movement",
+  "group": "T1047",
+  "side": "test",
+  "n_events_recording": 8947,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   661,
+   1272,
+   847,
+   447,
+   448,
+   443,
+   185,
+   433
+  ],
+  "sha256": "f9164701f273cee3d2f663c14a481d0b0bdbb2a83953e3c7093339eb23b0d305"
+ },
+ {
+  "case_id": "lateral_movement__empire_dcom_shellwindows_stager",
+  "dataset": "lateral_movement__empire_dcom_shellwindows_stager.zip",
+  "label": "lateral_movement",
+  "group": "T1021.003",
+  "side": "test",
+  "n_events_recording": 32706,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   4917,
+   13626,
+   1055,
+   1428,
+   32422,
+   32463,
+   32382,
+   17113
+  ],
+  "sha256": "4306132b12f7edd241b3ce84a1f27cbfdbfc0581f7f9d5eb638f218e3b2fa177"
+ },
+ {
+  "case_id": "lateral_movement__empire_msbuild_dcerpc_wmi_smb",
+  "dataset": "lateral_movement__empire_msbuild_dcerpc_wmi_smb.zip",
+  "label": "lateral_movement",
+  "group": "T1047",
+  "side": "test",
+  "n_events_recording": 4559,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   1120,
+   1207,
+   1215,
+   1262,
+   1273,
+   1863,
+   2926,
+   2964
+  ],
+  "sha256": "bccc4f45c2fc7db7a333e940d8a446c97b713be12c3f028876802f15972b371c"
+ },
+ {
+  "case_id": "lateral_movement__empire_psexec_dcerpc_tcp_svcctl",
+  "dataset": "lateral_movement__empire_psexec_dcerpc_tcp_svcctl.zip",
+  "label": "lateral_movement",
+  "group": "T1021",
+  "side": "test",
+  "n_events_recording": 4348,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   1212,
+   1250,
+   2900,
+   2954,
+   2876,
+   1056,
+   1072,
+   1086
+  ],
+  "sha256": "9d43380a90a30615e198467c1aa4f65894ad877d6270672c0ba7892cd51488c0"
+ },
+ {
+  "case_id": "lateral_movement__empire_psremoting_stager",
+  "dataset": "lateral_movement__empire_psremoting_stager.zip",
+  "label": "lateral_movement",
+  "group": "T1021.006",
+  "side": "test",
+  "n_events_recording": 2744,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   516,
+   535,
+   840,
+   843,
+   764,
+   784,
+   574,
+   799
+  ],
+  "sha256": "db791497e2dce922be7b1d4d1bf67c6144062669f4a11cd5813ee4dcecc40482"
+ },
+ {
+  "case_id": "lateral_movement__empire_wmi_dcerpc_wmi_IWbemServices_ExecMethod",
+  "dataset": "lateral_movement__empire_wmi_dcerpc_wmi_IWbemServices_ExecMethod.zip",
+  "label": "lateral_movement",
+  "group": "T1047",
+  "side": "test",
+  "n_events_recording": 6383,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   551,
+   1583,
+   1617,
+   1558,
+   368,
+   375,
+   732,
+   719
+  ],
+  "sha256": "8186830c9cf807514ee98ec9125aa556e891d624a1402598a1e80c95205ac70f"
+ },
+ {
+  "case_id": "lateral_movement__empire_wmic_add_user_backdoor",
+  "dataset": "lateral_movement__empire_wmic_add_user_backdoor.zip",
+  "label": "lateral_movement",
+  "group": "T1047",
+  "side": "test",
+  "n_events_recording": 12278,
+  "primary_host": "WORKSTATION6.theshire.local",
+  "positions": [
+   164,
+   413,
+   590,
+   633,
+   695,
+   762,
+   7308,
+   436
+  ],
+  "sha256": "c325f9aed4060fa9a5574c97884382b18712f107d13217f767c404c6fa73670d"
+ },
+ {
+  "case_id": "lateral_movement__purplesharp_ad_playbook_I",
+  "dataset": "lateral_movement__purplesharp_ad_playbook_I.zip",
+  "label": "lateral_movement",
+  "group": "T1110.003",
+  "side": "test",
+  "n_events_recording": 25993,
+  "primary_host": "WORKSTATION7.theshire.local",
+  "positions": [
+   6078,
+   3192,
+   3600,
+   4351,
+   6085,
+   10507,
+   10775,
+   25833
+  ],
+  "sha256": "d80744e74fd99bbd19e082df7c77b242fdf93c11adc2f060c0db0adef4ab921e"
+ },
+ {
+  "case_id": "lateral_movement__purplesharp_ad_playbook_I_2020-10-22042947",
+  "dataset": "lateral_movement__purplesharp_ad_playbook_I_2020-10-22042947.json",
+  "label": "lateral_movement",
+  "group": "nometa:purplesharp_ad_playbook_I_2020-10-22042947.json",
+  "side": "test",
+  "n_events_recording": 25993,
+  "primary_host": "WORKSTATION7.theshire.local",
+  "positions": [
+   6078,
+   3192,
+   3600,
+   4351,
+   6085,
+   10507,
+   10775,
+   25833
+  ],
+  "sha256": "d734818e3c5060ec628ba750038f71dfd7bf88f34a3cbea116e2f2dc4c0f284c"
+ },
+ {
+  "case_id": "lateral_movement__schtask_create",
+  "dataset": "lateral_movement__schtask_create.zip",
+  "label": "lateral_movement",
+  "group": "T1053.005",
+  "side": "test",
+  "n_events_recording": 1041,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   93,
+   59,
+   65,
+   465,
+   479,
+   577,
+   602,
+   574
+  ],
+  "sha256": "41e19554a60ba9c30537ecc1c107e71dd4271457fd204fb279553ce24c0b6e0c"
+ },
+ {
+  "case_id": "lateral_movement__schtask_modification",
+  "dataset": "lateral_movement__schtask_modification.zip",
+  "label": "lateral_movement",
+  "group": "T1053.005",
+  "side": "test",
+  "n_events_recording": 2657,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   327,
+   2169,
+   10,
+   75,
+   243,
+   264,
+   271,
+   280
+  ],
+  "sha256": "394d7ea658b38c57d537f445b9b438b7c39d9fdf8e4f0d6aee4c981339df3517"
+ },
+ {
+  "case_id": "persistence__cmd_userinitmprlogonscript_batch",
+  "dataset": "persistence__cmd_userinitmprlogonscript_batch.zip",
+  "label": "persistence",
+  "group": "T1037.001",
+  "side": "test",
+  "n_events_recording": 122,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   0,
+   121,
+   9,
+   15,
+   35,
+   43,
+   47,
+   75
+  ],
+  "sha256": "a35af1acd51488ee47ba7820a803277f478bb05126a6fea9f6524b169eb242b1"
+ },
+ {
+  "case_id": "persistence__covenant_persiststartup",
+  "dataset": "persistence__covenant_persiststartup.tar.gz",
+  "label": "persistence",
+  "group": "nometa:covenant_persiststartup.tar.gz",
+  "side": "test",
+  "n_events_recording": 1238,
+  "primary_host": "HFDC01.shire.com",
+  "positions": [
+   232,
+   272,
+   194,
+   179,
+   317,
+   331,
+   396,
+   156
+  ],
+  "sha256": "c1c05a381ae8fa823e73f6e3da5c07f7212c8ca001cef6ed18034a46cae2e73f"
+ },
+ {
+  "case_id": "persistence__empire_schtasks_creation_execution_elevated_user",
+  "dataset": "persistence__empire_schtasks_creation_execution_elevated_user.zip",
+  "label": "persistence",
+  "group": "T1053.005",
+  "side": "test",
+  "n_events_recording": 59399,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   16762,
+   38480,
+   16842,
+   16858,
+   27488,
+   19382,
+   19495,
+   19497
+  ],
+  "sha256": "81eef055acbe88ae997b8867a14e3d8aaae7a365101939362269392a3f8941b8"
+ },
+ {
+  "case_id": "persistence__empire_schtasks_creation_standard_user",
+  "dataset": "persistence__empire_schtasks_creation_standard_user.zip",
+  "label": "persistence",
+  "group": "T1053.005",
+  "side": "test",
+  "n_events_recording": 1297,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   163,
+   333,
+   178,
+   325,
+   11,
+   176,
+   24,
+   26
+  ],
+  "sha256": "beef0314f18c9d66ee8f9738c93738e27904fdf7926b938822cbfabb0c512fc7"
+ },
+ {
+  "case_id": "persistence__empire_wmi_local_event_subscriptions_elevated_user",
+  "dataset": "persistence__empire_wmi_local_event_subscriptions_elevated_user.zip",
+  "label": "persistence",
+  "group": "T1546.003",
+  "side": "test",
+  "n_events_recording": 79896,
+  "primary_host": "WORKSTATION5.theshire.local",
+  "positions": [
+   447,
+   592,
+   8806,
+   457,
+   465,
+   5360,
+   5424,
+   5443
+  ],
+  "sha256": "be28840eff0f288b214cbad99a90a7865c7e0cb4c6afc46ced0062b2c3bb97ec"
+ },
+ {
+  "case_id": "persistence__proxylogon_ssrf_rce_poc",
+  "dataset": "persistence__proxylogon_ssrf_rce_poc.zip",
+  "label": "persistence",
+  "group": "T1505.003",
+  "side": "test",
+  "n_events_recording": 10487,
+  "primary_host": "MXS01.azsentinel.local",
+  "positions": [
+   955,
+   19,
+   4049,
+   4136,
+   4190,
+   4196,
+   4915,
+   4965
+  ],
+  "sha256": "8a1fe2559cfa3c22e1cef44b28d80da0d558d1041e5f59ced0324a8eab1f5ddd"
+ },
+ {
+  "case_id": "privilege_escalation__cmd_service_mod_fax",
+  "dataset": "privilege_escalation__cmd_service_mod_fax.zip",
+  "label": "privilege_escalation",
+  "group": "T1543.003",
+  "side": "test",
+  "n_events_recording": 437,
+  "primary_host": "WORKSTATION5",
+  "positions": [
+   0,
+   434,
+   12,
+   93,
+   114,
+   142,
+   384,
+   113
+  ],
+  "sha256": "0182b688e6acb8c6262d1d9fc8cc855ddc2f3becaf3009995dbb680afca46a73"
+ },
+ {
+  "case_id": "privilege_escalation__empire_invoke_runas",
+  "dataset": "privilege_escalation__empire_invoke_runas.tar.gz",
+  "label": "privilege_escalation",
+  "group": "nometa:empire_invoke_runas.tar.gz",
+  "side": "test",
+  "n_events_recording": 2581,
+  "primary_host": "HR001.shire.com",
+  "positions": [
+   402,
+   382,
+   637,
+   682,
+   364,
+   645,
+   1561,
+   356
+  ],
+  "sha256": "b012e198711767c9cf3ab0d6584172b466d5c1eeea59d97406fd2bb1a34505e8"
+ }
+]

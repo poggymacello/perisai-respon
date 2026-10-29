@@ -1,0 +1,34 @@
+# berat / diunduh ulang (lihat prototype/DATA.md)
+prototype/.venv/
+prototype/models/
+prototype/data/
+# cache
+__pycache__/
+*.pyc
+.pytest_cache/
+# sisa LaTeX
+laporan_pdf/*.aux
+laporan_pdf/*.log
+laporan_pdf/*.out
+laporan_pdf/*.toc
+laporan_pdf/*.fls
+laporan_pdf/*.fdb_latexmk
+laporan_pdf/*.xdv
+# lokal
+.env*
+*.local.*
+prototype/results/rating/kunci.csv
+# catatan proses internal (tidak dipublikasikan)
+00_INFO.md
+01_ASET.md
+02_BRAINSTORM.md
+03_RISET.md
+03b_ADVOKAT_SETAN.md
+04_KEPUTUSAN.md
+06_PENGGUNA.md
+07_KELAYAKAN.md
+AKSI_MANUSIA.md
+LAPORAN_AKHIR.md
+CARA_KIRIM.md
+JURI_90/
+laporan_pdf/

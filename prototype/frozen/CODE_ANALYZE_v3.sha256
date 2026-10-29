@@ -1,0 +1,2 @@
+5d730d18a67def1340dae1ee3799b12874a2f96b645d74dc24ca6bc371a938c7 *analyze.py
+# deviasi D1 analisis 2026-10-29T08:27:32+07:00: koreksi bug metrik sekunder S3 (act_correct mode rules ditulis True di run_eval.py baris 115). Dibuat SESUDAH hasil dilihat; P1/P2 tidak berubah.
