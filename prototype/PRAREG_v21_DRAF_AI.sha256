@@ -1,0 +1,7 @@
+1540b921f9210cc0f084d3a60e7b8f9ceb718b23d638c1b8cd3d2309b76f0bdf *PRAREG_v21_DRAF_AI.md
+ae2ccbd952f618fec0f43f9c875a0a166b1a88b52a1ad2233ea17453030e989d *scripts/make_rating_packet_v21.py
+754503a77945f84a64a58addc009ec962b9f52cabdda4d6a58cb6dd394b16008 *perisai/v12.py
+524b713840655806e36a5d72c275b5ebebbecac237057802fa0b4bcfd55c5526 *scripts/posthoc_v12.py
+07728b7e3ef2dc2cbda23c5d377a564b29bc2abf0dbcfbbbdedcc66637da536b *results/rating_v21/lembar_penilaian.csv
+e6654070412a79fd1e43f03f985f2510067c7b0a602c29beec4d8681d4ad1c82 *results/rating_v21/kunci.csv
+# PRAREG v2.1 dibekukan 2026-10-29T22:17:31+07:00 SEBELUM penilaian manusia; kunci.csv tidak ikut git (baris ini gagal di salinan repo, disengaja)

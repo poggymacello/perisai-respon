@@ -1,0 +1,9 @@
+491a7bb13630060ef78fc94d3a053bb5229b85461cb800d7f11e3f4bfdbfc11c *PRAREG_v24_DRAF_AI.md
+f44b6b55548186e951bc21c0243634f3d36a04d5d8f957f8da0e9b4c1815047b *PROKTOR_v24.md
+22557d81938ff0eab70159e82b462c3174692df064aa491b9fcad1351e2f11f8 *PANDUAN_PENULIS_v24.md
+ee2b49c81952f848abf4e9ad62598122523981710566da06f43e76b606a7cdd2 *scripts/make_rating_packet_v24.py
+c3ba3e71b995cd8fd9300ce01166dee77775e97efd93054cd6b35fe726bbcb13 *scripts/make_rating_packet_v23.py
+4cce84bc48059d138b6c890b694f50704c77c72d89e8ffe0c9a896e473146f8f *perisai/v12.py
+54262a1dca00ebc25f792131bf4ced1e171f9a3a2939527c0c08b4fd14111ca1 *results/rating_v24/tulis_ringkasan_aturan.csv
+fbdc6d8f3c9ef501d74c4052df7dcc611bcb0b34a8aa817729646cd7d3432bd0 *tests/test_rating_v24.py
+# PRAREG v2.4 dibekukan 2026-11-02T12:14:33+07:00 SEBELUM ringkasan manusia ditulis; lembar tulis di-hash dalam keadaan KOSONG (baris itu akan gagal sesudah penulis mengisinya, disengaja; hash lembar terisi ada di PRAREG_v24_PAKET.sha256)

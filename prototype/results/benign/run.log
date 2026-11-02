@@ -1,0 +1,22 @@
+{
+ "rekaman": 121,
+ "event": 841110,
+ "event_dengan_teks_bebas": 246528,
+ "field_teks_bebas": 260351,
+ "field_per_jenis": {
+  "Details": 67595,
+  "Message": 147309,
+  "CommandLine": 3494,
+  "ParentCommandLine": 1571,
+  "Payload": 39533,
+  "ScriptBlockText": 785,
+  "ServiceFileName": 59,
+  "ImagePath": 5
+ },
+ "field_ditandai": 0,
+ "event_ditandai": 0,
+ "laju_tanda_palsu_field": 0.0,
+ "laju_tanda_palsu_event": 0.0,
+ "rekaman_dengan_tanda": 0,
+ "kode": {}
+}

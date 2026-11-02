@@ -1,0 +1,59 @@
+[
+ {
+  "case_id": "WS-LOG03.batalyon.lab@2026-10-29T02:00:00+00:00",
+  "sha256": "613353a07c806cbc246f29beed557dce3ba550928759a059cd8b6005cf858bee",
+  "keputusan": {
+   "verdict": "EXECUTE",
+   "final_action": {
+    "jenis": "escalate",
+    "target": null
+   },
+   "kategori": "credential_access",
+   "ringkasan": "Indikasi pencurian kredensial pada WS-LOG03.batalyon.lab: Akses memori proses LSASS oleh proses non-sistem; Proses berjalan dari lokasi sementara / berkas disamarkan; Logon jaringan (tipe 3) dari alamat jarak jauh. 3 event dianalisis. Ringkasan dibuat dari template aturan (tanpa LLM).",
+   "source": "rules_v12",
+   "proposal": null,
+   "reasons": [
+    "LLM dimatikan",
+    "kategori dari template aturan (CA01, DE07, LM08)",
+    "firewall menemukan instruksi di isi log: aksi berisiko tidak diusulkan",
+    "v1.1: kategori dan aksi dari template aturan (CA01, DE07, LM08)",
+    "instruksi terdeteksi di isi log: aksi berisiko tidak diusulkan, kasus dieskalasi"
+   ],
+   "warnings": [
+    "INJEKSI_TERDETEKSI"
+   ],
+   "final_status": "DIESKALASI",
+   "draf_ai": "",
+   "kalimat_dibuang": [],
+   "v1_verdict": "EXECUTE",
+   "draf_dibuang_v12": []
+  }
+ },
+ {
+  "case_id": "SRV-ARSIP02.batalyon.lab@2026-10-29T03:30:00+00:00",
+  "sha256": "aaa3f9c8908b7e1ad8fc92e24f381636f2e784ce32c520c18cdf1b770d30d641",
+  "keputusan": {
+   "verdict": "EXECUTE",
+   "final_action": {
+    "jenis": "escalate",
+    "target": null
+   },
+   "kategori": "lateral_movement",
+   "ringkasan": "Indikasi pergerakan lateral pada SRV-ARSIP02.batalyon.lab: Pemasangan layanan baru (7045/4697). 1 event dianalisis. Ringkasan dibuat dari template aturan (tanpa LLM).",
+   "source": "rules_v12",
+   "proposal": null,
+   "reasons": [
+    "LLM dimatikan",
+    "kategori dari template aturan (LM02)",
+    "v1.1: kategori dan aksi dari template aturan (LM02)",
+    "v1.2: bukti isolasi kurang (LM02: butuh 1 aturan high atau 2 aturan berbeda di kategori ini): dieskalasi"
+   ],
+   "warnings": [],
+   "final_status": "DIESKALASI",
+   "draf_ai": "",
+   "kalimat_dibuang": [],
+   "v1_verdict": "REQUEST_APPROVAL",
+   "draf_dibuang_v12": []
+  }
+ }
+]

@@ -1,0 +1,8 @@
+e74096dc31ac4c674c83c1b6fbb337527bb5be3aa8cd022f74ccbdd54560ec78 *PRAREG_v23_DRAF_AI.md
+a193bc8c046b2df8c7338aec1c481d886044e42b267cca249522d856515c3b5a *PROKTOR_v23.md
+c3ba3e71b995cd8fd9300ce01166dee77775e97efd93054cd6b35fe726bbcb13 *scripts/make_rating_packet_v23.py
+f7e28713f0c5708b2b46bf3fe5200b990246716c1113ae81edd2cf433ad568fd *perisai/v12.py
+ee9074d769a3bac9275ca0dbeb70fa76dfe38af418f4b3395d22d3d36fb01bf0 *results/rating_v23/lembar_penilaian.csv
+3b526af87f8bd75d5b51a0f832f14efe36e391b2ef3c0a1d2e495e55ec85a1d1 *results/rating_v23/kunci.csv
+58b4c7e34c5bb4414b6e7b825af5a4ef4000512a0bbfc76d2b63be55a472ac3d *results/rating_v23/uji_pembeda.json
+# PRAREG v2.3 dibekukan 2026-10-30T13:41:46+07:00 SEBELUM penilaian manusia; kunci.csv (berisi salt) tidak ikut git (baris itu gagal di salinan repo, disengaja)

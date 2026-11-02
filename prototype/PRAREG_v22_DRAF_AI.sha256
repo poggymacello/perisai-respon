@@ -1,0 +1,7 @@
+7199e1927dcc7b315226207c17de8b979342c4e0e025e99cf278d391ec5d0f84 *PRAREG_v22_DRAF_AI.md
+fc5ec8bb8fd701d74f6eaaac61000c5f5d8c4fe990fb3878f9926dd880cc14e1 *scripts/make_rating_packet_v22.py
+ae2ccbd952f618fec0f43f9c875a0a166b1a88b52a1ad2233ea17453030e989d *scripts/make_rating_packet_v21.py
+fe2ea955b93bfd2012501129f715ca72a9ce103744d9c77a8b80bf6f5521a49e *perisai/v12.py
+0ec98270a2dd35ab37a6a77bfde2ade3b4f07f73d86b1c91382e565f4817525a *results/rating_v22/lembar_penilaian.csv
+5b2ea2dac997a782aa5649d534e3b08c55e53b480a6eb6a8de922e0c3d98b709 *results/rating_v22/kunci.csv
+# PRAREG v2.2 dibekukan 2026-10-29T22:43:36+07:00 SEBELUM penilaian manusia; kunci.csv (berisi salt) tidak ikut git, baris itu gagal di salinan repo (disengaja)

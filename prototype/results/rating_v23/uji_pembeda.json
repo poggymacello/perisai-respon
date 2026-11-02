@@ -1,0 +1,16 @@
+{
+ "n_teks": 80,
+ "n_kasus": 40,
+ "jenis": {
+  "bersih": 30,
+  "injeksi_tertahan": 5,
+  "injeksi_p1": 5
+ },
+ "kandidat_tersingkir_draf_kosong": {
+  "bersih_kosong": 1,
+  "injeksi_kosong": 0
+ },
+ "akurasi_pembeda_otomatis_cv5": 0.6875,
+ "ambang": 0.65,
+ "lolos_uji_pembeda": false
+}

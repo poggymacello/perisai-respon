@@ -29,5 +29,19 @@ Semua aset publik, tanpa login, dan masing-masing di bawah 1 GB. Folder `models/
 
 **Windows Defender:** arsip `discovery__empire_shell_net_local_users.zip` dikarantina Defender (VirTool:PowerShell/Empire) dua kali, pada 00:50 dan 00:52, sehingga **dikeluarkan**. Total yang dipakai: 121 rekaman. File teks kasus yang sempat ditulis polos (`frozen/cases_dev.jsonl`, berisi command line Mimikatz/Empire dari log) juga dikarantina (HackTool:Win32/Mikatz). Karena itu kasus sekarang dibangun di memori dari arsip asli, dan yang dibekukan hanya manifes SHA-256 (`frozen/manifest_test.json`). Pengaturan Defender **tidak** diubah dan tidak ada pengecualian yang ditambahkan.
 
+## Telemetri OT (ditambahkan 29 Okt 2026, PRAREG v4)
+| | |
+|---|---|
+| Nama | HAI (HIL-based Augmented ICS) Security Dataset, versi **21.03** (boiler P1, turbin P2, air P3, simulasi HIL P4) |
+| Sumber | https://github.com/icsdataset/hai, commit `2a814cebc9a66b06c9e5cd545e2d72e65d383737`, folder `hai-21.03/` (berkas `.csv.gz` biasa, bukan LFS) |
+| Lisensi | **CC BY-SA 4.0** (README repo, bagian License; salinan `data/hai/README.hai.md`). Atribusi: Shin, Lee, Yun, Min (The Affiliated Institute of ETRI), "Two ICS Security Datasets and Anomaly Detection Contest on the HIL-Based Augmented ICS Testbed", 2021 |
+| Berkas | `train1` 30,7 MB · `train2` 31,4 MB · `train3` 68,0 MB (normal) · `test1` 6,1 MB · `test4` 5,6 MB (berlabel serangan). Total ±142 MB di `data/hai/` |
+| SHA-256 | tercantum di `PRAREG_v4_OT_BENIGN.sha256` |
+
+## Log benign Windows: dicari, tidak dipakai
+- COMISET (Zenodo 15375146, CC BY 4.0): 4,9 GB + 31,7 GB, di atas batas 1 GB.
+- arniki/atomic-evtx (punya folder benign): repo tidak berlisensi.
+- Pengganti: semua teks bebas asli di 121 rekaman OTRF dipindai firewall (`scripts/benign_firewall.py`) + data normal HAI.
+
 ## Skenario injeksi
-Dibuat sendiri (`perisai/scenarios.py`): 3 keluarga string teks (override EN, override ID, tag sistem palsu) × 4 tujuan. Isinya hanya string uji di field log sistem kita sendiri. Host dan IP fiktif, domain memakai TLD cadangan `.invalid` (RFC 2606), dan tidak ada kode maupun target nyata. Keluarga uji yang ditahan **tidak dibuat** (lihat `PRAREG.md` §0).
+Dibuat sendiri (`perisai/scenarios.py`): 3 keluarga string teks (override EN, override ID, tag sistem palsu) × 4 tujuan. Isinya hanya string uji di field log sistem kita sendiri. Host dan IP fiktif, domain memakai TLD cadangan `.invalid` (RFC 2606), dan tidak ada kode maupun target nyata. Keluarga uji yang ditahan **tidak dibuat** untuk PRAREG v1 (lihat `PRAREG.md` §0). Keluarga tertahan dibuat kemudian untuk PRAREG v3 (`perisai/scenarios_heldout.py`: 4 pembungkus bergaya log × 4 tujuan dalam bahasa alami, target sama, domain `.invalid`).
