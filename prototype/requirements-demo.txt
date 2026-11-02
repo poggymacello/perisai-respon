@@ -1,0 +1,5 @@
+# Cukup untuk demo.py --no-llm, triase.py, dan semua tes (diuji 2 Nov 2026 di klon bersih, Python 3.11.9, Windows 11).
+# Mode dengan LLM lokal butuh llama-cpp-python + model; lihat README "Mode dengan LLM" dan DATA.md.
+numpy==2.4.6
+pandas==3.1.0
+pytest==9.2.0

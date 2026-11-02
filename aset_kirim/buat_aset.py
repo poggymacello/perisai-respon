@@ -62,18 +62,13 @@ def render(lines, title, path, width=150):
 def thumbnail(path):
     fig = plt.figure(figsize=(12, 6.3), dpi=100)
     fig.patch.set_facecolor(BG)
-    fig.text(0.06, 0.80, "PERISAI-RESPON", color=FG, family=SANS, fontsize=58, weight="bold", va="center")
-    fig.text(0.06, 0.66, "Asisten triase insiden siber offline yang aksinya\ntidak bisa disetir oleh isi log",
-             color=DIM, family=SANS, fontsize=24, va="center", linespacing=1.3)
-    stats = [("16,5 % → 0 %", "keberhasilan injeksi lewat log\n(176 unit uji, prareg)"),
-             ("100 % lokal", "LLM Qwen2.5-1.5B di CPU,\ntanpa internet"),
-             ("0 aksi otomatis", "isolasi/blokir selalu\nmenunggu persetujuan manusia")]
-    for k, (big, small) in enumerate(stats):
-        x = 0.06 + k * 0.31
-        fig.text(x, 0.36, big, color=OK if k == 0 else ACC, family=SANS, fontsize=30, weight="bold", va="center")
-        fig.text(x, 0.22, small, color=FG, family=SANS, fontsize=15, va="center", linespacing=1.25)
-    fig.text(0.06, 0.07, "Kartika Cyber Hackathon 2026 · Kategori Penangkalan · IT + OT · audit hash-chain",
-             color=DIM, family=SANS, fontsize=14, va="center")
+    # Standar gambar pratinjau 1,91:1: teks di zona aman tengah, satu bukti, terbaca saat diperkecil ke lebar 300 px.
+    fig.text(0.09, 0.74, "PERISAI-RESPON", color=FG, family=SANS, fontsize=64, weight="bold", va="center")
+    fig.text(0.09, 0.58, "Triase insiden offline yang tidak bisa disetir isi log",
+             color=DIM, family=SANS, fontsize=27, va="center")
+    fig.text(0.09, 0.36, "16,5 % → 0 %", color=OK, family=SANS, fontsize=54, weight="bold", va="center")
+    fig.text(0.09, 0.22, "keberhasilan injeksi lewat log, 176 unit uji", color=FG, family=SANS, fontsize=20, va="center")
+    fig.text(0.09, 0.10, "Kategori Penangkalan", color=DIM, family=SANS, fontsize=16, va="center")
     fig.savefig(path, facecolor=BG)
     plt.close(fig)
 
