@@ -1,5 +1,14 @@
 # DOKUMENTASI TEKNIS: PERISAI-RESPON (inti v1 yang dievaluasi + lapisan v1.1/v1.2.2 yang dipakai)
-### Kode: `prototype/` · Python 3.11.9 · Windows 11, berjalan di CPU · 29 Okt 2026
+### Kode: `prototype/` (mesin) dan `app/` (aplikasi desktop 1.0.0) · Python 3.11 · Windows 11, berjalan di CPU · diperbarui 2 Nov 2026
+
+## 0. Aplikasi desktop 1.0.0 (`app/`)
+Aplikasi analis di atas mesin v1.2.2. Mesin dipanggil sebagai pustaka dan kodenya tidak diubah (hash di `prototype/frozen` tetap cocok).
+- **Distribusi:** `PERISAI-RESPON-1.0.0-win64.zip` (41,5 MB, PyInstaller onedir, belum ditandatangani). `PERISAI-RESPON.exe` menjalankan server FastAPI di `127.0.0.1` pada port bebas, lalu membuka jendela pywebview (Edge WebView2). Kalau WebView2 tidak ada, `--browser` membuka peramban bawaan.
+- **Fitur:** impor XML `wevtutil`, JSON Winlogbeat, dan `.evtx` (dikonversi lokal dengan `wevtutil`); antrean kasus; detail kasus dengan bukti field terstruktur dan temuan firewall; uji usulan terhadap policy; setujui/tolak oleh analis yang hanya dicatat di jejak audit (`dieksekusi: false`); verifikasi dan uji ubah jejak audit; laporan CSIRT Markdown/HTML; jalur OT; halaman status dengan cek hash model, hash mesin, dan uji kinerja di perangkat.
+- **Mode LLM:** opsional. Model 0,92 GB ditaruh di folder `models` di samping exe; SHA-256 dicek sebelum dimuat. Draf AI dibuat per kasus atas permintaan analis, di latar belakang, dan diberi label "bukan dasar keputusan".
+- **Keamanan server lokal:** hanya `127.0.0.1`, cek header Host, header `X-Perisai` wajib untuk POST, CSP `connect-src 'self'`, tanpa CDN dan tanpa telemetri.
+- **Mode demo (Docker):** `app/Dockerfile`, `PERISAI_MODE=demo`, hanya data contoh dan unggahan ditolak. Langkah publikasi di `app/DEPLOY.md`.
+- **Tes:** `cd app; .venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests` (24 tes API). Panduan pengguna lengkap: `app/README.md`.
 
 ## 1. Arsitektur
 | Lapis | Modul | Fungsi | Bergantung pada LLM? |
@@ -105,7 +114,7 @@ Paket offline untuk satuan berisi wheel, model, dan kode di satu media lepas.
 | Laporan ikut membawa instruksi penyerang | teks bebas log tidak disalin ke laporan CSIRT, hanya field terstruktur + id event. **Batas:** DRAF AI ikut dicetak (berlabel), dan draf itu bisa mengulang narasi penyerang (temuan tinjauan, `BUKTI_EVALUASI.md` §11). Menurut ukuran tim, gema turun dari 14/176 (v1.1) ke 0/176 (v1.2.2, post-hoc, §14), tetapi probe juri baru masih lolos, jadi draf tetap dianggap tidak tepercaya |
 | Audit dipotong di ujung | **prosedur, belum dikode/diuji:** jangkar harian, yaitu hash terakhir (`triase.py --verify` mencetak `head`) dicatat di luar perangkat (buku jaga) |
 | Ringkasan menyesatkan (halusinasi) | v1: hanya URL/e-mail/IP/host yang disaring. v1.1: ringkasan utama dari aturan, draf AI disaring per kalimat (istilah eskalatif tanpa dukungan log dibuang). v1.2.2: kalimat harus menyebut bukti, dan kalimat yang menyarankan penutupan/aksi, mengklaim otoritas, meminta kredensial, atau menyalin teks log dibuang (daftar kata; parafrase baru masih bisa lolos, `BUKTI_EVALUASI.md` §14). Kewajiban event ID per kalimat masih **rencana**. Contoh nyata: "terorisme" di demo |
-| Data keluar | tidak ada kode jaringan; model dan log lokal |
+| Data keluar | mesin (`prototype/perisai`) tidak punya kode jaringan. Aplikasi desktop (`app/`) menjalankan server lokal yang hanya mendengar di `127.0.0.1`, memeriksa header Host, dan memasang CSP `connect-src 'self'`; tidak ada koneksi keluar. Mode demo Docker mendengar di `0.0.0.0` tetapi hanya memuat data contoh dan menolak unggahan |
 
 ## 6b. v1.1 (pasca-evaluasi)
 `perisai/v11.py`: kategori + aksi dari aturan, LLM hanya DRAF AI, tanpa penutupan kasus otomatis, dan penyaring kalimat. 8 tes di `tests/test_v11.py`. Total 102 tes lulus, termasuk `test_v12.py` (6), `test_v121_guard.py` (16), `test_v122_probes.py` (30), `test_ot.py` (5), dan `test_triase.py` (5). **v1.2** (`perisai/v12.py`) dipakai `demo.py` dan `triase.py`. Isolasi hanya diusulkan dengan bukti cukup (1 aturan high atau 2 aturan), dan draf AI dijaga (lihat `BUKTI_EVALUASI.md` §12). Replay post-hoc: `scripts/posthoc_v11.py` → `results/posthoc_v11.json`. Detail di `BUKTI_EVALUASI.md` §9. Catatan: docstring `firewall.py` menyebut pola ditulis "sebelum" keluarga uji, padahal yang benar menurut PRAREG §0 adalah in-sample. Berkas itu tidak diubah karena di-hash.

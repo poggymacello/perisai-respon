@@ -20,7 +20,7 @@ Angka diambil dari `BUKTI_EVALUASI.md` dan `prototype/results/summary.json`. Kal
     - v1.1: ringkasan utama dari template aturan, draf AI diberi label, dan istilah eskalatif yang tidak ada di log dibuang.
     - v1.2.2: kalimat draf hanya tampil kalau menyebut bukti (judul aturan, field terstruktur, atau istilah kategori yang terpicu), dan tetap dibuang kalau menyarankan penutupan atau aksi, mengklaim keputusan pihak berwenang, meminta kredensial, atau menyalin teks log.
     - Di uji tertahan, gema injeksi turun dari 14/176 (v1.1) ke 0/176. Ukuran independen (draf menyebut target penyerang, G1/G2/G4) turun dari 6/132 ke 0/132.
-    - Jujurnya, ini tetap penyaring daftar kata yang bisa diakali parafrase. Juri latihan kami meloloskan 25 probe baru. Karena itu draf AI hanya pelengkap berlabel, dan aksi tidak pernah diambil dari LLM.
+    - Jujurnya, ini tetap penyaring daftar kata yang bisa diakali parafrase. Juri latihan kami meloloskan 25 probe baru di putaran 6, dan cek ulang 2 Nov masih meloloskan 12 dari 16. Karena itu draf AI hanya pelengkap berlabel, dan aksi tidak pernah diambil dari LLM.
     - Angka ini post-hoc. Riwayat koreksinya kami tulis terbuka: v1.2 pertama 4/176, v1.2.1 0/176 tetapi masih bocor lewat negasi dan "lalu lintas" (juri P5).
     - Kewajiban menunjuk event ID per kalimat masih rencana.
 11. **Apa bedanya dengan CaMeL / integrasi Wazuh-LLM?** Prinsipnya sama, dan kami tidak mengklaim prinsip itu sebagai temuan kami. Yang baru dari kami: jalur injeksi lewat log, offline di CPU, pola bahasa Indonesia, serta pengukuran ber-prareg dengan ablasi.

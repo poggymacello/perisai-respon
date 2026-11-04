@@ -1,0 +1,304 @@
+1
+00:00:00,500 --> 00:00:04,915
+PERISAI-RESPON memilah insiden dari
+log Windows secara offline.
+
+2
+00:00:05,900 --> 00:00:09,024
+Masalahnya, isi log bisa ditulis penyerang.
+
+3
+00:00:09,224 --> 00:00:14,865
+Di sini penyerang menyelipkan perintah untuk AI
+di baris PowerShell: isolasi DC01.
+
+4
+00:00:15,065 --> 00:00:20,963
+Aplikasi menandainya sebagai data, tidak
+menurutinya, dan menyerahkan kasus ke analis.
+
+5
+00:00:24,167 --> 00:00:28,065
+Log satuan memuat nama host, akun,
+dan alamat internal.
+
+6
+00:00:28,265 --> 00:00:32,357
+Karena itu log tidak boleh dikirim
+ke layanan AI di cloud.
+
+7
+00:00:33,367 --> 00:00:39,394
+PERISAI-RESPON berjalan di laptop dan hanya
+menerima koneksi dari perangkat itu sendiri.
+
+8
+00:00:40,400 --> 00:00:45,782
+Status sistem: alamat 127.0.0.1, akses ke
+host lain diblokir, tanpa telemetri.
+
+9
+00:00:46,800 --> 00:00:52,053
+Modelnya juga lokal, Qwen2.5 1,5B, dan hash
+berkasnya dicek sebelum dipakai.
+
+10
+00:00:53,067 --> 00:00:56,901
+Isi log juga bisa menyetir
+asisten AI yang membacanya.
+
+11
+00:00:57,101 --> 00:01:00,612
+Karena itu kategori dan aksi diambil dari aturan.
+
+12
+00:01:00,812 --> 00:01:05,549
+LLM hanya menulis draf ringkasan, dan
+hanya kalau analis memintanya.
+
+13
+00:01:08,767 --> 00:01:13,568
+Kita mulai dari sesi kosong dan memuat
+log contoh dengan host fiktif.
+
+14
+00:01:14,567 --> 00:01:17,110
+Event dikelompokkan menjadi kasus.
+
+15
+00:01:17,310 --> 00:01:22,370
+Tiap kasus punya kategori ATT&CK, severity,
+dan status dari mesin aturan.
+
+16
+00:01:23,367 --> 00:01:28,233
+Filter ini menampilkan kasus yang lognya
+memuat instruksi tersembunyi.
+
+17
+00:01:29,233 --> 00:01:34,551
+Kasus WS-KEU02. Banner merah menyebut lokasi
+instruksinya: field CommandLine.
+
+18
+00:01:35,567 --> 00:01:42,110
+Teks log ditampilkan sebagai teks biasa. Teks itu
+tidak dijalankan dan tidak disalin ke laporan.
+
+19
+00:01:43,100 --> 00:01:49,773
+Keputusan diambil oleh aturan v1.2.2, bukan oleh LLM,
+dan alasan policy-nya ditulis satu per satu.
+
+20
+00:01:50,800 --> 00:01:55,860
+Draf AI dibuat hanya atas permintaan
+analis. Waktu tunggunya kami potong.
+
+21
+00:01:56,867 --> 00:01:59,797
+Draf ini berlabel bukan dasar keputusan.
+
+22
+00:01:59,997 --> 00:02:06,283
+Di sini draf menebak pergerakan lateral. Di
+percobaan lain, tebakannya pencurian kredensial.
+
+23
+00:02:06,483 --> 00:02:13,413
+Kategori tetap eksekusi kode dari
+aturan, jadi draf tidak menentukan aksi
+dan nilainya belum terbukti.
+
+24
+00:02:14,400 --> 00:02:19,073
+Skenario terburuk: LLM sudah tersetir
+dan mengusulkan isolasi DC01.
+
+25
+00:02:19,273 --> 00:02:21,881
+Detektor pola injeksi kami matikan.
+
+26
+00:02:22,900 --> 00:02:26,992
+Policy tetap menolak: BLOCK, karena
+DC01 aset terlindungi.
+
+27
+00:02:27,192 --> 00:02:33,477
+Aturan ini melihat target aksi, jadi tetap bekerja
+walau kalimat serangannya tidak dikenali.
+
+28
+00:02:34,467 --> 00:02:38,559
+Kasus WS-OPS07: proses dari folder
+Public mengakses LSASS.
+
+29
+00:02:38,759 --> 00:02:43,496
+Aturan mengusulkan isolasi host, dan
+statusnya menunggu persetujuan.
+
+30
+00:02:44,500 --> 00:02:50,205
+Aksi berisiko tidak berjalan sendiri. Analis
+menyetujuinya dengan nama dan catatan.
+
+31
+00:02:54,500 --> 00:02:59,108
+Persetujuan itu dicatat, tidak
+dieksekusi. Aplikasi ini baca-saja.
+
+32
+00:03:00,100 --> 00:03:05,740
+Setiap langkah masuk jejak audit. Tiap entri
+memuat hash SHA-256 entri sebelumnya.
+
+33
+00:03:06,767 --> 00:03:10,665
+Verifikasi menghitung ulang
+seluruh rantai dari berkas.
+
+34
+00:03:11,667 --> 00:03:16,533
+Uji ini mengubah persetujuan tadi menjadi
+dieksekusi: true di salinan.
+
+35
+00:03:16,733 --> 00:03:21,276
+Verifikasi salinan langsung gagal, dan
+berkas aslinya tetap utuh.
+
+36
+00:03:22,300 --> 00:03:28,327
+Laporan CSIRT disusun dari kasus dan jejak audit,
+lalu bisa diunduh atau dicetak ke PDF.
+
+37
+00:03:29,333 --> 00:03:32,909
+Teks bebas dari log tidak ikut disalin ke laporan.
+
+38
+00:03:36,133 --> 00:03:41,838
+Pada telemetri proses bergaya HAI 21.03, satu
+tag aliran keluar dari amplop normal.
+
+39
+00:03:42,833 --> 00:03:49,054
+Catatan HMI mengaku komandan memerintahkan PLC-P1
+diputus. Firewall pola tidak menandainya.
+
+40
+00:03:50,067 --> 00:03:56,288
+Usulan itu tetap ditolak aturan aset OT, karena
+memutus PLC bisa menghentikan proses fisik.
+
+41
+00:03:56,488 --> 00:03:59,160
+Kasus dieskalasi ke insinyur proses.
+
+42
+00:04:02,367 --> 00:04:06,394
+Rencana uji kami kunci dengan
+SHA-256 sebelum dijalankan.
+
+43
+00:04:06,594 --> 00:04:11,847
+Pada 176 unit uji, injeksi yang berhasil
+turun dari 16,5 persen ke 0 persen.
+
+44
+00:04:12,047 --> 00:04:18,010
+Pola deteksinya dibuat dengan mengetahui keluarga
+injeksi ini, jadi hasilnya in-sample.
+
+45
+00:04:19,000 --> 00:04:23,802
+Dengan detektor pola dimatikan, yang
+lolos 0,6 persen, satu dari 176.
+
+46
+00:04:24,800 --> 00:04:29,795
+Injeksi yang ditulis ulang lolos dari pola
+deteksi: 0 persen terdeteksi.
+
+47
+00:04:29,995 --> 00:04:33,635
+Tetapi isolasi dan blokir palsu
+yang lolos tetap 0.
+
+48
+00:04:33,835 --> 00:04:40,185
+Versi 1 kebobolan 4 dari 176 lewat penutupan kasus;
+kini kasus tidak pernah ditutup otomatis.
+
+49
+00:04:41,200 --> 00:04:47,098
+Uji P2 gagal. LLM 1,5B kalah dari aturan dalam
+menebak taktik, 35,2 lawan 50,0 persen.
+
+50
+00:04:47,298 --> 00:04:50,810
+Karena itu kategori dan aksi diambil dari aturan.
+
+51
+00:04:51,800 --> 00:04:56,150
+Di jalur OT, 10 dari 10 episode
+serangan HAI 21.03 tertangkap.
+
+52
+00:04:56,350 --> 00:05:00,377
+Alarm palsunya 5,4 persen dan 0
+persen di dua berkas uji.
+
+53
+00:05:03,567 --> 00:05:09,465
+Di CPU laptop tanpa GPU, firewall dan policy
+butuh kurang dari 10 milidetik per kasus.
+
+54
+00:05:09,665 --> 00:05:15,692
+Dengan LLM, median 28,7 detik per kasus. Tombol
+ini mengukur ulang di perangkat penguji.
+
+55
+00:05:16,700 --> 00:05:20,018
+Lisensinya Rp0. Qwen2.5 berlisensi Apache-2.0.
+
+56
+00:05:20,218 --> 00:05:24,826
+Llama tidak dipakai karena lisensinya
+melarang penggunaan militer.
+
+57
+00:05:25,833 --> 00:05:31,216
+Untuk pilot, log diekspor dengan wevtutil,
+atau berkas .evtx diimpor langsung.
+
+58
+00:05:32,233 --> 00:05:35,358
+Usulan kami pilot baca-saja di satu satuan.
+
+59
+00:05:35,558 --> 00:05:40,101
+Aplikasi membaca log dan menulis
+laporan, tanpa menyentuh sistem.
+
+60
+00:05:41,100 --> 00:05:46,611
+Batasannya: pola injeksi tidak tahan
+parafrase, dan LLM kecil kalah dari aturan.
+
+61
+00:05:46,811 --> 00:05:49,355
+Nilai draf AI juga belum terbukti.
+
+62
+00:05:49,555 --> 00:05:53,389
+Exe belum ditandatangani dan baru
+diuji di Windows 11.
+
+63
+00:05:54,400 --> 00:05:59,395
+Aplikasi, kode, dan hasil uji ada di
+tautan ini. Silakan unduh dan coba.

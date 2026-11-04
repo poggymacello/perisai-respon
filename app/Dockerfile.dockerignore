@@ -1,0 +1,8 @@
+# Konteks build = akar repo. Hanya berkas yang dibutuhkan image demo yang dikirim ke Docker.
+*
+!app/requirements.txt
+!app/perisai_app/
+!app/frontend/
+!prototype/perisai/
+**/__pycache__
+**/*.pyc

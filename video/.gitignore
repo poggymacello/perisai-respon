@@ -1,0 +1,9 @@
+# alat dan berkas antara (dibuat ulang oleh rekam.py / susun.py)
+.venv/
+_kerja/
+rekaman/
+# video dan audio besar: diunggah ke YouTube, tidak masuk repo
+*.mp4
+*.webm
+*.wav
+__pycache__/

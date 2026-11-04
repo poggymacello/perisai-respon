@@ -299,7 +299,7 @@ Semua angka ini **post-hoc**. Total tes 92.
 **Penilaian buta:**
 - **v2.3 juga tidak buta.** Juri P5 menunjukkan ringkasan aturan dari templat kode publik bisa dicocokkan dengan regex, 40/80.
 - Selama ringkasan aturan dibuat oleh kode, paket berapa pun tidak bisa benar-benar buta.
-- Rancangan **v2.4** (`scripts/make_rating_packet_v24.py`, belum dibekukan): ringkasan aturan untuk 40 kasus **ditulis tangan** oleh anggota tim yang bukan penilai, berdasarkan daftar judul aturan saja, tanpa melihat draf AI. Uji pembeda otomatis dijalankan sebelum pembekuan. Lembar tulisnya ada di `results/rating_v24/tulis_ringkasan_aturan.csv`.
+- Rancangan **v2.4** (`scripts/make_rating_packet_v24.py`; dibekukan 2 Nov bersama `PRAREG_v24_DRAF_AI.md`, lihat `prototype/PRAREG_STATUS.md`): ringkasan aturan untuk 40 kasus **ditulis tangan** oleh anggota tim yang bukan penilai, berdasarkan daftar judul aturan saja, tanpa melihat draf AI. Uji pembeda otomatis dijalankan sebelum pembekuan. Lembar tulisnya ada di `results/rating_v24/tulis_ringkasan_aturan.csv`.
 
 **Koreksi atas §14 (juri putaran 6):**
 - **Klaim "membalik aturan" melebihi data.**

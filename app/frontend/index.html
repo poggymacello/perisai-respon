@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PERISAI-RESPON</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/app.css">
+<script type="module" src="js/app.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">P</span>PERISAI-RESPON <small>triase insiden offline</small></div>
+    <div class="spacer"></div>
+    <div id="top-pills" class="actions" aria-live="polite"></div>
+  </header>
+  <nav class="sidebar" aria-label="Navigasi utama">
+    <ul class="nav" id="nav">
+      <li><a href="#/antrean" data-route="antrean"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-inbox"></use></svg>Antrean kasus<span class="badge" id="nav-badge" hidden></span></a></li>
+      <li><a href="#/impor" data-route="impor"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-upload"></use></svg>Impor log</a></li>
+      <li><a href="#/audit" data-route="audit"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-link-2"></use></svg>Jejak audit</a></li>
+      <li><a href="#/laporan" data-route="laporan"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-file-text"></use></svg>Laporan CSIRT</a></li>
+      <li class="nav-sep" role="separator"></li>
+      <li><a href="#/ot" data-route="ot"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-activity"></use></svg>Jalur OT</a></li>
+      <li><a href="#/status" data-route="status"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-info"></use></svg>Status sistem</a></li>
+    </ul>
+    <div class="sidebar-foot" id="side-foot">Aplikasi 1.0.0 · mesin v1.2.2</div>
+  </nav>
+  <main id="main" tabindex="-1"></main>
+</div>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+<noscript>PERISAI-RESPON membutuhkan JavaScript.</noscript>
+</body>
+</html>

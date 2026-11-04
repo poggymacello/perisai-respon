@@ -3,9 +3,14 @@ Asisten triase insiden siber yang berjalan offline di laptop biasa. Isi log tida
 
 Karya untuk Kartika Cyber Hackathon 2026, kategori Penangkalan.
 
-![Instruksi tersembunyi di field CommandLine tertangkap, kasus diserahkan ke analis](aset_kirim/screenshot_1_injeksi_dieskalasi.png)
+## Unduh aplikasi (Windows 10/11)
+Unduh `PERISAI-RESPON-1.0.0-win64.zip` (41,5 MB) dari halaman [Releases](https://github.com/poggymacello/perisai-respon/releases), ekstrak, lalu jalankan `PERISAI-RESPON.exe`. Tidak perlu Python, internet, atau akun. Di dalam aplikasi, klik **Muat data contoh** untuk mencoba dengan log sintetis, atau **Impor log** untuk ekspor log Windows milikmu (XML `wevtutil`, JSON Winlogbeat, atau `.evtx`). Panduan lengkap, persyaratan sistem, dan mode LLM: [`app/README.md`](app/README.md).
 
-## Coba dalam 2 menit (tanpa model, tanpa internet setelah instalasi)
+Exe belum ditandatangani, jadi SmartScreen akan memperingatkan; klik **More info** lalu **Run anyway**. SHA-256 zip ada di halaman rilis.
+
+![Antrean kasus di aplikasi PERISAI-RESPON: kategori ATT&CK, severity, status, dan tanda injeksi terdeteksi (data contoh sintetis)](app/screenshots/01_antrean.png)
+
+## Coba mesinnya dari kode sumber (tanpa model, tanpa internet setelah instalasi)
 Windows + Python 3.11:
 ```powershell
 git clone https://github.com/poggymacello/perisai-respon
@@ -77,7 +82,8 @@ docs/
   DOKUMENTASI_TEKNIS.md  arsitektur, aturan policy, instalasi, keamanan alat
   BUKTI_EVALUASI.md      semua hasil uji + penyimpangan dari prareg
   SLIDE_OUTLINE.md · NASKAH_VIDEO.md · TANYA_JAWAB.md
-aset_kirim/              thumbnail, screenshot, slide (sumber .tex + PDF)
+app/                     aplikasi desktop 1.0.0 (FastAPI + pywebview), Dockerfile mode demo, tes API, screenshot
+aset_kirim/              thumbnail, screenshot, slide teknis (aset_kirim/slide: generator PPTX + PDF)
 prototype/
   perisai/      kode inti (detektor, firewall, policy, LLM, audit, v1.1/v1.2, importer, laporan, OT)
   triase.py     CLI untuk log Windows asli -> laporan CSIRT
