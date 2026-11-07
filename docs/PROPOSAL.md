@@ -1,6 +1,6 @@
 # PROPOSAL SOLUSI: PERISAI-RESPON
 ### Asisten triase insiden offline yang aksinya tidak bisa disetir oleh isi log
-**Kartika Cyber Hackathon 2026 · Kategori Penangkalan · Susunan tim di §9**
+**Kartika Cyber Hackathon 2026 · Kategori Penangkalan · Tim PERISAI Siber Ganesha**
 
 > Semua angka di proposal ini berasal dari run kami sendiri yang bisa diulang (`prototype/`, prareg SHA-256 `cad685a3…012a`) atau dari sumber terbuka yang dicantumkan. Hasil yang **gagal** juga kami laporkan.
 
@@ -114,11 +114,11 @@ Angka P1/P2 di §3 adalah hasil **v1**. Perubahan v1.1–v1.2.2 dibuat sesudah h
 - **Alat bantu AI saat pengembangan:** lihat bagian "Deklarasi" di `README.md`.
 
 ## 9. Tim
-<!-- Diketik sendiri sesuai data pendaftaran CODEPOLITAN. -->
-| Nama | Peran | Kontribusi |
-|---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
+Tim **PERISAI Siber Ganesha** (terdaftar dan diterima CODEPOLITAN, 2 Nov 2026).
+
+| Nama | Peran |
+|---|---|
+| Mohammad Ari Alexander Aziz | Ketua tim |
+| Poggy Macello Gultom | Anggota |
 
 **Lampiran:** `DOKUMENTASI_TEKNIS.md`, `BUKTI_EVALUASI.md`, repositori https://github.com/poggymacello/perisai-respon (aplikasi Windows di halaman Releases), video demo di YouTube (tautannya ada di formulir submisi).

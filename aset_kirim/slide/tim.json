@@ -1,10 +1,9 @@
 {
-  "_catatan": "Diketik sendiri oleh tim, sesuai data pendaftaran CODEPOLITAN. Field kosong tidak ditampilkan di slide. Setelah mengisi: python buat_slide.py --pdf",
-  "nama_tim": "",
+  "_catatan": "Sesuai email konfirmasi CODEPOLITAN 2 Nov 2026 (tim diterima). Anggota yang belum tercatat di sini diketik sendiri. Field kosong tidak ditampilkan di slide. Setelah mengubah: python buat_slide.py --pdf",
+  "nama_tim": "PERISAI Siber Ganesha",
   "anggota": [
-    {"nama": "", "peran": ""},
-    {"nama": "", "peran": ""},
-    {"nama": "", "peran": ""}
+    {"nama": "Mohammad Ari Alexander Aziz", "peran": "Ketua tim"},
+    {"nama": "Poggy Macello Gultom", "peran": "Anggota"}
   ],
   "url_video": ""
 }

@@ -939,7 +939,7 @@ Terima kasih. Kami siap menerima pertanyaan.""")
              "Policy engine, pola injeksi, dan audit diadaptasi dari Kendali (MIT, Poggy Macello Gultom & "
              "Mohammad Ari Alexander Aziz). Bagian lain dikerjakan sejak 29 Okt 2026."),
             ("Alat bantu AI saat pengembangan",
-             "Sebagian besar kode, dokumen, dan analisis disusun dengan bantuan Claude Code (Anthropic), diarahkan dan diperiksa tim."),
+             "Sebagian besar kode, dokumen, dan analisis disusun dengan bantuan asisten AI generatif, dengan arahan dan pemeriksaan tim."),
             ("Komponen pihak ketiga",
              "Qwen2.5-1.5B-Instruct (Apache-2.0), llama.cpp (MIT), OTRF Security-Datasets (MIT), HAI 21.03 (CC BY-SA 4.0)."),
             ("Data", "Hanya log publik berlabel dan event demo sintetis.")]

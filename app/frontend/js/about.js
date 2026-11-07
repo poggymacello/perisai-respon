@@ -17,7 +17,7 @@ export const NOTE_LLAMA = "Model Llama tidak dipakai karena lisensinya melarang 
 
 export const DECLARATION = [
   ["Karya pre-existing", "Komponen Kendali di atas sudah ada sebelum Program. Kendali juga diikutkan di FinTechathon 2026. Domain SOC, jalur injeksi lewat log, mode offline, jalur OT, importer, dan seluruh evaluasi dikerjakan sejak 29 Okt 2026."],
-  ["Alat bantu AI saat pengembangan", "Sebagian besar kode, dokumen, dan analisis disusun dengan bantuan asisten AI (Claude Code, Anthropic), dengan arahan dan pemeriksaan tim."],
+  ["Alat bantu AI saat pengembangan", "Sebagian besar kode, dokumen, dan analisis disusun dengan bantuan asisten AI generatif, dengan arahan dan pemeriksaan tim."],
   ["Data", "Hanya log publik berlabel dan event demo sintetis. Tidak ada data satuan atau data pribadi."],
 ];
 

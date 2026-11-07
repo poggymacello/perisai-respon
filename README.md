@@ -103,7 +103,7 @@ Kode dan prareg yang di-hash masih menyebut nama berkas lama. Padanannya: `05_BU
 
 ## Deklarasi (S&K Kartika Cyber Hackathon 2026, pasal 5.3–5.4)
 - **Karya pre-existing:** komponen Kendali di atas sudah ada sebelum Program. Kendali juga diikutkan di FinTechathon 2026. Domain SOC, jalur injeksi lewat log, mode offline, jalur OT, importer, dan seluruh evaluasi dikerjakan sejak 29 Okt 2026.
-- **Alat bantu AI saat pengembangan:** sebagian besar kode, dokumen, dan analisis disusun dengan bantuan asisten AI (Claude Code, Anthropic), dengan arahan dan pemeriksaan tim.
+- **Alat bantu AI saat pengembangan:** sebagian besar kode, dokumen, dan analisis disusun dengan bantuan asisten AI generatif, dengan arahan dan pemeriksaan tim.
 - **Data:** hanya log publik berlabel dan event demo sintetis. Tidak ada data satuan atau data pribadi.
 
 Proyek ini hanya defensif. String injeksi adalah string uji dengan host/IP fiktif dan domain `.invalid`.

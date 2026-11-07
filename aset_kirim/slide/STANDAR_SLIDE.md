@@ -1,7 +1,7 @@
 # STANDAR_SLIDE: dasar desain dek teknis PERISAI-RESPON
 ### 2 Nov 2026 · berkas: `buat_slide.py` → `PERISAI-RESPON_Slide_Teknis.pptx` / `.pdf`
 
-Dek ini menggantikan `aset_kirim/slide_PERISAI-RESPON.tex/.pdf` (beamer). Yang diambil dari setiap rujukan adalah konvensinya, bukan isi atau merek.
+Dek ini menggantikan draf beamer lama (dihapus dari repo 7 Nov 2026, masih ada di riwayat git). Yang diambil dari setiap rujukan adalah konvensinya, bukan isi atau merek.
 
 ## 1. Rujukan dan cara dipakai
 | Rujukan | Yang diambil | Penerapan di dek |
