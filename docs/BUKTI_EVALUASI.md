@@ -84,16 +84,16 @@ Sumber: `results\summary.json`, `results\endpoints.csv`, `results\fig_endpoints.
 - **L4 Penulis yang sama** menulis aturan, firewall, injeksi, dan label playbook. Aturan baseline disetel di DEV (25/33), jadi baseline kuat menurut desain.
 - **L5 Halusinasi ringkasan:** di demo LLM (event sintetis; dekoding deterministik, jadi **akan muncul lagi** di demo v1), ringkasan LLM menulis "**potensi terorisme**" padahal kata itu tidak ada di log. Ini tidak bergantung versi `demo.py`. Filter ringkasan policy hanya menyaring URL/e-mail/IP/domain, **bukan** klaim yang dikarang. Ringkasan LLM harus dibaca sebagai draf, bukan fakta.
 - **L6 Latensi** ±28 s per kasus di CPU laptop (di bawah beban paralel). Untuk volume alert tinggi ini terlalu lambat. Mode aturan (milidetik) tetap jalan sebagai jalur utama.
-- **L7 Defender** mengkarantina teks log mentah. Kasus dibangun di memori. Di lingkungan satuan perlu prosedur penanganan data serangan `[ISI]`.
+- **L7 Defender** mengkarantina teks log mentah. Kasus dibangun di memori. Di lingkungan satuan perlu prosedur penanganan data serangan yang ditetapkan satuan.
 - Klaim relevansi untuk satuan TNI AD tetap **[ASUMSI]** sampai ada konfirmasi Webinar 2 / panitia.
 
 ## 7. Yang dibutuhkan untuk uji lapangan
 1. **Keluarga injeksi yang ditahan**, ditulis pihak lain (tim merah terpisah atau korpus publik berlisensi jelas) **setelah** kode firewall dibekukan. Ini menutup L1.
-2. Log nyata satuan (Sysmon/Windows Security atau Wazuh) dengan label analis, minimal beberapa host dan beberapa minggu, supaya split per host/waktu bermakna. Termasuk kasus benign agar no_action dan false-block terukur `[ISI: akses data]`.
+2. Log nyata satuan (Sysmon/Windows Security atau Wazuh) dengan label analis, minimal beberapa host dan beberapa minggu, supaya split per host/waktu bermakna. Termasuk kasus benign agar no_action dan false-block terukur. Akses ke data seperti ini belum kami punya.
 3. Perbaiki celah S-PO: no_action hanya boleh dengan bukti positif "benign", atau selalu butuh konfirmasi manusia.
 4. Uji model yang lebih besar (masih ≤1 GB per berkas atau dengan izin manusia) dan uji di laptop kantor satuan, bukan workstation dev.
 5. Uji kegunaan dengan operator nyata: apakah ringkasan Bahasa Indonesia mempercepat triase dibanding membaca event + temuan aturan langsung.
-6. Kajian karya ganda dengan Kendali (FinTechathon) dan izin ko-pemilik `[ISI]`.
+6. Kajian karya ganda dengan Kendali (FinTechathon) dan izin tertulis dari ko-pemilik Kendali.
 
 ## 8. Cara memeriksa ulang
 ```powershell

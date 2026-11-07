@@ -1,0 +1,10 @@
+{
+  "_catatan": "Diketik sendiri oleh tim, sesuai data pendaftaran CODEPOLITAN. Field kosong tidak ditampilkan di slide. Setelah mengisi: python buat_slide.py --pdf",
+  "nama_tim": "",
+  "anggota": [
+    {"nama": "", "peran": ""},
+    {"nama": "", "peran": ""},
+    {"nama": "", "peran": ""}
+  ],
+  "url_video": ""
+}

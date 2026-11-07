@@ -34,6 +34,17 @@ SHOTS = Path(os.environ.get("PERISAI_SHOTS", ROOT / "app" / "screenshots"))  # o
 DETECTOR = ROOT / "prototype" / "perisai" / "detector.py"
 OUT_PPTX = HERE / "PERISAI-RESPON_Slide_Teknis.pptx"
 OUT_PDF = HERE / "PERISAI-RESPON_Slide_Teknis.pdf"
+REPO = "github.com/poggymacello/perisai-respon"
+
+# Data tim diketik sendiri oleh tim di tim.json. Field yang kosong tidak ditampilkan di slide.
+try:
+    import json as _json
+    TIM = _json.loads((HERE / "tim.json").read_text(encoding="utf-8"))
+except FileNotFoundError:
+    TIM = {}
+NAMA_TIM = (TIM.get("nama_tim") or "").strip()
+ANGGOTA = [a for a in TIM.get("anggota", []) if (a.get("nama") or "").strip()]
+URL_VIDEO = (TIM.get("url_video") or "").strip()
 
 # ---------------------------------------------------------------- sistem visual
 FONT = "Arial"            # tersedia di Windows, macOS, dan Google Slides
@@ -318,20 +329,24 @@ def detector_rules():
 # ---------------------------------------------------------------- slide-slide
 def s_title(d: Deck):
     s = d.new(notes="""
-(0:15) Kami tim [ISI: nama tim]. PERISAI-RESPON adalah asisten triase insiden yang berjalan offline di laptop biasa.
+(0:15) {pembuka} PERISAI-RESPON adalah asisten triase insiden yang berjalan offline di laptop biasa.
 Yang membedakannya: isi log tidak bisa menyetir aksi yang diusulkan.
-Urutannya: masalah, demo langsung, hasil uji termasuk yang gagal, lalu rencana pilot.""")
+Urutannya: masalah, demo langsung, hasil uji termasuk yang gagal, lalu rencana pilot.""".format(
+        pembuka=f"Kami tim {NAMA_TIM}." if NAMA_TIM else "Kami tim pengembang PERISAI-RESPON."))
     text(s, ML, 1.25, CW, 0.35, "Kartika Cyber Hackathon 2026  ·  Kategori Penangkalan", size=16, color=ACCENT, bold=True)
     text(s, ML, 1.75, CW, 1.0, "PERISAI-RESPON", size=54, bold=True)
     text(s, ML, 2.85, sw(9), 1.3,
          "Triase insiden siber yang berjalan offline di laptop biasa. Isi log tidak bisa menyetir aksinya.",
          size=26, color=GREY, spacing=1.05)
     hline(s, ML, ML + sw(2), 4.45, color=ACCENT, lw=2.25)
-    text(s, ML, 4.7, sw(8), 1.4, [
-        [("Tim  ", {"color": GREY3}), ("[ISI: nama tim]", {"bold": True})],
-        [("Anggota  ", {"color": GREY3}), ("[ISI: anggota]", {})],
-        [("Aplikasi 1.0.0  ·  mesin v1.2.2  ·  2 November 2026", {"color": GREY3})],
-    ], size=18, spacing=1.35)
+    baris = []
+    if NAMA_TIM:
+        baris.append([("Tim  ", {"color": GREY3}), (NAMA_TIM, {"bold": True})])
+    if ANGGOTA:
+        baris.append([("Anggota  ", {"color": GREY3}), (", ".join(a["nama"].strip() for a in ANGGOTA), {})])
+    baris.append([("Aplikasi 1.0.0  ·  mesin v1.2.2", {"color": GREY3})])
+    baris.append([(REPO, {"color": GREY3})])
+    text(s, ML, 4.7, sw(8), 1.4, baris, size=18, spacing=1.35)
 
 
 def s_summary(d: Deck):
@@ -905,24 +920,26 @@ def s_team(d: Deck):
 Komponen policy, pola injeksi, dan audit diadaptasi dari proyek kami sebelumnya, Kendali, dan sudah dideklarasikan.
 Terima kasih. Kami siap menerima pertanyaan.""")
     x, w = cx(0), sw(5)
-    text(s, x, BODY_TOP, w, 0.35, "Tim [ISI: nama tim]", size=20, bold=True)
-    for i in range(3):
-        y = BODY_TOP + 0.6 + i * 0.55
-        text(s, x, y, w, 0.4, f"[ISI: anggota {i + 1}]  ·  [ISI: peran]", size=18, color=GREY)
-    y = BODY_TOP + 2.45
+    text(s, x, BODY_TOP, w, 0.35, f"Tim {NAMA_TIM}" if NAMA_TIM else "Tim", size=20, bold=True)
+    for i, a in enumerate(ANGGOTA[:3]):
+        y = BODY_TOP + 0.5 + i * 0.62
+        peran = (a.get("peran") or "").strip()
+        baris = [[(a["nama"].strip(), {})]] + ([[(peran, {"color": GREY3})]] if peran else [])
+        text(s, x, y, w, 0.6, baris, size=16, color=GREY, spacing=1.0)
+    y = BODY_TOP + 0.75 + len(ANGGOTA[:3]) * 0.62
     hline(s, x, x + w, y)
-    text(s, x, y + 0.2, w, 1.4, [
-        [("Repo  ", {"color": GREY3}), ("[ISI: URL repo]", {"bold": True})],
-        [("Video  ", {"color": GREY3}), ("[ISI: URL video]", {"bold": True})],
-        [("Demo  ", {"color": GREY3}), ("[ISI: URL demo]", {"bold": True})],
-        [("Unduh  ", {"color": GREY3}), ("PERISAI-RESPON-1.0.0-win64.zip di rilis repo", {})]], size=18, spacing=1.3)
+    tautan = [[(REPO, {"bold": True})]]
+    if URL_VIDEO:
+        tautan.append([("Video  ", {"color": GREY3}), (URL_VIDEO, {"bold": True})])
+    tautan.append([("Unduh  ", {"color": GREY3}), ("zip aplikasi Windows di Releases", {})])
+    tautan.append([("Docker  ", {"color": GREY3}), ("mode demo, app/DEPLOY.md", {})])
+    text(s, x, y + 0.2, w, 1.4, tautan, size=16, spacing=1.3)
     xr, wr = cx(6), sw(6)
     decl = [("Karya pre-existing",
              "Policy engine, pola injeksi, dan audit diadaptasi dari Kendali (MIT, Poggy Macello Gultom & "
              "Mohammad Ari Alexander Aziz). Bagian lain dikerjakan sejak 29 Okt 2026."),
             ("Alat bantu AI saat pengembangan",
-             "Sebagian besar kode, dokumen, dan analisis disusun dengan bantuan Claude Code (Anthropic), diarahkan dan diperiksa tim. "
-             "[ISI: konfirmasi kalimat ini]"),
+             "Sebagian besar kode, dokumen, dan analisis disusun dengan bantuan Claude Code (Anthropic), diarahkan dan diperiksa tim."),
             ("Komponen pihak ketiga",
              "Qwen2.5-1.5B-Instruct (Apache-2.0), llama.cpp (MIT), OTRF Security-Datasets (MIT), HAI 21.03 (CC BY-SA 4.0)."),
             ("Data", "Hanya log publik berlabel dan event demo sintetis.")]
@@ -1024,10 +1041,10 @@ def s_repro(d: Deck):
               "Juri bisa mencoba aplikasi dari zip, atau menjalankan ulang demo dan tes dari kode sumber",
               "Sumber: app/README.md, app/DEPLOY.md, README.md; BUKTI_EVALUASI §8. Tes dijalankan ulang 2 Nov 2026: 102 + 24 lulus.",
               notes="Cadangan tanya jawab bila juri bertanya cara mencoba atau memeriksa klaim.", number="A4")
-    steps = ["Unduh PERISAI-RESPON-1.0.0-win64.zip (41,5 MB) dari rilis repo [ISI: URL repo].",
+    steps = ["Unduh PERISAI-RESPON-1.0.0-win64.zip (41,5 MB) dari Releases repo.",
              "Ekstrak, jalankan PERISAI-RESPON.exe. SmartScreen: More info, lalu Run anyway.",
              "Klik Muat data contoh, lalu buka kasus berlabel Injeksi terdeteksi.",
-             "Demo publik tanpa instalasi (data sintetis, unggah dimatikan): [ISI: URL demo]."]
+             "Tanpa Windows: jalankan mode demo lewat Docker (app/DEPLOY.md). Data sintetis, unggah dimatikan."]
     text(s, cx(0), BODY_TOP, CW, 0.35, "Aplikasi (Windows 10/11 64-bit, tanpa Python atau internet)", size=18, bold=True)
     cw2 = (CW - GUT) / 2
     for i, st in enumerate(steps):
@@ -1041,7 +1058,7 @@ def s_repro(d: Deck):
             r".venv\Scripts\python -m pip install -r requirements-demo.txt",
             r".venv\Scripts\python -I demo.py --no-llm",
             r".venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests  # 102",
-            r"cd ..\app; .venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests  # 23"]
+            r"cd ..\app; .venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests  # 24"]
     box(s, cx(0), y0 + 0.45, CW, 1.95, fill=FILL)
     text(s, cx(0) + 0.25, y0 + 0.6, CW - 0.4, 1.8, code, size=16, font=MONO, spacing=1.15)
 

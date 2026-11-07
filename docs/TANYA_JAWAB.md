@@ -40,11 +40,11 @@ Angka diambil dari `BUKTI_EVALUASI.md` dan `prototype/results/summary.json`. Kal
 19. **Kenapa tidak pakai Llama?** *Acceptable Use Policy* Llama melarang penggunaan militer/perang. Qwen2.5 berlisensi Apache-2.0. Asal model dari luar negeri tetap jadi pertimbangan, jadi kami membuat antarmukanya model-agnostik dan menyediakan mode tanpa LLM.
 
 ## C. Kelayakan / bisnis
-20. **Biaya?** Lisensi Rp0. Pilot cukup memakai perangkat yang sudah ada, ditambah pelatihan dan pendampingan `[ISI angka resmi]`.
+20. **Biaya?** Lisensi Rp0. Pilot cukup memakai perangkat yang sudah ada, ditambah pelatihan dan pendampingan. Angka biayanya belum kami hitung.
 21. **Siapa yang memelihara?** Usulannya: paket pembaruan aturan dan model bertanda tangan lewat Kartika CSIRT `[ASUMSI]`.
-22. **TKDN?** Diperlukan untuk pengadaan nyata. Masuk tahap 3 `[ISI]`.
+22. **TKDN?** Diperlukan untuk pengadaan nyata. Masuk tahap 3 dan belum kami kaji.
 
 ## D. Integritas
 23. **Ini karya lama?** Komponen policy, pola injeksi, dan audit diadaptasi dari proyek tim sendiri, Kendali (MIT), yang juga diikutkan di FinTechathon. Domain, data, evaluasi, dan produknya baru, dan dikerjakan sejak 29 Okt 2026. Rulebook membolehkan karya pre-existing sebagai dasar asalkan dideklarasikan (S&K 5.3); deklarasinya ada di `README.md` dan `PROPOSAL.md` §8.
-24. **Pakai AI untuk menulis kode?** Ya. Rulebook tidak punya aturan khusus soal AI generatif, tetapi S&K 5.4 meminta atribusi untuk model AI dan tools pihak ketiga, jadi kami mendeklarasikannya di `README.md` (bagian Deklarasi). Setiap anggota bisa menjelaskan arsitektur dan kodenya. `[ISI: sesuaikan dengan peran nyata tiap anggota]`
+24. **Pakai AI untuk menulis kode?** Ya. Rulebook tidak punya aturan khusus soal AI generatif, tetapi S&K 5.4 meminta atribusi untuk model AI dan tools pihak ketiga, jadi kami mendeklarasikannya di `README.md` (bagian Deklarasi). Setiap anggota bisa menjelaskan arsitektur dan kodenya.
 25. **Ada data asli satuan?** Tidak ada. Hanya log publik berlabel dan event demo sintetis. Injeksi berupa string uji dengan host/IP fiktif dan domain `.invalid`.

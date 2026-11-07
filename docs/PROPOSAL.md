@@ -1,6 +1,6 @@
 # PROPOSAL SOLUSI: PERISAI-RESPON
 ### Asisten triase insiden offline yang aksinya tidak bisa disetir oleh isi log
-**Kartika Cyber Hackathon 2026 · Kategori Penangkalan · Tim `[ISI: nama tim]` · `[ISI: nama anggota, maks 3]`**
+**Kartika Cyber Hackathon 2026 · Kategori Penangkalan · Susunan tim di §9**
 
 > Semua angka di proposal ini berasal dari run kami sendiri yang bisa diulang (`prototype/`, prareg SHA-256 `cad685a3…012a`) atau dari sumber terbuka yang dicantumkan. Hasil yang **gagal** juga kami laporkan.
 
@@ -87,7 +87,7 @@ Angka P1/P2 di §3 adalah hasil **v1**. Perubahan v1.1–v1.2.2 dibuat sesudah h
 | Takut "AI bertindak sendiri" | Allowlist tertutup, aset terlindungi, persetujuan manusia, mode baca-saja di pilot |
 | Akuntabilitas | Audit berantai hash. Mengubah satu entri terdeteksi (diuji di demo dan di tes otomatis) |
 | Log asli dari PC/server satuan | `triase.py` membaca ekspor `wevtutil`/`Get-WinEvent` (XML) atau JSON Winlogbeat tanpa agen tambahan, lalu mengelompokkan event per host dan per 15 menit |
-| Laporan ke Kartika CSIRT | `triase.py` menghasilkan laporan Markdown: ringkasan aturan, bukti dari field terstruktur dengan id event, hash audit per kasus, kolom persetujuan analis. Format formulir resmi CSIRT `[ISI: minta contoh ke panitia]` |
+| Laporan ke Kartika CSIRT | `triase.py` menghasilkan laporan Markdown: ringkasan aturan, bukti dari field terstruktur dengan id event, hash audit per kasus, kolom persetujuan analis. Contoh formulir resmi CSIRT belum kami terima dari panitia. Kolom laporan mudah disesuaikan begitu contohnya ada |
 | OT (pompa/boiler/turbin) | **Purwarupa jalur OT** di data HAI 21.03 (testbed ICS, CC BY-SA 4.0). Detektor amplop menangkap 10/10 episode serangan, dengan alarm palsu 5,4 % dan 0 % di dua berkas uji. Kebijakannya: **PLC/HMI tidak pernah diputus sistem**, eskalasi ke insinyur proses. Jalur OT hanya memakai aturan, tanpa LLM. Alarm palsu 5,4 % per jendela 60 detik setara ±3 alarm palsu per jam di test1. Penggunaan SCADA di satuan tetap `[ASUMSI → tanya di Webinar 2]` |
 
 ## 6. Kelayakan implementasi
@@ -114,6 +114,11 @@ Angka P1/P2 di §3 adalah hasil **v1**. Perubahan v1.1–v1.2.2 dibuat sesudah h
 - **Alat bantu AI saat pengembangan:** lihat bagian "Deklarasi" di `README.md`.
 
 ## 9. Tim
-`[ISI: nama · peran · kontribusi]`. Satu tim maksimal 3 orang, dan semuanya wajib punya akun CODEPOLITAN.
+<!-- Diketik sendiri sesuai data pendaftaran CODEPOLITAN. -->
+| Nama | Peran | Kontribusi |
+|---|---|---|
+|  |  |  |
+|  |  |  |
+|  |  |  |
 
-**Lampiran:** `DOKUMENTASI_TEKNIS.md`, `BUKTI_EVALUASI.md`, repositori `[ISI: URL GitHub publik]`, video `[ISI: URL]`.
+**Lampiran:** `DOKUMENTASI_TEKNIS.md`, `BUKTI_EVALUASI.md`, repositori https://github.com/poggymacello/perisai-respon (aplikasi Windows di halaman Releases), video demo di YouTube (tautannya ada di formulir submisi).

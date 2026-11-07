@@ -45,7 +45,7 @@ Pencarian web dipakai (2 Nov 2026) untuk memastikan tanggal dan struktur NIST SP
 - Judul berupa kalimat klaim yang bisa dibantah dengan angka atau bukti.
 - Isi prosa ≤ 30 kata per slide bila bisa. Tabel bukti, diagram, dan deklarasi (slide 16) melebihi itu dan sengaja dibiarkan.
 - Skrip memindai teks slide **dan** catatan pembicara untuk daftar §D1, klaim terlarang §C, tanda pisah panjang (—), dan emoji. Hasil terakhir: 0 temuan.
-- Placeholder yang harus diisi manusia tetap terlihat: `[ISI: nama tim]`, `[ISI: anggota]`, `[ISI: URL repo]`, `[ISI: URL video]`, `[ISI: URL demo]`, `[ISI: peran]`, `[ISI: konfirmasi kalimat ini]` (deklarasi alat bantu AI, sama dengan README), dan `[ASUMSI]`.
+- Tidak ada placeholder `[ISI]` di dek. Nama tim, anggota, peran, dan URL video dibaca dari `tim.json` (diketik sendiri oleh tim). Field yang kosong tidak ditampilkan. URL repo sudah tertulis di skrip (`REPO`). Label `[ASUMSI]` tetap dipakai untuk klaim yang belum dikonfirmasi.
 
 ## 5. Struktur dan waktu (presentasi final 10 menit termasuk demo dan tanya jawab)
 17 slide utama, satu di atas rentang 12–16 yang disarankan. Alasannya, Fungsionalitas Purwarupa berbobot 25 dan tangkapan layar asli adalah buktinya; tiga slide produk dipakai sebagai jalur demo langsung, dan tiap tangkapan layar harus cukup besar untuk dibaca.

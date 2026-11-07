@@ -12,8 +12,9 @@ PERISAI-RESPON: triase insiden offline yang tidak bisa disetir isi log
 ```
 PERISAI-RESPON adalah aplikasi desktop untuk memilah insiden dari log Windows secara offline di laptop. Aturan dan policy engine yang memutuskan, LLM lokal hanya menulis draf berlabel, dan setiap aksi berisiko menunggu persetujuan analis.
 
-Unduh dan coba: [ISI: URL repo]
-Slide penjelasan: [ISI: URL slide]
+Unduh dan coba: https://github.com/poggymacello/perisai-respon/releases
+Kode dan dokumentasi: https://github.com/poggymacello/perisai-respon
+Slide penjelasan: https://github.com/poggymacello/perisai-respon/blob/main/aset_kirim/slide/PERISAI-RESPON_Slide_Teknis.pdf
 
 Chapter:
 00:00 Masalah: log bisa ditulis penyerang
@@ -33,7 +34,7 @@ Alat bantu AI dipakai saat pengembangan; rinciannya ada di bagian Deklarasi READ
 #keamanansiber #incidentresponse #promptinjection
 ```
 
-Sebelum unggah: ganti `[ISI: URL repo]` dan `[ISI: URL slide]` (juga di kartu penutup video bila URL sudah pasti; jalankan ulang `susun.py` setelah mengubah `alur.py`).
+Tautan di deskripsi baru berfungsi penuh setelah rilis `v1.0.0` dibuat dan slide terbaru di-push. Kalau slide diunggah ke Google Drive, ganti baris "Slide penjelasan" dengan tautan Drive itu.
 
 ## Pengaturan
 | Pengaturan | Nilai |

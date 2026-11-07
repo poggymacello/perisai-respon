@@ -239,7 +239,7 @@ URUTAN: list[Kartu | Rekam] = [
     ]),
     Kartu("k_penutup", "penutup", {
         "judul": "PERISAI-RESPON",
-        "url": "[ISI: URL repo]",
+        "url": "github.com/poggymacello/perisai-respon",
         "ajak": "Coba sendiri: unduh aplikasi dari halaman rilis repo.",
         "kecil": "Kode, hasil uji, deklarasi alat bantu AI, dan lisensi ada di README.",
     }, [

@@ -19,6 +19,6 @@ Satu ide per slide, angka besar, sumber di pojok kanan bawah.
 
 ## Aturan visual
 - Gunakan grafik `prototype/results/fig_endpoints.png`, atau gambar ulang dengan warna tema.
-- Jangan pakai logo TNI AD/Pussiberad kecuali panitia mengizinkan `[ISI]`.
+- Jangan pakai logo TNI AD/Pussiberad kecuali panitia mengizinkan secara tertulis.
 - Setiap angka diberi label "run sendiri, 29 Okt 2026" atau nama sumbernya.
 - Kata yang dilarang: "100 % aman", "real-time", "dipakai TNI", "terintegrasi SIEM".
