@@ -100,8 +100,8 @@ def uji_injeksi_case(teks: str) -> dict:
 PERAN = {
     "operator": {"label": "Operator", "izin": ["lihat", "uji"],
                  "tugas": "Memantau antrean, membuka kasus, menguji usulan dan injeksi."},
-    "analis": {"label": "Analis", "izin": ["lihat", "uji", "tinjau", "lapor"],
-               "tugas": "Menyetujui, menolak, atau menutup kasus, dan melengkapi laporan CSIRT."},
+    "analis": {"label": "Analis", "izin": ["lihat", "uji", "tinjau", "lapor", "demo"],
+               "tugas": "Menyetujui, menolak, atau menutup kasus, melengkapi laporan CSIRT, dan menjalankan demo."},
     "admin": {"label": "Admin", "izin": ["lihat", "uji", "demo"],
               "tugas": "Mengelola sesi demo dan memeriksa status sistem. Tidak bisa menyetujui aksi."},
 }

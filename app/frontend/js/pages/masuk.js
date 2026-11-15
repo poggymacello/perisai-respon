@@ -39,7 +39,7 @@ export async function render(page, _params, ctx) {
       const m = await api.post("/api/masuk", creds);
       await ctx.refreshPeran();
       ctx.toast(`Masuk sebagai ${m.nama} (${m.label}). Tercatat di jejak audit.`);
-      ctx.go(m.izin.includes("demo") ? "#/demo" : "#/antrean");
+      ctx.go(m.peran === "admin" ? "#/demo" : "#/antrean");
     } catch (e) {
       busy = false;
       err.textContent = e.status === 401 ? "Email atau sandi salah." : (e.message || "Tidak bisa masuk. Coba lagi.");

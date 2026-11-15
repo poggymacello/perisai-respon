@@ -52,8 +52,8 @@ export async function render(page, _params, ctx) {
       h("h1", { class: "with-chip" }, "Kontrol demo", h("span", { class: "sim" }, "Simulator")),
       h("div", { class: "sub" }, "Memainkan peran penyerang dan sumber log, supaya alur lengkap bisa ditunjukkan dalam beberapa menit."))));
   if (peran.wajib && !(peran.masuk && peran.masuk.izin.includes("demo"))) {
-    page.append(card("Hanya untuk Admin", { icon: "lock" },
-      h("p", null, "Halaman ini untuk yang menjalankan demo: Kapten Dimas (Admin). Analis dan Operator bekerja dari antrean kasus."),
+    page.append(card("Untuk Analis dan Admin", { icon: "lock" },
+      h("p", null, "Halaman ini untuk yang menjalankan demo: Lettu Andi (Analis) dan Kapten Dimas (Admin). Operator bekerja dari antrean kasus."),
       h("div", { class: "actions" }, h("a", { class: "btn", href: "#/antrean" }, "Kembali ke antrean"), h("a", { class: "btn primary", href: "#/masuk" }, icon("user"), "Ganti akun"))));
     return;
   }

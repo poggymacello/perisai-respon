@@ -67,7 +67,7 @@ app\.venv\Scripts\python app\run_desktop.py --browser    # di browser
 cd app; .venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests      # 37 tes
 app\.venv\Scripts\python -I app\tools\build.py           # -> app\dist\PERISAI-RESPON-1.0.0-win64.zip
 ```
-Tangkapan layar diambil dengan exe yang sedang berjalan, memakai Edge headless (Playwright):
+Tangkapan layar di `screenshots/` saat ini diambil dari server lokal mode desktop (mode aturan) dengan Chrome headless. Untuk mengambil ulang dari exe yang sedang berjalan, pakai Edge headless (Playwright):
 ```powershell
 app\.venv\Scripts\python -I app\tools\shoot.py --data-dir "$env:LOCALAPPDATA\PERISAI-RESPON" --out app\screenshots [--llm]
 ```
@@ -93,7 +93,7 @@ app/
   tests/              37 tes: API 26, cek silang draf 7, penjaga aset OT 4
   tools/              build.py, shoot.py, make_sample.py, make_icon.py, build_icons.py, make_space.py
   packaging/          spec PyInstaller + info versi exe
-  screenshots/        tangkapan layar 1920x1080 (15 Nov 2026, LLM lokal aktif)
+  screenshots/        tangkapan layar 1920x1080 (15 Nov 2026, mode aturan, tanpa model)
   Dockerfile          image demo publik
 ```
 

@@ -532,8 +532,8 @@ def test_demo_lab_scenarios_go_through_engine(tmp_path, monkeypatch):
         lab = c.get("/api/demo/skenario").json()["skenario"]
         assert len(lab) == 7
         assert c.post("/api/demo/skenario/injeksi-inggris", headers=H).status_code == 401      # belum masuk
-        c.post("/api/masuk", json={"email": "andi@posko.example", "sandi": "perisai-demo"}, headers=H)
-        assert c.post("/api/demo/skenario/injeksi-inggris", headers=H).status_code == 403      # analis bukan admin
+        c.post("/api/masuk", json={"email": "rina@posko.example", "sandi": "perisai-demo"}, headers=H)
+        assert c.post("/api/demo/skenario/injeksi-inggris", headers=H).status_code == 403      # operator tidak boleh
         c.post("/api/masuk", json={"email": "dimas@posko.example", "sandi": "perisai-demo"}, headers=H)
         assert c.post("/api/demo/skenario/tidak-ada", headers=H).status_code == 404
         got = {}

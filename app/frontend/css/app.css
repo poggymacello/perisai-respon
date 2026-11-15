@@ -650,3 +650,5 @@ hr.sep { border: 0; border-top: 1px solid var(--border); margin: 12px 0; }
   .paper h2 { break-after: avoid; }
   .paper tr { break-inside: avoid; }
 }
+.nav .sim-dot { margin-left: auto; font-size: 10px; font-weight: 600; padding: 0 6px; border-radius: 4px; border: 1px dashed var(--wait-fill); background: var(--wait-bg); color: var(--wait); }
+.app[data-collapsed] .nav .sim-dot { display: none; }
