@@ -82,7 +82,7 @@ Jalur log seluruhnya satu arah: dari PC sumber ke media, lalu ke laptop offline.
 - **Belum ada:** tanda tangan digital paket (misalnya Authenticode untuk exe), dan paket aturan terpisah dari aplikasi. Keduanya masuk tahap 3 di `PROPOSAL.md` §6. Sampai saat itu, perlindungannya hanya kecocokan hash yang dikirim lewat kanal terpisah.
 
 ### 3.4 Peran
-Aplikasi 1.0.0 **belum punya login atau pembatasan peran**. Nama analis pada persetujuan diisi bebas. Karena itu, peran di bawah ditegakkan lewat prosedur dan akun Windows terpisah di laptop `[ASUMSI: kebijakan akun perangkat satuan]`.
+Aplikasi 1.0.0 **belum punya login atau pembatasan peran**. Nama analis pada persetujuan diisi bebas. Karena itu, peran di bawah ditegakkan lewat prosedur dan akun Windows terpisah di laptop `[ASUMSI: kebijakan akun perangkat satuan]`. Demo web (15 Nov 2026) sudah menegakkan ketiga peran ini di server: hanya Analis yang bisa meninjau kasus dan mengisi data pelaporan, Admin tidak bisa menyetujui aksi, dan setiap masuk tercatat di jejak audit. Fitur yang sama direncanakan untuk aplikasi desktop.
 
 | Peran | Tugas | Layar |
 |---|---|---|

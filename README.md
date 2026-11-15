@@ -41,6 +41,28 @@ Pemetaan lengkap ke Perpres 47/2023, Peraturan BSSN 1/2024, NIST SP 800-61r3, da
 - **Pola injeksi berbahasa Indonesia** dan normalisasi teks (homoglyph, karakter tersembunyi, base64) yang bisa dicoba langsung di Kontrol demo.
 - **Rencana uji dikunci sebelum diuji.** Hipotesis dan metrik di-hash SHA-256 pada 29 Okt 2026, dan hasil yang gagal tetap dilaporkan.
 
+## Penerapan di satuan
+
+| | |
+|---|---|
+| **Instalasi** | Paket zip dibawa dengan media lepas, SHA-256-nya dikirim lewat kanal terpisah, lalu dicek di laptop offline sebelum diekstrak. Uji penerimaan memakai data contoh dan verifikasi audit, sekitar 1 hari-orang |
+| **Persyaratan** | Windows 10/11 64-bit, ±100 MB disk, proses ±170 MB RAM di mode aturan, tanpa GPU dan tanpa jaringan. Model lokal opsional menambah 0,92 GB |
+| **Peran** | Operator mengimpor log, Analis memutuskan dan menandatangani laporan, Admin memasang paket dan menjaga jejak audit. Demo web sudah menegakkan pembagian ini di server |
+| **Pelatihan** | Satu hari (8 jam) untuk operator dan analis, diakhiri latihan skenario satu hari di posko |
+| **Pilot** | 30 hari baca-saja di satu satuan, berjalan di samping prosedur yang ada. Metrik waktu triase, cakupan tinjauan, dan alarm palsu dihitung langsung dari jejak audit |
+| **Biaya** | Lisensi Rp0. Model yang dipakai berlisensi Apache-2.0 |
+| **Pembaruan** | Aturan dan model diperbarui lewat rilis zip baru dengan hash yang dicek ulang. Kode mesin yang berubah langsung terlihat di **Status sistem** |
+
+Rincian instalasi, peran, pelatihan, metrik pilot, biaya dalam hari-orang, dan register risiko ada di [`docs/PENERAPAN_SATUAN.md`](docs/PENERAPAN_SATUAN.md).
+
+**Pengembangan lanjutan**
+
+1. Login dan peran di aplikasi desktop, serta daftar aset terlindungi yang dikelola Admin dengan setiap perubahan tercatat di audit.
+2. Importer alert Wazuh/Elastic dan ekspor layer ATT&CK Navigator, supaya PERISAI bisa dipasang di samping SIEM yang sudah ada.
+3. Penilaian buta draf AI oleh penilai luar dan uji red team dari luar tim.
+4. Tanda tangan kode untuk exe dan paket aturan, ditambah uji penetrasi pihak ketiga.
+5. Pilot di satu satuan, lalu perluasan ke posko lain lewat CSIRT atasan.
+
 ## Coba dalam 3 menit
 
 ### Lewat browser
