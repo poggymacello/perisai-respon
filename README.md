@@ -13,9 +13,11 @@ Karya untuk Kartika Cyber Hackathon 2026, kategori Penangkalan.
 **Demo web tanpa unduhan:** https://perisai-respon.vercel.app (data sintetis, unggah log dimatikan). Halaman **Uji injeksi** di demo itu membiarkan juri menulis injeksinya sendiri dan melihat policy menahannya, dengan atau tanpa detektor pola.
 
 ## Untuk juri: coba dalam 3 menit
-Tanpa instalasi, internet, atau akun. Datanya log contoh sintetis. Langkah dan hasil di bawah sudah dicek ulang pada zip rilis 1.0.0 (15 Nov 2026).
+**Paling cepat, di browser:** https://perisai-respon.vercel.app/ (mode demo publik: data sintetis, unggah log dimatikan, LLM tidak aktif). Langkah 3 sampai 6 di bawah bisa diikuti di sana.
 
-1. **Unduh** `PERISAI-RESPON-1.0.0-win64.zip` (41,5 MB) dari folder Google Drive tim. Tautannya ada di halaman submisi (Link Karya). SHA-256 zip ada di berkas `PERISAI-RESPON-1.0.0-win64.zip.sha256` di folder yang sama. Ekstrak seluruh isinya ke satu folder. Jangan jalankan dari dalam zip.
+Aplikasi desktop: tanpa instalasi, internet, atau akun. Datanya log contoh sintetis. Langkah dan hasil di bawah sudah dicek ulang pada zip rilis 1.0.0 (15 Nov 2026).
+
+1. **Unduh** `PERISAI-RESPON-1.0.0-win64.zip` (41,5 MB) dari halaman [Releases](https://github.com/poggymacello/perisai-respon/releases/tag/v1.0.0). SHA-256 zip ada di berkas `PERISAI-RESPON-1.0.0-win64.zip.sha256` di halaman yang sama. Ekstrak seluruh isinya ke satu folder. Jangan jalankan dari dalam zip.
 2. **Jalankan** `PERISAI-RESPON.exe`. Kalau muncul layar **Windows protected your PC** (SmartScreen), klik **More info**, lalu **Run anyway**. Exe belum ditandatangani sertifikat penerbit. Jendela aplikasi terbuka dalam beberapa detik di halaman **Antrean kasus**.
 3. Klik **Muat data contoh**. Yang terlihat: 10 kasus dari 22 event sintetis (host fiktif `*.batalyon.lab`), 3 di antaranya bertanda **Injeksi terdeteksi**.
 
