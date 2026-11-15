@@ -416,3 +416,25 @@ html.js .reveal[data-shown] { opacity: 1; transform: none; }
   .ot-svg .wire { stroke-dasharray: none; opacity: .7; }
   .jr-progress { display: none; }
 }
+
+/* draf AI asli dari evaluasi */
+.drafts { margin-top: 28px; padding: 26px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); }
+.drafts-head { display: grid; gap: 8px; margin-bottom: 18px; }
+@media (min-width: 900px) { .drafts-head { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 32px; align-items: start; } }
+.drafts-head h3 { font-size: 20px; letter-spacing: -.02em; color: var(--navy); }
+.drafts-head p { font-size: 14.5px; color: var(--text-2); }
+.draft-grid { display: grid; gap: 12px; }
+@media (min-width: 900px) { .draft-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.draft { margin: 0; padding: 16px 18px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-alt); display: flex; flex-direction: column; gap: 10px; }
+.draft-bad { border-color: var(--bad-line); }
+.draft-wait { border-color: #efcf9f; }
+.draft-ok { border-color: var(--ok-line); }
+.draft figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.draft figcaption code { font-size: 11.5px; color: var(--text-3); }
+.draft .pill.wait { background: var(--wait-bg); color: var(--wait); }
+.draft blockquote { margin: 0; padding: 10px 12px; border-left: 3px solid var(--border-strong); background: var(--surface); border-radius: 0 8px 8px 0; font-size: 14.5px; line-height: 1.55; color: var(--text); }
+.draft-bad blockquote { border-left-color: var(--bad); }
+.draft-wait blockquote { border-left-color: #d97706; }
+.draft-ok blockquote { border-left-color: var(--ok); }
+.draft p { font-size: 13.5px; color: var(--text-2); }
+.drafts-src { margin-top: 14px; font-size: 12.5px; color: var(--text-3); }

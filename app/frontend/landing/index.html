@@ -233,6 +233,31 @@
           <span class="layer-hit layer-hold">tidak bisa dibujuk kalimat</span>
         </li>
       </ol>
+
+      <div class="drafts reveal" aria-labelledby="drafts-h">
+        <div class="drafts-head">
+          <h3 id="drafts-h">Draf AI asli, apa adanya</h3>
+          <p>Contoh keluaran Qwen2.5-1.5B yang tersimpan dari evaluasi, lalu dicek silang terhadap temuan aturan. Dari 421 draf, 175 (41,6%) menyebut kategori yang tidak didukung aturan. Semuanya ditandai untuk analis, tidak disembunyikan, dan kategori yang berlaku tetap dari aturan.</p>
+        </div>
+        <div class="draft-grid">
+          <figure class="draft draft-bad">
+            <figcaption><span class="pill bad">Ditandai bertentangan</span><code>empire_mimikatz_lsadump</code></figcaption>
+            <blockquote>"Pencurian kredensial dan pergerakan lateral dalam sistem Windows melalui akses memori proses LSASS dan perintah pengintaian akun/domain."</blockquote>
+            <p><b>Aturan yang terpicu:</b> pencurian kredensial, pengintaian, eksekusi. "Pergerakan lateral" tidak didukung aturan mana pun, jadi kalimat itu ditandai.</p>
+          </figure>
+          <figure class="draft draft-wait">
+            <figcaption><span class="pill wait">Ditandai, ternyata draf benar</span><code>rdp_taskmanager_lsass</code></figcaption>
+            <blockquote>"Pencurian kredensial terdeteksi melalui logon dengan kredensial eksplisit dan logon jaringan dari alamat jarak jauh."</blockquote>
+            <p><b>Aturan:</b> defense evasion. <b>Label dataset:</b> pencurian kredensial. Di kasus ini AI yang benar dan aturan yang meleset. Karena itu draf ditandai untuk diperiksa analis, bukan dihapus.</p>
+          </figure>
+          <figure class="draft draft-ok">
+            <figcaption><span class="pill ok">Sesuai aturan</span><code>sharpwmi_create_dcerpc</code></figcaption>
+            <blockquote>"Pergerakan lateral dalam sistem, dengan proses anak dari WMI Provider Host dan logon jaringan dari alamat jarak jauh."</blockquote>
+            <p><b>Aturan:</b> pergerakan lateral. Draf menyebut kategori yang sama dan menambahkan konteks yang membantu analis membaca bukti.</p>
+          </figure>
+        </div>
+        <p class="drafts-src">Sumber: <code>app/hasil/konsistensi_draf.md</code> (uji petik manual, 15 Nov 2026). Demo web tidak menjalankan model; draf di atas adalah keluaran yang direkam saat evaluasi.</p>
+      </div>
     </div>
   </section>
 
