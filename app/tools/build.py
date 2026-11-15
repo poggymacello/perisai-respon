@@ -1,4 +1,4 @@
-"""Build Windows: PyInstaller onedir -> app/dist/PERISAI-RESPON-1.0.0-win64.zip
+"""Build Windows: PyInstaller onedir -> app/dist/PERISAI-RESPON-<APP_VERSION>-win64.zip
 
     app\\.venv\\Scripts\\python -I app\\tools\\build.py            # dengan llama_cpp (mode LLM bisa aktif bila model ada)
     set PERISAI_BUNDLE_LLM=0 && app\\.venv\\Scripts\\python -I app\\tools\\build.py   # aturan saja, lebih kecil

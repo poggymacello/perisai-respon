@@ -5,5 +5,5 @@ audit berantai hash -> laporan CSIRT. Persetujuan analis hanya dicatat di audit,
 """
 
 APP_NAME = "PERISAI-RESPON"
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.1.0"
 ENGINE_VERSION = "1.2.2"  # perisai/v12.py (decide_v12 + guard_draft), lihat frozen/CODE_V12_posthoc.sha256

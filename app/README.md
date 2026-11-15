@@ -1,11 +1,11 @@
-# PERISAI-RESPON 1.0.0 (aplikasi)
+# PERISAI-RESPON 1.1.0 (aplikasi)
 
 Aplikasi desktop untuk triase insiden dari log Windows, berjalan offline di laptop. Isinya antarmuka analis di atas mesin PERISAI v1.2.2 (`prototype/perisai`): impor log, antrean kasus, bukti, keputusan policy beserta alasannya, persetujuan analis, jejak audit berantai SHA-256, dan laporan CSIRT. Mesinnya dipanggil sebagai pustaka dan kodenya tidak diubah.
 
 ![Antrean kasus](screenshots/01_antrean.png)
 
 ## Unduh dan jalankan (Windows 10/11, 64-bit)
-1. Unduh `PERISAI-RESPON-1.0.0-win64.zip` dari halaman rilis, lalu ekstrak seluruh isinya ke satu folder. Jangan jalankan dari dalam zip.
+1. Unduh `PERISAI-RESPON-1.0.0-win64.zip` dari [rilis v1.1.0](https://github.com/poggymacello/perisai-respon/releases/tag/v1.1.0) (zip aplikasi desktop terakhir yang dibangun, sama dengan di rilis v1.0.0), lalu ekstrak seluruh isinya ke satu folder. Jangan jalankan dari dalam zip.
 2. Klik dua kali `PERISAI-RESPON.exe`. Jendela aplikasi terbuka dalam beberapa detik.
 3. Kalau muncul layar biru **Windows protected your PC** (SmartScreen), klik **More info**, lalu **Run anyway**. Exe ini belum ditandatangani sertifikat penerbit, jadi Windows belum mengenalnya.
 
@@ -65,7 +65,7 @@ uv pip install --python app\.venv\Scripts\python.exe --only-binary=:all: -r app\
 app\.venv\Scripts\python app\run_desktop.py              # jendela aplikasi (dev)
 app\.venv\Scripts\python app\run_desktop.py --browser    # di browser
 cd app; .venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests      # 37 tes
-app\.venv\Scripts\python -I app\tools\build.py           # -> app\dist\PERISAI-RESPON-1.0.0-win64.zip
+app\.venv\Scripts\python -I app\tools\build.py           # -> app\dist\PERISAI-RESPON-1.1.0-win64.zip
 ```
 Tangkapan layar di `screenshots/` saat ini diambil dari server lokal mode desktop (mode aturan) dengan Chrome headless. Untuk mengambil ulang dari exe yang sedang berjalan, pakai Edge headless (Playwright):
 ```powershell

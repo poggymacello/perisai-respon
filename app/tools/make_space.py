@@ -24,7 +24,7 @@ license: mit
 short_description: Triase insiden offline; demo publik dengan data sintetis
 ---
 
-# PERISAI-RESPON 1.0.0, demo publik
+# PERISAI-RESPON 1.1.0, demo publik
 
 Demo ini hanya memuat log contoh SINTETIS (host fiktif *.batalyon.lab). Unggah log dimatikan: server publik tidak boleh
 menerima log asli. Untuk memeriksa log sendiri secara offline, unduh aplikasi desktop Windows dari halaman rilis repo.

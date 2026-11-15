@@ -267,7 +267,7 @@ def test_ot_rejects_plc_isolation(client):
 
 def test_status_rules_mode_and_integrity(client):
     s = client.get("/api/status").json()
-    assert s["aplikasi"]["versi"] == "1.0.0" and s["mesin"]["versi"] == "1.2.2"
+    assert s["aplikasi"]["versi"] == "1.1.0" and s["mesin"]["versi"] == "1.2.2"
     assert s["mesin"]["integritas"]["ok"] is True
     assert s["mode_analisis"] == "aturan" and s["llm"]["tersedia"] is False
     assert s["jaringan"]["lokal_saja"] is True

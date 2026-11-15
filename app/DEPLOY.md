@@ -11,8 +11,8 @@ Langkah yang butuh akun (membuat akun, login, push) dikerjakan manusia. Agen tid
 ## 0. Uji di laptop sendiri (Docker Desktop)
 Dari akar repo:
 ```powershell
-docker build -f app/Dockerfile -t perisai-respon-demo:1.0.0 .
-docker run --rm -p 127.0.0.1:7860:7860 perisai-respon-demo:1.0.0
+docker build -f app/Dockerfile -t perisai-respon-demo:1.1.0 .
+docker run --rm -p 127.0.0.1:7860:7860 perisai-respon-demo:1.1.0
 ```
 Buka http://127.0.0.1:7860. Sejak 15 Nov 2026, di mode demo `/` menampilkan **landing page** (dengan konsol serangan yang memanggil mesin asli), dan aplikasinya ada di **http://127.0.0.1:7860/app/**. Di `/app/` yang harus terlihat: label **Demo publik · data sintetis** di kanan atas, 10 kasus di antrean, dan pesan "Unggah log dinonaktifkan" di halaman Impor log. Image sudah dibangun dan diuji dengan cara ini pada 2 Nov 2026 (ukuran 426 MB; status healthcheck `healthy`; `POST /api/impor` dijawab 403).
 
@@ -34,7 +34,7 @@ Buka http://127.0.0.1:7860. Sejak 15 Nov 2026, di mode demo `/` menampilkan **la
    Copy-Item -Recurse -Force app\dist\space\* hf-space\
    cd hf-space
    git add -A
-   git commit -m "PERISAI-RESPON 1.0.0 demo publik (data sintetis, unggah dimatikan)"
+   git commit -m "PERISAI-RESPON 1.1.0 demo publik (data sintetis, unggah dimatikan)"
    git push
    ```
 4. Tunggu tab **Logs** sampai build selesai (±2-4 menit). Alamat demonya `https://<USERNAME>-perisai-respon-demo.hf.space`.

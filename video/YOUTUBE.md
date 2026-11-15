@@ -15,7 +15,7 @@ PERISAI-RESPON adalah aplikasi desktop untuk memilah insiden dari log Windows se
 Karya Tim PERISAI Siber Ganesha (Poggy Macello Gultom, Mohammad Ari Alexander Aziz, Hasri Fayadh Muqaffa) untuk Kartika Cyber Hackathon 2026, kategori Penangkalan.
 
 Coba di browser: https://perisai-respon.vercel.app/
-Unduh aplikasi (Windows 10/11, tanpa internet): https://github.com/poggymacello/perisai-respon/releases/tag/v1.0.0
+Unduh aplikasi (Windows 10/11, tanpa internet): https://github.com/poggymacello/perisai-respon/releases/tag/v1.1.0
 Kode dan dokumentasi: https://github.com/poggymacello/perisai-respon
 Slide: https://drive.google.com/file/d/1bz-MT65_ZECsbbrfhz__k0_rRdGYFESU/view
 

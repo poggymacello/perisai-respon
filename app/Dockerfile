@@ -1,7 +1,7 @@
 # PERISAI-RESPON demo publik (Hugging Face Spaces / Render). Data contoh sintetis saja; unggah log ditolak.
 # Build dari AKAR repo (butuh prototype/perisai):
-#   docker build -f app/Dockerfile -t perisai-respon-demo:1.0.0 .
-#   docker run --rm -p 7860:7860 perisai-respon-demo:1.0.0
+#   docker build -f app/Dockerfile -t perisai-respon-demo:1.1.0 .
+#   docker run --rm -p 7860:7860 perisai-respon-demo:1.1.0
 FROM python:3.11.15-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
