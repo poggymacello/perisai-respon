@@ -94,6 +94,31 @@ def uji_injeksi_case(teks: str) -> dict:
                  "DestinationIp": "172.16.30.9", "DestinationPort": "8080", "Hostname": host}]}
 
 
+class PelaporanIn(BaseModel):
+    """Isian analis untuk laporan (Peraturan BSSN 1/2024 Pasal 15 ayat 4: kontak pelapor dan dampak)."""
+    pelapor_nama: str = Field(default="", max_length=120)
+    pelapor_satuan: str = Field(default="", max_length=160)
+    pelapor_kontak: str = Field(default="", max_length=160)
+    dampak: str = Field(default="", max_length=2000)
+
+
+PELAPORAN_ROWS = [("pelapor_nama", "Nama pelapor"), ("pelapor_satuan", "Satuan / unit kerja"),
+                  ("pelapor_kontak", "Kontak pelapor (telepon / surel dinas)"), ("dampak", "Dampak insiden")]
+
+
+def _md_cell(v: str) -> str:
+    return " ".join(str(v).split()).replace("|", "\\|") if v else "**belum diisi**"
+
+
+def _with_pelaporan(md: str, p: dict) -> str:
+    """Sisipkan bagian data pelaporan sebelum bagian kedua laporan (sesudah judul dan ringkasan run)."""
+    sec = ("## Data pelaporan (Peraturan BSSN 1/2024 Pasal 15 ayat 4)\n\n"
+           "Diisi analis sebelum laporan diteruskan ke CSIRT atasan.\n\n| Butir | Isi |\n|---|---|\n"
+           + "".join(f"| {label} | {_md_cell(p.get(key, ''))} |\n" for key, label in PELAPORAN_ROWS) + "\n")
+    i = md.find("\n## ")
+    return md + "\n" + sec if i < 0 else md[: i + 1] + sec + md[i + 1:]
+
+
 class ImporHasil(BaseModel):
     id: str
     jenis: str
@@ -536,14 +561,24 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
                "llm": llm_txt, "model_check": chk, "audit_path": "audit.jsonl (ekspor dari menu Jejak audit)",
                "n_tanpa_temuan": sum(i["n_kelompok_tanpa_temuan"] for i in imp)}
         md = engine.render_report(run, items, ws.audit, ws.all_reviews(), llm_on=llm.status()["tersedia"])
+        md = _with_pelaporan(md, ws.state.get("pelaporan") or {})
         return md, f"laporan_perisai_{ws.sid[:15]}"
+
+    @app.post("/api/laporan/pelaporan")
+    def save_pelaporan(body: PelaporanIn, ws: Workspace = Depends(workspace)):
+        data = {k: v.strip() for k, v in body.model_dump().items()}
+        with ws.lock:
+            ws.state["pelaporan"] = data | {"diubah": engine.now_iso()}
+            ws.save()
+        return ws.state["pelaporan"]
 
     @app.get("/api/laporan")
     def report(ws: Workspace = Depends(workspace)):
         if not ws.state["kasus"]:
             raise HTTPException(409, "belum ada kasus; impor log atau muat data contoh dulu")
         md, name = build_report(ws)
-        return {"markdown": md, "html": reportfmt.md_to_html(md), "nama": name}
+        return {"markdown": md, "html": reportfmt.md_to_html(md), "nama": name,
+                "pelaporan": ws.state.get("pelaporan") or {}}
 
     @app.get("/api/laporan/unduh")
     def report_download(format: Literal["md", "html"] = "md", ws: Workspace = Depends(workspace)):

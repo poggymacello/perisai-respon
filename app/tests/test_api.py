@@ -417,3 +417,25 @@ def test_landing_and_app_routes(client, tmp_path, monkeypatch):
     with TestClient(app, base_url="https://demo.example") as c:
         assert "Jadilah penyerangnya" in c.get("/").text
         assert "js/app.js" in c.get("/app/").text
+
+
+# ---------------------------------------------------------------- data pelaporan BSSN 1/2024 Pasal 15(4)
+def test_report_has_pelaporan_section_and_saves_fields(loaded):
+    md = loaded.get("/api/laporan").json()["markdown"]
+    assert "Data pelaporan (Peraturan BSSN 1/2024 Pasal 15 ayat 4)" in md
+    assert md.count("**belum diisi**") == 4
+    r = loaded.post("/api/laporan/pelaporan", json={"pelapor_nama": "Lettu A | B", "pelapor_kontak": "0812",
+                                                   "dampak": "WS-KEU02 offline\n2 jam", "pelapor_satuan": ""}, headers=H)
+    assert r.status_code == 200
+    d = loaded.get("/api/laporan").json()
+    assert d["pelaporan"]["pelapor_nama"] == "Lettu A | B"
+    assert "Lettu A \\| B" in d["markdown"] and "WS-KEU02 offline 2 jam" in d["markdown"]
+    assert d["markdown"].count("**belum diisi**") == 1
+    loaded.post("/api/laporan/pelaporan", json={"dampak": "<script>x</script>"}, headers=H)
+    html = loaded.get("/api/laporan").json()["html"]
+    assert "<script>" not in html and "&lt;script&gt;" in html
+
+
+def test_pelaporan_limits(loaded):
+    assert loaded.post("/api/laporan/pelaporan", json={"dampak": "x" * 2001}, headers=H).status_code == 422
+    assert loaded.post("/api/laporan/pelaporan", json={"dampak": "x"}).status_code == 403
