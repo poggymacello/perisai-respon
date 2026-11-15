@@ -122,7 +122,13 @@ function reviewCard(d, ctx, rerender) {
   } else {
     body.append(h("p", null, "Sistem tidak mengusulkan aksi berisiko. Kasus diserahkan ke analis untuk ditinjau."));
   }
-  body.append(btns, form);
+  const m = ctx.peran && ctx.peran.masuk;
+  if (m && !nameIn.value) nameIn.value = m.nama;
+  if (ctx.can("tinjau")) body.append(btns, form);
+  else body.append(h("div", { class: "banner info" }, icon("lock"), h("div", null,
+    h("b", null, `Peran ${m ? m.label : "ini"} tidak bisa meninjau kasus. `),
+    "Hanya Analis yang boleh menyetujui, menolak, atau menutup kasus. Pembatasan ini juga ditegakkan di server. ",
+    h("a", { href: "#/masuk" }, "Ganti peran"))));
   if (d.tinjauan.length) {
     body.append(h("h3", { class: "mt" }, "Riwayat"), ...d.tinjauan.slice().reverse().map((r) => h("div", { class: "review-item" },
       h("div", { class: "actions" }, r.status ? reviewChip(r.status) : h("span", { class: "chip st-esc" }, r.label), h("span", { class: "muted small" }, fmtTime(r.ts))),

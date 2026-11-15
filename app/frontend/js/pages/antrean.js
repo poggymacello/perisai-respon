@@ -1,9 +1,10 @@
 // Beranda: antrean kasus (gaya incident queue).
 import { api } from "../api.js";
-import { banner, btn, clear, fmtNum, fmtTime, h, icon, setBusy } from "../dom.js";
+import { banner, btn, clear, fmtNum, fmtTime, h, hostEl, icon, setBusy } from "../dom.js";
 import { actionText, reviewChip, sevChip, statusChip, warnChips } from "../labels.js";
 
 const state = { q: "", sev: "", st: "", kat: "", tile: "", sort: "waktu", dir: -1 };
+let keyHandler = null;
 
 export async function loadSample(ctx, b) {
   if (b) setBusy(b, true, "Memuat data contoh");
@@ -111,10 +112,38 @@ export async function render(page, _params, ctx) {
     h("div", { class: "filters" }, h("div", { class: "search" }, icon("search"), q), sevSel, stSel, katSel,
       h("button", { type: "button", class: "linkbtn small", onclick: () => { Object.assign(state, { q: "", sev: "", st: "", kat: "", tile: "" }); rerender(); } }, "Reset filter"),
       countEl),
-    h("div", { class: "tbl-wrap" }, h("table", { class: "t" }, head, body))));
-  page.append(h("p", { class: "muted small" },
-    `${fmtNum(nEmpty)} kelompok event tanpa temuan aturan tidak dibuat kasus. Waktu dalam UTC. `,
-    "Aksi yang disetujui hanya dicatat di jejak audit; PERISAI tidak menjalankan aksi ke sistem."));
+    h("div", { class: "tbl-wrap" }, h("table", { class: "t queue" }, head, body))));
+  page.append(h("div", { class: "actions" },
+    h("p", { class: "muted small" },`${fmtNum(nEmpty)} kelompok event tanpa temuan aturan tidak dibuat kasus. Waktu dalam UTC. `,
+      "Aksi yang disetujui hanya dicatat di jejak audit; PERISAI tidak menjalankan aksi ke sistem."),
+    h("div", { class: "kbd-hints", "aria-hidden": "true" },
+      h("span", null, h("kbd", null, "/"), "cari"), h("span", null, h("kbd", null, "j"), h("kbd", null, "k"), "pilih baris"),
+      h("span", null, h("kbd", null, "Enter"), "buka kasus"))));
+
+  // Pintasan keyboard: / fokus ke pencarian, j/k pindah baris, Enter buka kasus terpilih.
+  let sel = -1;
+  function mark() {
+    const rows = [...body.querySelectorAll("tr.click")];
+    rows.forEach((tr, i) => tr.classList.toggle("kb-sel", i === sel));
+    if (rows[sel]) rows[sel].scrollIntoView({ block: "nearest" });
+    return rows;
+  }
+  function onKey(e) {
+    const tag = (e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea" || tag === "select" || e.ctrlKey || e.metaKey || e.altKey) {
+      if (e.key === "Escape" && e.target === q) q.blur();
+      return;
+    }
+    if (e.key === "/") { e.preventDefault(); q.focus(); return; }
+    const n = body.querySelectorAll("tr.click").length;
+    if (!n) return;
+    if (e.key === "j" || e.key === "ArrowDown") { e.preventDefault(); sel = Math.min(n - 1, sel + 1); mark(); }
+    else if (e.key === "k" || e.key === "ArrowUp") { e.preventDefault(); sel = Math.max(0, sel - 1); mark(); }
+    else if (e.key === "Enter" && sel >= 0) { const a = mark()[sel]?.querySelector("a"); if (a) ctx.go(a.getAttribute("href")); }
+  }
+  if (keyHandler) document.removeEventListener("keydown", keyHandler);
+  keyHandler = onKey;
+  document.addEventListener("keydown", onKey);
 
   function sortBtn(key, label) {
     const active = state.sort === key;
@@ -141,8 +170,8 @@ export async function render(page, _params, ctx) {
       const tr = h("tr", { class: "click", onclick: (e) => { if (e.target.tagName !== "A") ctx.go(`#/kasus/${r.id}`); } },
         h("td", { class: "nowrap" }, h("span", { class: `sev-bar ${r.severity}`, "aria-hidden": "true" }), link),
         h("td", { class: "nowrap" }, fmtTime(r.waktu)),
-        h("td", null, r.host, r.aset_terlindungi ? h("div", { class: "small muted" }, "aset terlindungi") : null),
-        h("td", null, h("span", { class: "tag" }, r.attack.id), " ", r.attack.nama, h("div", { class: "small muted" }, r.kategori_id)),
+        h("td", null, hostEl(r.host), r.aset_terlindungi ? h("div", { class: "small muted" }, "aset terlindungi") : null),
+        h("td", { class: "nowrap", title: r.kategori_id }, h("span", { class: "tag" }, r.attack.id), " ", r.attack.nama),
         h("td", null, sevChip(r.severity)),
         h("td", null, statusChip(r.status_mesin)),
         h("td", null, reviewChip(r.status_tinjauan)),
@@ -152,6 +181,8 @@ export async function render(page, _params, ctx) {
     }
     if (!rows.length) body.append(h("tr", null, h("td", { colspan: "9", class: "muted" }, "Tidak ada kasus yang cocok dengan filter.")));
     countEl.textContent = `Menampilkan ${rows.length} dari ${data.kasus.length}`;
+    sel = -1;
   }
   draw();
+  return () => { document.removeEventListener("keydown", onKey); if (keyHandler === onKey) keyHandler = null; };
 }

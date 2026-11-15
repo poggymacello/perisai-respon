@@ -442,3 +442,45 @@ def test_report_has_pelaporan_section_and_saves_fields(loaded):
 def test_pelaporan_limits(loaded):
     assert loaded.post("/api/laporan/pelaporan", json={"dampak": "x" * 2001}, headers=H).status_code == 422
     assert loaded.post("/api/laporan/pelaporan", json={"dampak": "x"}).status_code == 403
+
+
+# ---------------------------------------------------------------- peran demo publik (pemisahan tugas)
+def _demo_client(tmp_path, monkeypatch):
+    monkeypatch.setenv("PERISAI_DATA_DIR", str(tmp_path))
+    return TestClient(create_app(mode="demo", root=tmp_path, bind="0.0.0.0"), base_url="https://demo.example")
+
+
+def test_demo_roles_enforced_on_server(tmp_path, monkeypatch):
+    with _demo_client(tmp_path, monkeypatch) as c:
+        k = next(x for x in c.get("/api/kasus").json()["kasus"] if x["status_mesin"] == "MENUNGGU_PERSETUJUAN")
+        review = {"keputusan": "setujui", "analis": "Lettu A", "catatan": "dicek ke operator"}
+        url = f"/api/kasus/{k['id']}/tinjauan"
+        assert c.get("/api/peran").json()["wajib"] is True
+        assert c.post(url, json=review, headers=H).status_code == 401           # belum masuk
+        assert c.post("/api/masuk", json={"peran": "admin", "nama": "Kapten D"}, headers=H).status_code == 200
+        r = c.post(url, json=review, headers=H)
+        assert r.status_code == 403 and "Admin" in r.json()["detail"]           # admin tidak boleh menyetujui
+        assert c.post("/api/laporan/pelaporan", json={"dampak": "x"}, headers=H).status_code == 403
+        c.post("/api/masuk", json={"peran": "operator", "nama": "Serda R"}, headers=H)
+        assert c.post(url, json=review, headers=H).status_code == 403
+        assert c.post("/api/uji-injeksi", json={"teks": "abc"}, headers=H).status_code == 200  # uji tetap boleh
+        c.post("/api/masuk", json={"peran": "analis", "nama": "Lettu A"}, headers=H)
+        assert c.post(url, json=review, headers=H).status_code == 200
+        kinds = [e["kind"] for e in c.get("/api/audit").json()["entri"]]
+        assert kinds.count("masuk") == 3                                         # masuk tercatat di audit
+        assert c.post("/api/masuk", json={"peran": "root", "nama": "x"}, headers=H).status_code == 422
+
+
+def test_demo_new_session_keeps_role_and_signout(tmp_path, monkeypatch):
+    with _demo_client(tmp_path, monkeypatch) as c:
+        c.get("/api/kasus")
+        c.post("/api/masuk", json={"peran": "analis", "nama": "Lettu A"}, headers=H)
+        c.post("/api/sesi/baru", headers=H)
+        assert c.get("/api/peran").json()["masuk"]["peran"] == "analis"
+        c.post("/api/keluar-peran", headers=H)
+        assert c.get("/api/peran").json()["masuk"] is None
+
+
+def test_desktop_has_no_login(client):
+    assert client.get("/api/peran").json()["wajib"] is False
+    assert client.post("/api/masuk", json={"peran": "analis", "nama": "AB"}, headers=H).status_code == 409

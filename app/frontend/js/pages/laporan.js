@@ -33,7 +33,9 @@ export async function render(page, _params, ctx) {
       btn("Unduh HTML", { icon: "file-down", onclick: dl("html") }),
       btn("Cetak / simpan PDF", { icon: "printer", cls: "primary", onclick: () => window.print() }))));
   if (ctx.status && ctx.status.mode === "demo") page.append(banner("warn", "info", "Laporan dari data contoh sintetis."));
-  page.append(pelaporanForm(d.pelaporan || {}, ctx, () => render(page, _params, ctx)));
+  if (ctx.can("lapor")) page.append(pelaporanForm(d.pelaporan || {}, ctx, () => render(page, _params, ctx)));
+  else page.append(banner("info", "lock", h("b", null, "Data pelaporan diisi Analis. "), "Masuk sebagai Analis untuk melengkapi kontak pelapor dan dampak. ",
+    h("a", { href: "#/masuk" }, "Ganti peran")));
   page.append(paper);
 }
 

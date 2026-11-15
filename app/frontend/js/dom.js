@@ -79,6 +79,13 @@ export function banner(kind, iconName, ...body) {
   return h("div", { class: `banner ${kind}`, role: kind === "bad" ? "alert" : null }, icon(iconName), h("div", null, ...body));
 }
 
+/** Nama host: bagian pertama tebal, domain redup (WS-OPS07 .batalyon.lab). */
+export function hostEl(host) {
+  const s = String(host || "-");
+  const i = s.indexOf(".");
+  return h("span", { class: "host", title: s }, h("b", null, i > 0 ? s.slice(0, i) : s), i > 0 ? h("span", null, s.slice(i)) : null);
+}
+
 export function kv(pairs, cls = "kv") {
   const dl = h("dl", { class: cls });
   for (const [k, v] of pairs) {

@@ -39,6 +39,7 @@ export const KIND = {
   cek_silang_draf: "Cek silang draf AI",
   penjaga_aset_ot: "Penjaga aset OT",
   tindakan_analis: "Tindakan analis",
+  masuk: "Masuk (peran demo)",
 };
 export const CODE = {
   PROMPT_INJECTION: "instruksi ke AI",

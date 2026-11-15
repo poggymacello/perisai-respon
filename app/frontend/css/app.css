@@ -221,8 +221,10 @@ main { overflow-y: auto; min-width: 0; grid-column: 2; }
 .linkbtn:hover { text-decoration: underline; }
 
 /* ------------------------------------------------------------------ kartu */
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; box-shadow: var(--shadow); min-width: 0; }
-.card-h { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 16px; min-width: 0; }
+.card-h { display: flex; align-items: center; gap: 10px; padding: 14px 18px 0; }
+.card-h + .card-b { padding-top: 12px; }
+.card-h + .card-b.flush { margin-top: 12px; border-top: 1px solid var(--border); }
 .card-h > .ic { color: var(--text-3); }
 .card-h h2 { flex: 1; }
 .card-h .hint { margin: 2px 0 0; }
@@ -235,7 +237,7 @@ main { overflow-y: auto; min-width: 0; grid-column: 2; }
 
 /* ------------------------------------------------------------------ stat tile */
 .stats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
-.stat { position: relative; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow);
+.stat { position: relative; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
   text-align: left; font: inherit; color: inherit; cursor: pointer; transition: border-color .15s, box-shadow .15s; min-width: 0; }
 .stat:hover { border-color: var(--border-strong); }
 .stat:focus-visible { outline: none; box-shadow: var(--ring); }
@@ -300,6 +302,7 @@ table.t { width: 100%; border-collapse: separate; border-spacing: 0; }
 .t td.num, .t th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .t .sub-row td { background: var(--surface-2); padding-top: 0; }
 .t a { font-weight: 600; }
+.t.queue td { vertical-align: middle; }
 .kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
 .kv dt { color: var(--text-3); font-size: 12.5px; }
 .kv dd { margin: 0; word-break: break-all; }
@@ -437,12 +440,68 @@ details.payload pre { font-family: var(--mono); font-size: 11.5px; white-space: 
 .presets { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 12px; }
 .counter { font-size: 12px; color: var(--text-3); text-align: right; margin-top: 4px; font-variant-numeric: tabular-nums; }
 
+/* ------------------------------------------------------------------ pengguna, masuk, kontrol demo */
+.user-box { flex: none; display: flex; align-items: center; gap: 10px; margin: 0 10px 8px; padding: 8px; border-radius: var(--radius-sm); background: var(--surface-2);
+  border: 1px solid var(--shell-border); min-width: 0; }
+.avatar { width: 32px; height: 32px; flex: none; display: grid; place-items: center; border-radius: 8px; background: var(--accent); color: var(--on-accent);
+  font-size: 12px; font-weight: 700; letter-spacing: .02em; }
+.user-t { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+.user-t b { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-t small { font-size: 11.5px; color: var(--text-3); }
+.user-signin { width: 100%; }
+.app[data-collapsed] .user-box { margin: 0 8px 8px; padding: 6px; flex-direction: column; background: none; border: 0; }
+.app[data-collapsed] .user-t, .app[data-collapsed] .user-signin .lbl { display: none; }
+.app[data-signin] { grid-template-columns: minmax(0, 1fr); }
+.app[data-signin] .sidebar, .app[data-signin] .menu-btn, .app[data-signin] .scrim { display: none; }
+.app[data-signin] .topbar, .app[data-signin] main { grid-column: 1; }
+.signin { max-width: 880px; margin: 24px auto 0; }
+.signin-head { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 28px; }
+.signin-head h1 { font-size: 28px; }
+.signin-head .sub { color: var(--text-3); max-width: 60ch; }
+.brand-mark.lg { width: 48px; height: 48px; border-radius: 13px; margin-bottom: 6px; }
+.brand-mark.lg .ic { width: 26px; height: 26px; }
+.role-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.role-card { position: relative; text-align: left; display: flex; flex-direction: column; gap: 6px; padding: 18px; border-radius: var(--radius); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); font: inherit; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+.role-card:hover { border-color: var(--border-strong); }
+.role-card:focus-visible { outline: none; box-shadow: var(--ring); }
+.role-card[aria-checked="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.role-card[aria-checked="true"]::after { content: ""; position: absolute; top: 16px; right: 16px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-weak); }
+.role-ic { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; background: var(--surface-3); color: var(--text-2); margin-bottom: 4px; }
+.role-card[aria-checked="true"] .role-ic { background: var(--accent-weak); color: var(--accent); }
+.role-card b { font-size: 15.5px; }
+.role-desc { font-size: 13px; color: var(--text-2); flex: 1; }
+.role-perm { font-size: 12px; font-weight: 600; color: var(--text-3); padding-top: 8px; border-top: 1px dashed var(--border); }
+.signin-foot { display: flex; align-items: flex-end; gap: 12px; margin-top: 20px; }
+.signin-foot .field { flex: 1; margin: 0; }
+.signin-note { text-align: center; margin-top: 16px; }
+.guide { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.guide li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--border); }
+.guide li:first-child { border-top: 0; }
+.guide-n { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 12.5px; font-weight: 700; background: var(--surface-3); color: var(--text-2); }
+.guide-t { display: flex; flex-direction: column; min-width: 0; }
+.pad { padding: 12px 18px; margin: 0; }
+@media (max-width: 760px) { .role-grid { grid-template-columns: 1fr; } .signin-foot { flex-direction: column; align-items: stretch; } }
+
+/* host: nama pendek tebal + domain redup, tidak terpotong di tengah */
+.host { white-space: nowrap; }
+.host b { font-weight: 600; }
+.host span { color: var(--text-3); }
+.kbd-hints { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--text-3); }
+.kbd-hints span { display: inline-flex; gap: 5px; align-items: center; }
+.t tbody tr.kb-sel { background: var(--accent-weak); box-shadow: inset 3px 0 0 var(--accent); }
+
 /* ------------------------------------------------------------------ toast */
 .toasts { position: fixed; right: 20px; bottom: 20px; display: flex; flex-direction: column; gap: 8px; z-index: 60; max-width: 420px; }
 .toast { background: var(--head); color: #f1f3f5; padding: 12px 16px; border-radius: var(--radius-sm); font-size: 13.5px; display: flex; gap: 10px; align-items: flex-start;
   box-shadow: var(--shadow-lg); animation: enter .22s ease-out both; border: 1px solid rgba(255, 255, 255, .08); }
 .toast.bad { background: #7a1b14; }
 .toast .ic { margin-top: 2px; }
+.toast { position: relative; overflow: hidden; }
+.toast::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: rgba(255, 255, 255, .35); transform-origin: left;
+  animation: toastbar var(--toast-ms, 4500ms) linear forwards; }
+@keyframes toastbar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 
 /* ------------------------------------------------------------------ utilitas */
 .mt { margin-top: 14px; }

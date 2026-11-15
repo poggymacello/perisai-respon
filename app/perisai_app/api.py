@@ -94,6 +94,24 @@ def uji_injeksi_case(teks: str) -> dict:
                  "DestinationIp": "172.16.30.9", "DestinationPort": "8080", "Hostname": host}]}
 
 
+# Peran di demo publik. Pemisahan tugas: admin mengelola demo tetapi tidak menyetujui aksi; analis menyetujui
+# tetapi tidak mengelola sistem. Aplikasi desktop (satu operator, satu laptop) tidak memakai login.
+PERAN = {
+    "operator": {"label": "Operator", "izin": ["lihat", "uji"],
+                 "tugas": "Memantau antrean, membuka kasus, menguji usulan dan injeksi."},
+    "analis": {"label": "Analis", "izin": ["lihat", "uji", "tinjau", "lapor"],
+               "tugas": "Menyetujui, menolak, atau menutup kasus, dan melengkapi laporan CSIRT."},
+    "admin": {"label": "Admin", "izin": ["lihat", "uji", "demo"],
+              "tugas": "Mengelola sesi demo dan memeriksa status sistem. Tidak bisa menyetujui aksi."},
+}
+IZIN_LABEL = {"tinjau": "meninjau kasus (setujui/tolak/tutup)", "lapor": "mengisi data pelaporan", "demo": "membuka kontrol demo"}
+
+
+class MasukIn(BaseModel):
+    peran: Literal["operator", "analis", "admin"]
+    nama: str = Field(min_length=2, max_length=80)
+
+
 class PelaporanIn(BaseModel):
     """Isian analis untuk laporan (Peraturan BSSN 1/2024 Pasal 15 ayat 4: kontak pelapor dan dampak)."""
     pelapor_nama: str = Field(default="", max_length=120)
@@ -292,6 +310,16 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
                 response.set_cookie(DEMO_COOKIE, ws.sid, httponly=True, samesite="lax", max_age=7 * 86400)
         return ws
 
+    def require(ws: Workspace, izin: str) -> None:
+        """Di demo publik: pengunjung harus masuk dengan peran yang punya izin ini. Desktop: selalu boleh."""
+        if not demo:
+            return
+        m = ws.state.get("masuk")
+        if not m:
+            raise HTTPException(401, "masuk dulu dengan salah satu peran demo")
+        if izin not in PERAN[m["peran"]]["izin"]:
+            raise HTTPException(403, f"peran {PERAN[m['peran']]['label']} tidak boleh {IZIN_LABEL.get(izin, izin)}")
+
     def case_or_404(ws: Workspace, kid: str) -> dict:
         k = ws.get(kid)
         if k is None:
@@ -436,6 +464,7 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
 
     @app.post("/api/kasus/{kid}/tinjauan")
     def review(kid: str, body: TinjauanIn, ws: Workspace = Depends(workspace)):
+        require(ws, "tinjau")
         case_or_404(ws, kid)
         try:
             rec = ws.review(kid, body.keputusan, body.analis.strip(), body.catatan.strip())
@@ -566,6 +595,7 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
 
     @app.post("/api/laporan/pelaporan")
     def save_pelaporan(body: PelaporanIn, ws: Workspace = Depends(workspace)):
+        require(ws, "lapor")
         data = {k: v.strip() for k, v in body.model_dump().items()}
         with ws.lock:
             ws.state["pelaporan"] = data | {"diubah": engine.now_iso()}
@@ -653,10 +683,39 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
         return llm.jobs.submit("uji_llm", ws.sid, work, perkiraan_detik=(llm.last_case_seconds or 30) + 10)
 
     # -------------------------------------------------------------- sesi
+    @app.get("/api/peran")
+    def roles(ws: Workspace = Depends(workspace)):
+        return {"wajib": demo, "masuk": ws.state.get("masuk"),
+                "peran": [{"id": k} | v for k, v in PERAN.items()]}
+
+    @app.post("/api/masuk")
+    def sign_in(body: MasukIn, ws: Workspace = Depends(workspace)):
+        if not demo:
+            raise HTTPException(409, "login hanya dipakai di demo publik; aplikasi desktop dipakai satu operator")
+        p = PERAN[body.peran]
+        with ws.lock:
+            ws.state["masuk"] = {"peran": body.peran, "label": p["label"], "nama": body.nama.strip(),
+                                 "izin": p["izin"], "waktu": engine.now_iso()}
+            ws.save()
+            ws.audit.append(ws.sid, "masuk", {"peran": body.peran, "nama": body.nama.strip()}, engine.now_iso())
+        return ws.state["masuk"]
+
+    @app.post("/api/keluar-peran")
+    def sign_out(ws: Workspace = Depends(workspace)):
+        with ws.lock:
+            ws.state.pop("masuk", None)
+            ws.save()
+        return {"ok": True}
+
     @app.post("/api/sesi/baru")
     def new_session(request: Request, response: Response):
+        visitor = request.cookies.get(DEMO_COOKIE) if demo else None
+        old = store.active(visitor)[0] if visitor else None
         ws = store.new_session()
         if demo:
+            if old is not None and old.state.get("masuk"):
+                ws.state["masuk"] = old.state["masuk"]  # tetap masuk dengan peran yang sama
+                ws.save()
             ws.import_files(sample.sample_files(), label="data contoh")
             response.set_cookie(DEMO_COOKIE, ws.sid, httponly=True, samesite="lax", max_age=7 * 86400)
         return {"sesi": ws.sid}
