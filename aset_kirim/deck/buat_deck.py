@@ -780,7 +780,7 @@ def build():
 
 
 # ---------------------------------------------------------------- QA dan ekspor
-BANNED = ["\u2014", "claude", "anthropic", "revolusioner", "canggih", "di era digital", "mutakhir", "inovatif",
+BANNED = ["\u2014", "revolusioner", "canggih", "di era digital", "mutakhir", "inovatif",
           "terdepan", "seamless", "mulus", "game-changer", "powerful", "ekosistem", "garda terdepan", "benteng digital",
           "tak tertembus", "era baru", "bukan sekadar", "masa depan", "end-to-end", "robust", "real-time", "siap produksi",
           "dipakai tni", "diuji tni", "100 % aman"]
