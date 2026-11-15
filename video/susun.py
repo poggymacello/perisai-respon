@@ -391,14 +391,21 @@ LAYAR = {
 
 
 def tulis_youtube(bab, total) -> None:
-    judul = "PERISAI-RESPON: triase insiden offline yang tidak bisa disetir isi log"
-    assert len(judul) <= 70, len(judul)
+    judul = "PERISAI-RESPON: triase insiden offline yang tak bisa disetir isi log | Kartika Cyber Hackathon 2026"
+    assert len(judul) <= 100, len(judul)
     chap = "\n".join(f"{ts_mmss(a)} {j}" for a, j in bab)
-    desk = f"""PERISAI-RESPON adalah aplikasi desktop untuk memilah insiden dari log Windows secara offline di laptop. Aturan dan policy engine yang memutuskan, LLM lokal hanya menulis draf berlabel, dan setiap aksi berisiko menunggu persetujuan analis.
+    desk = f"""PERISAI-RESPON adalah aplikasi desktop untuk memilah insiden dari log Windows secara offline di laptop. Aturan dan policy engine yang memutuskan aksi. LLM lokal hanya menulis draf berlabel, dan setiap draf dicek silang terhadap temuan aturan. Aksi berisiko selalu menunggu persetujuan analis, dan setiap langkah tercatat di audit berantai SHA-256.
 
-Unduh dan coba: https://github.com/poggymacello/perisai-respon/releases
+Karya Tim PERISAI Siber Ganesha (Poggy Macello Gultom, Mohammad Ari Alexander Aziz, Hasri Fayadh Muqaffa) untuk Kartika Cyber Hackathon 2026, kategori Penangkalan.
+
+Unduh dan coba (Windows 10/11, tanpa internet): https://github.com/poggymacello/perisai-respon/releases/tag/v1.0.0
 Kode dan dokumentasi: https://github.com/poggymacello/perisai-respon
-Slide penjelasan: https://github.com/poggymacello/perisai-respon/blob/main/aset_kirim/slide/PERISAI-RESPON_Slide_Teknis.pdf
+Slide: https://drive.google.com/file/d/1bz-MT65_ZECsbbrfhz__k0_rRdGYFESU/view
+
+Hasil uji (run sendiri; rincian dan yang gagal ada di README):
+- Injeksi lewat log yang berhasil: 16,5 % menjadi 0 % (176 unit uji), dan 0,6 % walau detektor pola dimatikan
+- Cek silang menandai 175 dari 421 draf AI (41,6 %) yang menyebut kategori di luar temuan aturan
+- Jalur OT (HAI 21.03): 10 dari 10 episode serangan tertangkap
 
 Chapter:
 {chap}
@@ -408,7 +415,7 @@ Model: Qwen2.5-1.5B-Instruct (Apache-2.0), berjalan lokal di CPU. Llama tidak di
 Narasi memakai suara sintetis (Microsoft Edge TTS, id-ID-ArdiNeural) yang membacakan naskah tim.
 Alat bantu AI dipakai saat pengembangan; rinciannya ada di bagian Deklarasi README repo.
 
-#keamanansiber #incidentresponse #promptinjection"""
+#keamanansiber #incidentresponse #promptinjection #KartikaCyberHackathon"""
     md = f"""# YOUTUBE: bahan unggah video demo PERISAI-RESPON
 
 Berkas video: `video\\PERISAI-RESPON_demo_final.mp4` (narasi suara sintetis, dibuat dengan `video\suara.py` sesudah `susun.py`). Durasi {ts_mmss(total)}.
@@ -424,7 +431,7 @@ Subtitle: `video\\PERISAI-RESPON_demo.id.srt` (Bahasa Indonesia). Thumbnail: `vi
 {desk}
 ```
 
-Tautan di deskripsi baru berfungsi penuh setelah rilis `v1.0.0` dibuat dan slide terbaru di-push. Kalau slide diunggah ke Google Drive, ganti baris "Slide penjelasan" dengan tautan Drive itu.
+Tautan rilis dan kode baru bisa dibuka juri setelah repo dibuka ke publik.
 
 ## Pengaturan
 | Pengaturan | Nilai |
@@ -436,7 +443,7 @@ Tautan di deskripsi baru berfungsi penuh setelah rilis `v1.0.0` dibuat dan slide
 | Subtitle | Unggah `PERISAI-RESPON_demo.id.srt` (With timing), bahasa Indonesia |
 | Thumbnail | `thumbnail_youtube_1280x720.png` |
 | Komentar | boleh dimatikan |
-| Konten sintetis/diubah | Tidak (rekaman layar aplikasi asli dan suara asli anggota tim) |
+| Konten sintetis/diubah | Tidak. Rekaman layarnya asli, dan narasi TTS tidak meniru orang sungguhan. Penggunaan suara sintetis tetap dinyatakan di deskripsi |
 
 ## Uji penerimaan
 - Putar dari jendela penyamaran: durasi di bawah 10:00, subtitle muncul, chapter tampil di bilah putar.
