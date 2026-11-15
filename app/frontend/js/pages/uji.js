@@ -1,4 +1,4 @@
-// Uji injeksi: juri menjadi penyerang. Kalimat bebas disisipkan ke CommandLine sebuah log sintetis,
+// Uji injeksi: pengguna menjadi penyerang. Kalimat bebas disisipkan ke CommandLine sebuah log sintetis,
 // lalu usulan penyerang diuji ke policy dengan anggapan terburuk: AI menuruti injeksi 100%.
 import { api } from "../api.js";
 import { banner, btn, card, clear, h, icon, setBusy } from "../dom.js";
@@ -65,7 +65,7 @@ function resultView(d) {
 export async function render(page, params, ctx) {
   clear(page);
   page.append(h("div", { class: "page-head" },
-    h("div", { class: "titles" }, h("div", { class: "eyebrow" }, "Juri menjadi penyerang"), h("h1", null, "Uji injeksi"),
+    h("div", { class: "titles" }, h("div", { class: "eyebrow" }, "Anda menjadi penyerang"), h("h1", null, "Uji injeksi"),
       h("div", { class: "sub" }, "Tulis kalimat injeksi Anda sendiri. Kalimat itu disisipkan ke field CommandLine sebuah log sintetis, ",
         "lalu PERISAI memutuskan apa yang terjadi pada usulan penyerang, dengan dan tanpa detektor pola."))));
 

@@ -404,10 +404,13 @@ def test_uji_injeksi_does_not_touch_audit(client):
     assert client.get("/api/audit").json() == before
 
 
+LANDING_MARK = 'id="coba"'  # konsol serangan di hero landing
+
+
 def test_landing_and_app_routes(client, tmp_path, monkeypatch):
     # desktop: "/" tetap aplikasi, landing di /landing/, aplikasi juga di /app/
-    assert "PERISAI-RESPON" in client.get("/").text and "Jadilah penyerangnya" not in client.get("/").text
-    assert "Jadilah penyerangnya" in client.get("/landing/").text
+    assert "PERISAI-RESPON" in client.get("/").text and LANDING_MARK not in client.get("/").text
+    assert LANDING_MARK in client.get("/landing/").text
     assert client.get("/app/").status_code == 200
     assert client.get("/app", follow_redirects=False).headers["location"] == "/app/"
     assert "connect-src 'self'" in client.get("/landing/").headers["content-security-policy"]
@@ -415,7 +418,7 @@ def test_landing_and_app_routes(client, tmp_path, monkeypatch):
     monkeypatch.setenv("PERISAI_DATA_DIR", str(tmp_path / "demo"))
     app = create_app(mode="demo", root=tmp_path / "demo", bind="0.0.0.0")
     with TestClient(app, base_url="https://demo.example") as c:
-        assert "Jadilah penyerangnya" in c.get("/").text
+        assert LANDING_MARK in c.get("/").text
         assert "js/app.js" in c.get("/app/").text
 
 
