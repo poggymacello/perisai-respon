@@ -71,7 +71,7 @@ Angka P1/P2 di §3 adalah hasil **v1**. Perubahan v1.1–v1.2.2 dibuat sesudah h
   3. pola injeksi **bahasa Indonesia**;
   4. **pengukuran dengan model asli, prareg ber-hash, dan ablasi yang memisahkan "pola" dari "struktur"**, termasuk melaporkan bagian yang gagal.
 
-**Pemanfaatan AI secara tepat guna** (kriteria "Inovasi Teknis Berbasis AI", S&K 9.2). Peran AI kami tentukan dari hasil ukur, bukan dari keinginan:
+**Pemanfaatan AI secara tepat guna** (kriteria "Inovasi Teknis", Rulebook bagian H: keaslian ide dan pemanfaatan teknologi secara tepat guna untuk mendukung keamanan siber). Peran AI kami tentukan dari hasil ukur, bukan dari keinginan:
 | Tugas | Dipakai AI? | Alasan (bukti) |
 |---|---|---|
 | Menulis draf ringkasan insiden berbahasa Indonesia | **Ya**: LLM lokal Qwen2.5-1.5B, offline di CPU | Tugas bahasa. Draf diberi label DRAF AI dan disaring per kalimat. Nilainya **belum terbukti**; penilaian buta oleh penilai luar tim adalah uji berikutnya |
@@ -112,7 +112,7 @@ Peta lengkap kebutuhan → fitur → bukti → celah, dengan rujukan publik (Per
 7. Peran Kartika CSIRT dan format laporannya kami ambil dari sumber publik. Hubungan Kartika CSIRT dengan PUSSIBERAD (penyelenggara, menurut rulebook resmi) belum kami konfirmasi.
 8. Daftar aset terlindungi di jalur IT berisi nama host tetap di kode mesin yang di-hash, dan aplikasi 1.0.0 belum punya login atau pembatasan peran. Selama pilot keduanya ditangani lewat prosedur (`PENERAPAN_SATUAN.md` §1 dan §3.4).
 
-## 8. Asal-usul kode dan deklarasi (S&K 5.3–5.4)
+## 8. Asal-usul kode dan deklarasi (Rulebook bagian G, Ketentuan Karya)
 - **Karya pre-existing:** policy engine, pola injeksi EN/ID, dan audit hash-chain **diadaptasi dari proyek tim sendiri, Kendali** (MIT, Poggy Macello Gultom & Mohammad Ari Alexander Aziz), yang juga diikutkan di FinTechathon 2026. Karya Kartika adalah produk berbeda: domain SOC, injeksi lewat log, offline, dan evaluasinya baru, semuanya dikerjakan sejak 29 Okt 2026 (dalam periode Program). Rulebook tidak mengatur karya yang juga ikut lomba lain. Kami tetap mendeklarasikannya di sini.
 - **Komponen pihak ketiga:** Qwen2.5-1.5B-Instruct (Apache-2.0), llama.cpp / llama-cpp-python (MIT), OTRF Security-Datasets (MIT), HAI 21.03 (CC BY-SA 4.0, tidak ikut repo).
 - **Alat bantu AI saat pengembangan:** lihat bagian "Deklarasi" di `README.md`.
