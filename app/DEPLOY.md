@@ -14,7 +14,7 @@ Dari akar repo:
 docker build -f app/Dockerfile -t perisai-respon-demo:1.0.0 .
 docker run --rm -p 127.0.0.1:7860:7860 perisai-respon-demo:1.0.0
 ```
-Buka http://127.0.0.1:7860. Yang harus terlihat: label **Demo publik · data sintetis** di kanan atas, 10 kasus di antrean, dan pesan "Unggah log dinonaktifkan" di halaman Impor log. Image sudah dibangun dan diuji dengan cara ini pada 2 Nov 2026 (ukuran 426 MB; status healthcheck `healthy`; `POST /api/impor` dijawab 403).
+Buka http://127.0.0.1:7860. Sejak 15 Nov 2026, di mode demo `/` menampilkan **landing page** (dengan konsol serangan yang memanggil mesin asli), dan aplikasinya ada di **http://127.0.0.1:7860/app/**. Di `/app/` yang harus terlihat: label **Demo publik · data sintetis** di kanan atas, 10 kasus di antrean, dan pesan "Unggah log dinonaktifkan" di halaman Impor log. Image sudah dibangun dan diuji dengan cara ini pada 2 Nov 2026 (ukuran 426 MB; status healthcheck `healthy`; `POST /api/impor` dijawab 403).
 
 ## A. Hugging Face Spaces (SDK Docker, gratis, CPU basic)
 1. Login ke https://huggingface.co, lalu **New Space**.
@@ -38,7 +38,7 @@ Buka http://127.0.0.1:7860. Yang harus terlihat: label **Demo publik · data sin
    git push
    ```
 4. Tunggu tab **Logs** sampai build selesai (±2-4 menit). Alamat demonya `https://<USERNAME>-perisai-respon-demo.hf.space`.
-5. Periksa di browser: label demo di kanan atas, 10 kasus contoh, dan upload yang ditolak. Di **Status sistem**, mode harus "demo publik", dan integritas kode mesin harus "cocok dengan hash beku".
+5. Periksa di browser: `/` menampilkan landing page, dan konsol serangan di hero berlabel "mesin asli". Lalu buka `/app/`: label demo di kanan atas, 10 kasus contoh, dan upload yang ditolak. Di **Status sistem**, mode harus "demo publik", dan integritas kode mesin harus "cocok dengan hash beku".
 
 Catatan: Space gratis tidur setelah lama tidak dikunjungi, jadi kunjungan pertama bisa butuh ±30 detik. Sesi pengunjung disimpan di `/tmp` kontainer dan hilang saat Space dimulai ulang. Itu sesuai untuk demo.
 
