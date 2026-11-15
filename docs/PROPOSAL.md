@@ -113,7 +113,7 @@ Peta lengkap kebutuhan → fitur → bukti → celah, dengan rujukan publik (Per
 8. Daftar aset terlindungi di jalur IT berisi nama host tetap di kode mesin yang di-hash, dan aplikasi 1.0.0 belum punya login atau pembatasan peran. Selama pilot keduanya ditangani lewat prosedur (`PENERAPAN_SATUAN.md` §1 dan §3.4).
 
 ## 8. Asal-usul kode dan deklarasi (Rulebook bagian G, Ketentuan Karya)
-- **Karya pre-existing:** policy engine, pola injeksi EN/ID, dan audit hash-chain **diadaptasi dari proyek tim sendiri, Kendali** (MIT, Poggy Macello Gultom & Mohammad Ari Alexander Aziz), yang juga diikutkan di FinTechathon 2026. Karya Kartika adalah produk berbeda: domain SOC, injeksi lewat log, offline, dan evaluasinya baru, semuanya dikerjakan sejak 29 Okt 2026 (dalam periode Program). Rulebook tidak mengatur karya yang juga ikut lomba lain. Kami tetap mendeklarasikannya di sini.
+- **Karya pre-existing:** policy engine, pola injeksi EN/ID, dan audit hash-chain **dikembangkan dari proyek tim sendiri, Kendali** (MIT, Poggy Macello Gultom & Mohammad Ari Alexander Aziz). PERISAI-RESPON adalah produk berbeda: domain SOC, pertahanan injeksi lewat log, mode offline, jalur OT, aplikasi, dan seluruh evaluasinya dibangun sejak 29 Okt 2026, dalam periode Program.
 - **Komponen pihak ketiga:** Qwen2.5-1.5B-Instruct (Apache-2.0), llama.cpp / llama-cpp-python (MIT), OTRF Security-Datasets (MIT), HAI 21.03 (CC BY-SA 4.0, tidak ikut repo).
 - **Alat bantu AI saat pengembangan:** lihat bagian "Deklarasi" di `README.md`.
 

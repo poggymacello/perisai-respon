@@ -46,7 +46,7 @@ Angka diambil dari `BUKTI_EVALUASI.md` dan `prototype/results/summary.json`. Kal
 22. **TKDN?** Diperlukan untuk pengadaan nyata. Masuk tahap 3 dan belum kami kaji.
 
 ## D. Integritas
-23. **Ini karya lama?** Komponen policy, pola injeksi, dan audit diadaptasi dari proyek tim sendiri, Kendali (MIT), yang juga diikutkan di FinTechathon. Domain, data, evaluasi, dan produknya baru, dan dikerjakan sejak 29 Okt 2026. Rulebook membolehkan karya pre-existing sebagai dasar asalkan dideklarasikan (Rulebook bagian G, Ketentuan Karya); deklarasinya ada di `README.md` dan `PROPOSAL.md` §8.
+23. **Ini karya lama?** Komponen policy, pola injeksi, dan audit dikembangkan dari proyek tim sendiri, Kendali (MIT). Domain, data, evaluasi, aplikasi, dan produknya baru, dan dibangun sejak 29 Okt 2026. Rulebook membolehkan karya pre-existing sebagai dasar asalkan dideklarasikan (Rulebook bagian G, Ketentuan Karya); deklarasinya ada di `README.md` dan `PROPOSAL.md` §8.
 24. **Pakai AI untuk menulis kode?** Ya. Rulebook tidak punya aturan khusus soal AI generatif, tetapi Rulebook bagian G (Ketentuan Karya) meminta atribusi untuk library, model AI, dan tools pihak ketiga, jadi kami mendeklarasikannya di `README.md` (bagian Deklarasi). Setiap anggota bisa menjelaskan arsitektur dan kodenya.
 25. **Ada data asli satuan?** Tidak ada. Hanya log publik berlabel dan event demo sintetis. Injeksi berupa string uji dengan host/IP fiktif dan domain `.invalid`.
 

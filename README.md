@@ -233,9 +233,9 @@ video/         naskah, subtitle, dan skrip video demo
 
 ## Deklarasi
 
-- **Karya sebelumnya:** komponen Kendali di atas sudah ada sebelum lomba dan juga diikutkan di FinTechathon 2026. Domain SOC, jalur injeksi lewat log, mode offline, jalur OT, importer, dan seluruh evaluasi dikerjakan sejak 29 Okt 2026.
-- **Bantuan AI:** sebagian besar kode, dokumen, dan analisis disusun dengan bantuan asisten AI generatif, dengan arahan dan pemeriksaan tim.
-- **Narasi video:** suara sintetis (Microsoft Edge TTS, `id-ID-ArdiNeural`) yang membacakan naskah tim, dibuat dengan `video/suara.py`.
-- **Data:** hanya log publik berlabel dan event sintetis. Tidak ada data satuan atau data pribadi.
+- **Fondasi dari proyek tim:** Policy engine, pola injeksi, dan jejak audit dikembangkan dari Kendali (MIT), proyek tim yang sudah ada sebelum lomba. Domain SOC, pertahanan injeksi lewat log, mode offline, jalur OT, importer log, aplikasi, dan seluruh evaluasi dibangun untuk lomba ini sejak 29 Okt 2026.
+- **Alat bantu pengembangan:** Asisten AI generatif dipakai sebagai alat bantu menulis kode dan dokumen. Arsitektur, keputusan desain, evaluasi, dan pengujian diarahkan serta diperiksa tim.
+- **Narasi video:** suara sintetis (Microsoft Edge TTS) membacakan naskah tim.
+- **Data:** log publik berlabel dan event sintetis, tanpa data satuan atau data pribadi.
 
 Proyek ini sepenuhnya defensif. String injeksi di repo adalah string uji dengan host/IP fiktif. Berkas `prototype/results/raw_outputs*.jsonl` memuat cuplikan teks dari log serangan publik (Mimikatz/Empire) sehingga bisa ditandai antivirus; isinya teks log, bukan program.

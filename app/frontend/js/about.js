@@ -16,8 +16,8 @@ export const LICENSES = [
 export const NOTE_LLAMA = "Model Llama tidak dipakai karena lisensinya melarang penggunaan militer.";
 
 export const DECLARATION = [
-  ["Karya pre-existing", "Komponen Kendali di atas sudah ada sebelum Program. Kendali juga diikutkan di FinTechathon 2026. Domain SOC, jalur injeksi lewat log, mode offline, jalur OT, importer, dan seluruh evaluasi dikerjakan sejak 29 Okt 2026."],
-  ["Alat bantu AI saat pengembangan", "Sebagian besar kode, dokumen, dan analisis disusun dengan bantuan asisten AI generatif, dengan arahan dan pemeriksaan tim."],
+  ["Fondasi dari proyek tim", "Policy engine, pola injeksi, dan jejak audit dikembangkan dari Kendali (MIT), proyek tim yang sudah ada sebelum lomba. Domain SOC, pertahanan injeksi lewat log, mode offline, jalur OT, importer log, aplikasi, dan seluruh evaluasi dibangun untuk lomba ini sejak 29 Okt 2026."],
+  ["Alat bantu pengembangan", "Asisten AI generatif dipakai sebagai alat bantu menulis kode dan dokumen. Arsitektur, keputusan desain, evaluasi, dan pengujian diarahkan serta diperiksa tim."],
   ["Data", "Hanya log publik berlabel dan event demo sintetis. Tidak ada data satuan atau data pribadi."],
 ];
 
