@@ -10,10 +10,10 @@ Karya untuk Kartika Cyber Hackathon 2026, kategori Penangkalan.
 - **Inovasi AI-nya:** cara memakai AI dengan aman di lingkungan militer: firewall masukan, policy struktural, dan cek silang deterministik atas keluaran AI. Semuanya diukur dengan model asli.
 - **Kategori Penangkalan:** deteksi dini serangan dari log Windows dan OT, dan pencegahan pembajakan alat pertahanan itu sendiri. Semuanya berjalan offline di laptop satuan.
 
-**Demo web tanpa unduhan:** tautannya ada di halaman submisi (data sintetis, unggah log dimatikan). Konsol di halaman depan dan halaman **Uji injeksi** (`/app/#/uji`) membiarkan juri menulis injeksinya sendiri dan melihat policy menahannya, dengan atau tanpa detektor pola.
+**Demo web tanpa unduhan:** https://perisai-respon.vercel.app (data sintetis, unggah log dimatikan). Konsol di halaman depan dan halaman **Uji injeksi** (`/app/#/uji`) membiarkan juri menulis injeksinya sendiri dan melihat policy menahannya, dengan atau tanpa detektor pola.
 
 ## Untuk juri: coba dalam 3 menit
-**Paling cepat, di browser:** https://perisai-respon.vercel.app/ (mode demo publik: data sintetis, unggah log dimatikan, LLM tidak aktif). Langkah 3 sampai 6 di bawah bisa diikuti di sana.
+**Paling cepat, di browser:** https://perisai-respon.vercel.app/ (mode demo publik: data sintetis, unggah log dimatikan, LLM tidak aktif). Klik **Buka aplikasi**, pilih peran **Analis**, lalu ikuti langkah 4 sampai 6 di bawah. 10 kasus contoh sudah termuat otomatis.
 
 Aplikasi desktop: tanpa instalasi, internet, atau akun. Datanya log contoh sintetis. Langkah dan hasil di bawah sudah dicek ulang pada zip rilis 1.0.0 (15 Nov 2026).
 
