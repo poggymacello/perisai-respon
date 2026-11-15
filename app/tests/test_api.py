@@ -457,24 +457,24 @@ def test_demo_roles_enforced_on_server(tmp_path, monkeypatch):
         url = f"/api/kasus/{k['id']}/tinjauan"
         assert c.get("/api/peran").json()["wajib"] is True
         assert c.post(url, json=review, headers=H).status_code == 401           # belum masuk
-        assert c.post("/api/masuk", json={"peran": "admin", "nama": "Kapten D"}, headers=H).status_code == 200
+        assert c.post("/api/masuk", json={"email": "dimas@posko.example", "sandi": "perisai-demo"}, headers=H).status_code == 200
         r = c.post(url, json=review, headers=H)
         assert r.status_code == 403 and "Admin" in r.json()["detail"]           # admin tidak boleh menyetujui
         assert c.post("/api/laporan/pelaporan", json={"dampak": "x"}, headers=H).status_code == 403
-        c.post("/api/masuk", json={"peran": "operator", "nama": "Serda R"}, headers=H)
+        c.post("/api/masuk", json={"email": "rina@posko.example", "sandi": "perisai-demo"}, headers=H)
         assert c.post(url, json=review, headers=H).status_code == 403
         assert c.post("/api/uji-injeksi", json={"teks": "abc"}, headers=H).status_code == 200  # uji tetap boleh
-        c.post("/api/masuk", json={"peran": "analis", "nama": "Lettu A"}, headers=H)
+        c.post("/api/masuk", json={"email": "andi@posko.example", "sandi": "perisai-demo"}, headers=H)
         assert c.post(url, json=review, headers=H).status_code == 200
         kinds = [e["kind"] for e in c.get("/api/audit").json()["entri"]]
         assert kinds.count("masuk") == 3                                         # masuk tercatat di audit
-        assert c.post("/api/masuk", json={"peran": "root", "nama": "x"}, headers=H).status_code == 422
+        assert c.post("/api/masuk", json={"email": "root@posko.example", "sandi": "perisai-demo"}, headers=H).status_code == 401
 
 
 def test_demo_new_session_keeps_role_and_signout(tmp_path, monkeypatch):
     with _demo_client(tmp_path, monkeypatch) as c:
         c.get("/api/kasus")
-        c.post("/api/masuk", json={"peran": "analis", "nama": "Lettu A"}, headers=H)
+        c.post("/api/masuk", json={"email": "andi@posko.example", "sandi": "perisai-demo"}, headers=H)
         c.post("/api/sesi/baru", headers=H)
         assert c.get("/api/peran").json()["masuk"]["peran"] == "analis"
         c.post("/api/keluar-peran", headers=H)
@@ -483,7 +483,7 @@ def test_demo_new_session_keeps_role_and_signout(tmp_path, monkeypatch):
 
 def test_desktop_has_no_login(client):
     assert client.get("/api/peran").json()["wajib"] is False
-    assert client.post("/api/masuk", json={"peran": "analis", "nama": "AB"}, headers=H).status_code == 409
+    assert client.post("/api/masuk", json={"email": "andi@posko.example", "sandi": "perisai-demo"}, headers=H).status_code == 409
 
 
 def test_demo_role_survives_instance_switch(tmp_path, monkeypatch):
@@ -492,12 +492,12 @@ def test_demo_role_survives_instance_switch(tmp_path, monkeypatch):
     a = TestClient(create_app(mode="demo", root=tmp_path / "a", bind="0.0.0.0"), base_url="https://demo.example")
     with a:
         a.get("/api/kasus")
-        assert a.post("/api/masuk", json={"peran": "analis", "nama": "Lettu A"}, headers=H).status_code == 200
+        assert a.post("/api/masuk", json={"email": "andi@posko.example", "sandi": "perisai-demo"}, headers=H).status_code == 200
         cookies = dict(a.cookies)
     b = TestClient(create_app(mode="demo", root=tmp_path / "b", bind="0.0.0.0"), base_url="https://demo.example", cookies=cookies)
     with b:
         m = b.get("/api/peran").json()["masuk"]
-        assert m["peran"] == "analis" and m["nama"] == "Lettu A"
+        assert m["peran"] == "analis" and m["nama"] == "Lettu Andi"
         k = next(x for x in b.get("/api/kasus").json()["kasus"] if x["status_mesin"] == "MENUNGGU_PERSETUJUAN")
         r = b.post(f"/api/kasus/{k['id']}/tinjauan", json={"keputusan": "setujui", "analis": "Lettu A", "catatan": "dicek"}, headers=H)
         assert r.status_code == 200
@@ -508,3 +508,43 @@ def test_demo_role_survives_instance_switch(tmp_path, monkeypatch):
                    cookies={"perisai_peran": "root:Hacker"})
     with c:
         assert c.get("/api/peran").json()["masuk"] is None   # cookie peran tidak sah diabaikan
+
+
+def test_demo_login_password_and_accounts(tmp_path, monkeypatch):
+    with _demo_client(tmp_path, monkeypatch) as c:
+        p = c.get("/api/peran").json()
+        assert {a["email"] for a in p["akun"]} == {"rina@posko.example", "andi@posko.example", "dimas@posko.example"}
+        assert p["sandi_demo"] == "perisai-demo" and all("sandi" not in a for a in p["akun"])
+        assert c.post("/api/masuk", json={"email": "andi@posko.example", "sandi": "salah"}, headers=H).status_code == 401
+        assert c.post("/api/masuk", json={"email": "ANDI@posko.example ", "sandi": "perisai-demo"}, headers=H).status_code == 200
+    monkeypatch.setenv("PERISAI_SHOW_DEMO_ACCOUNTS", "off")
+    monkeypatch.setenv("PERISAI_DEMO_PASSWORD", "rahasia-lain")
+    with _demo_client(tmp_path / "x", monkeypatch) as c:
+        p = c.get("/api/peran").json()
+        assert p["akun"] == [] and p["sandi_demo"] is None
+        assert c.post("/api/masuk", json={"email": "andi@posko.example", "sandi": "perisai-demo"}, headers=H).status_code == 401
+        assert c.post("/api/masuk", json={"email": "andi@posko.example", "sandi": "rahasia-lain"}, headers=H).status_code == 200
+
+
+def test_demo_lab_scenarios_go_through_engine(tmp_path, monkeypatch):
+    with _demo_client(tmp_path, monkeypatch) as c:
+        c.get("/api/kasus")
+        lab = c.get("/api/demo/skenario").json()["skenario"]
+        assert len(lab) == 7
+        assert c.post("/api/demo/skenario/injeksi-inggris", headers=H).status_code == 401      # belum masuk
+        c.post("/api/masuk", json={"email": "andi@posko.example", "sandi": "perisai-demo"}, headers=H)
+        assert c.post("/api/demo/skenario/injeksi-inggris", headers=H).status_code == 403      # analis bukan admin
+        c.post("/api/masuk", json={"email": "dimas@posko.example", "sandi": "perisai-demo"}, headers=H)
+        assert c.post("/api/demo/skenario/tidak-ada", headers=H).status_code == 404
+        got = {}
+        for s in lab:
+            r = c.post(f"/api/demo/skenario/{s['id']}", headers=H)
+            assert r.status_code == 200, r.text
+            (k,) = r.json()["kasus"]
+            got[s["id"]] = k
+        for sid in ("injeksi-inggris", "injeksi-indonesia", "injeksi-base64", "klaim-izin", "karakter-tersembunyi"):
+            assert "INJEKSI_TERDETEKSI" in got[sid]["peringatan"] and got[sid]["aksi"]["jenis"] == "escalate", sid
+        assert got["dump-kredensial"]["status_mesin"] == "MENUNGGU_PERSETUJUAN"
+        assert got["serangan-dc"]["aksi"]["jenis"] == "escalate" and got["serangan-dc"]["aset_terlindungi"]
+        assert len(c.get("/api/kasus").json()["kasus"]) == 17
+        assert c.post("/api/audit/verifikasi", headers=H).json()["ok"] is True

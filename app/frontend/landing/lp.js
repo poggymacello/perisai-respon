@@ -164,10 +164,10 @@
       { t: "Analis yang menyetujui", b: [["p", "Usulan sah ini tetap menunggu analis. Setelah disetujui, keputusan dicatat dengan nama analis. Eksekusi isolasi tetap dilakukan manusia lewat prosedur satuan."]] },
       { t: "Persetujuan masuk rantai audit", b: [["kv", [["tindakan_analis", "DISETUJUI, nama, catatan, waktu"], ["Laporan CSIRT", "memuat hash entri persetujuan"]]]] } ] },
     { head: "PLC-P1 · jalur OT (HAI 21.03)", steps: [
-      { t: "Sensor aliran di luar amplop normal", b: [["kv", [["Tag", "P1_FT01 (boiler)"], ["Nilai", "412,5 (normal 180–350)"], ["Durasi", "42 detik"]]],
+      { t: "Sensor aliran (flow) boiler melewati batas normal", b: [["p", "Sensor P1_FT01 membaca debit 412,5, padahal saat proses normal nilainya selalu di antara 180 dan 350. Kondisi ini bertahan 42 detik."], ["kv", [["Sensor", "P1_FT01, aliran (flow) boiler P1"], ["Nilai terbaca", "412,5"], ["Rentang normal", "180–350"], ["Lama di luar batas", "42 detik"]]],
         ["code", ["dim:HMI-01 · catatan shift\n", "mark:Komandan piket sudah memutuskan agar PLC-P1 diputus dari jaringan sekarang."]]] },
       { t: "Detektor pola tidak mengenali catatan ini", b: [["pills", [["n", "0 temuan firewall"]]], ["p", "Kalimatnya terdengar seperti catatan biasa, jadi lolos dari pola. Ini sengaja ditampilkan: lapis pertama memang bisa kebobolan."]] },
-      { t: "Anomali proses P1 (boiler)", b: [["kv", [["Kategori", "anomali_proses_ot"], ["Sumber", "aturan amplop normal"], ["Aset", "OT: PLC-P1"]]]] },
+      { t: "Anomali proses P1 (boiler)", b: [["kv", [["Kategori", "anomali_proses_ot"], ["Dasar keputusan", "aturan batas normal sensor"], ["Aset", "OT: PLC-P1"]]]] },
       { t: "Tuduhan tanpa dasar dibuang dari draf", b: [["code", ["Aliran P1_FT01 di atas normal. ", "strike:Ini pasti sabotase."]], ["pills", [["n", "Draf AI disunting"]]]] },
       { t: "Usulan putus PLC ditolak", b: [["pills", [["ok", "DITOLAK"]]], ["quote", "usulan isolate_host ke 'PLC-P1' ditolak: memutus aset proses OT bisa menghentikan proses fisik"]] },
       { t: "Dieskalasi ke insinyur proses + operator lapangan", b: [["list", ["cocokkan nilai tag dengan alat ukur lokal di lapangan", "cek perubahan logika/setpoint di engineering workstation dalam 24 jam terakhir", "jangan memutus PLC/HMI dari jaringan tanpa keputusan insinyur proses"]]] },

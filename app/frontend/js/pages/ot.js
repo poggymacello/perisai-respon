@@ -1,4 +1,4 @@
-// Jalur OT: tag di luar amplop normal, usulan putus PLC ditolak, catatan HMI ditampilkan inert.
+// Jalur OT: sensor proses di luar batas normal, usulan putus PLC ditolak, catatan HMI ditampilkan inert.
 import { api } from "../api.js";
 import { banner, card, clear, fmtNum, h, icon, kv, s } from "../dom.js";
 import { VERDICT, actionText } from "../labels.js";
@@ -14,11 +14,11 @@ function envelopeChart(t) {
   for (let v = 0; v <= top; v += top > 300 ? 100 : 50) ticks.push(v);
   const xs = (v) => X0 + ((X1 - X0) * v) / t.jendela_detik;
   const svg = s("svg", { class: "ot-chart", viewBox: `0 0 ${W} 190`, role: "img",
-    "aria-label": `${t.tag}: nilai ${t.nilai}, amplop normal ${lo} sampai ${hi}; ${t.detik_melanggar} dari ${t.jendela_detik} detik di luar amplop` },
+    "aria-label": `${t.tag}: nilai ${t.nilai}, batas normal ${lo} sampai ${hi}; ${t.detik_melanggar} dari ${t.jendela_detik} detik di luar batas normal` },
     s("text", { x: 0, y: 44 }, t.tag),
     s("text", { x: 0, y: 60, class: "small" }, "nilai tag"),
     s("rect", { class: "band", x: x(lo), y: 26, width: x(hi) - x(lo), height: 30 }),
-    s("text", { x: (x(lo) + x(hi)) / 2, y: 20, "text-anchor": "middle" }, `amplop normal ${fmtNum(lo)}–${fmtNum(hi)}`),
+    s("text", { x: (x(lo) + x(hi)) / 2, y: 20, "text-anchor": "middle" }, `batas normal ${fmtNum(lo)}–${fmtNum(hi)}`),
     s("line", { class: "axis", x1: X0, y1: 64, x2: X1, y2: 64 }),
     ...ticks.flatMap((v) => [s("line", { class: "axis", x1: x(v), y1: 64, x2: x(v), y2: 69 }),
       s("text", { x: x(v), y: 82, "text-anchor": "middle" }, fmtNum(v))]),
@@ -42,12 +42,12 @@ export async function render(page) {
   const k = d.keputusan;
   const hmi = d.kasus.events.find((e) => e.EventID === "HMI-CATATAN");
   page.append(h("div", { class: "page-head" }, h("div", { class: "titles" }, h("h1", null, "Jalur OT"),
-    h("div", { class: "sub" }, "Telemetri proses (gaya HAI 21.03) → detektor amplop normal → keputusan khusus aset proses. Contoh sintetis dari demo.py skenario 5c."))));
+    h("div", { class: "sub" }, "Data sensor proses (gaya HAI 21.03) → pengecekan batas normal tiap sensor → keputusan khusus aset proses (PLC/HMI tidak pernah diputus). Contoh sintetis dari demo.py skenario 5c."))));
   page.append(banner("info", "info", h("b", null, "Kebijakan OT: "),
     "PLC, HMI, RTU, SIS, dan EWS tidak pernah diisolasi atau diblokir oleh sistem, bahkan dengan persetujuan di layar ini. ",
     "Memutus pengendali bisa menghentikan proses fisik. Aksi akhir selalu eskalasi ke insinyur proses dan operator lapangan."));
   const left = h("div", null,
-    card("Anomali tag", { icon: "gauge" }, ...d.tag.map(envelopeChart),
+    card("Sensor di luar batas normal", { icon: "gauge" }, ...d.tag.map(envelopeChart),
       h("p", { id: "ringkasan-ot" }, k.ringkasan),
       h("p", { class: "muted small" }, "Profil per tag dari data normal (kuantil 0,05 % dan 99,95 %). Satu jendela 60 detik berbunyi bila ada tag ",
         `yang melanggar ≥ ${K_SECONDS} detik.`)),

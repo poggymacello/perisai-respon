@@ -12,8 +12,8 @@
   --radius: 12px; --radius-sm: 8px;
   --shadow: 0 0 1px rgba(27, 31, 36, .14), 0 2px 6px rgba(27, 31, 36, .05);
   --shadow-lg: 0 0 1px rgba(27, 31, 36, .2), 0 24px 60px -20px rgba(10, 20, 35, .45);
-  --sans: "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-  --mono: "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+  --sans: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
   --ease: cubic-bezier(.2, .7, .2, 1);
   color-scheme: light;
 }

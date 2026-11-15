@@ -27,7 +27,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from . import APP_NAME, APP_VERSION, ENGINE_VERSION, asetot, cekdraf, engine, evtx, reportfmt, sample
+from . import APP_NAME, APP_VERSION, ENGINE_VERSION, asetot, cekdraf, demolab, engine, evtx, reportfmt, sample
 from .llmsvc import LLMService
 from .paths import app_mode, data_dir, display_path, frontend_dir
 from .store import REVIEW, ReviewError, Store, Workspace
@@ -37,7 +37,8 @@ from perisai import policy as _policy  # noqa: E402
 from perisai.ot import CHECKLIST, decide_ot, is_ot_asset  # noqa: E402
 from perisai.v12 import isolation_supported  # noqa: E402
 
-for _ext, _type in ((".js", "text/javascript"), (".css", "text/css"), (".svg", "image/svg+xml"), (".json", "application/json")):
+for _ext, _type in ((".js", "text/javascript"), (".css", "text/css"), (".svg", "image/svg+xml"), (".json", "application/json"),
+                    (".woff2", "font/woff2")):
     mimetypes.add_type(_type, _ext)  # registri Windows kadang memetakan .js ke text/plain
 
 MAX_UPLOAD = 200 * 1024 * 1024
@@ -123,9 +124,25 @@ def _role_from_cookie(raw: str | None) -> dict | None:
     return {"peran": peran, "label": p["label"], "nama": nama, "izin": p["izin"]}
 
 
+# Akun demo fiktif (domain .example dicadangkan RFC 2606). Sandinya sama dan sengaja ditampilkan di halaman masuk
+# supaya pengunjung bisa mencoba; matikan daftar akun dengan PERISAI_SHOW_DEMO_ACCOUNTS=off.
+AKUN_DEMO = [
+    {"id": "rina", "email": "rina@posko.example", "nama": "Serda Rina", "peran": "operator", "jabatan": "Operator posko",
+     "tugas": "memantau antrean dan menguji usulan"},
+    {"id": "andi", "email": "andi@posko.example", "nama": "Lettu Andi", "peran": "analis", "jabatan": "Analis insiden",
+     "tugas": "menyetujui atau menolak aksi"},
+    {"id": "dimas", "email": "dimas@posko.example", "nama": "Kapten Dimas", "peran": "admin", "jabatan": "Admin sistem",
+     "tugas": "menjalankan demo, tidak bisa menyetujui"},
+]
+
+
+def demo_password() -> str:
+    return os.environ.get("PERISAI_DEMO_PASSWORD", "perisai-demo")
+
+
 class MasukIn(BaseModel):
-    peran: Literal["operator", "analis", "admin"]
-    nama: str = Field(min_length=2, max_length=80)
+    email: str = Field(min_length=3, max_length=120)
+    sandi: str = Field(min_length=1, max_length=120)
 
 
 class PelaporanIn(BaseModel):
@@ -657,6 +674,7 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
     def ot():
         case, prop = sample.ot_case(), sample.ot_proposal()
         d = decide_ot(case, prop)
+        d = d | {"ringkasan": engine.plain(d.get("ringkasan", "")), "reasons": [engine.plain(r) for r in d.get("reasons", [])]}
         fw = _fw.inspect_case(case)
         tags = [{"tag": e["ObjectName"], "nilai": e["Nilai"], "normal": [float(x) for x in e["Normal"].strip("[]").split(",")],
                  "detik_melanggar": e["DetikMelanggar"], "jendela_detik": 60, "host": e["Hostname"], "waktu": e["TimeCreated"]}
@@ -709,7 +727,10 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
     # -------------------------------------------------------------- sesi
     @app.get("/api/peran")
     def roles(ws: Workspace = Depends(workspace)):
-        return {"wajib": demo, "masuk": ws.state.get("masuk"),
+        show = demo and os.environ.get("PERISAI_SHOW_DEMO_ACCOUNTS", "on").lower() != "off"
+        akun = [{k: a[k] for k in ("id", "email", "nama", "peran", "jabatan", "tugas")} | {"label": PERAN[a["peran"]]["label"]}
+                for a in AKUN_DEMO] if show else []
+        return {"wajib": demo, "masuk": ws.state.get("masuk"), "akun": akun, "sandi_demo": demo_password() if show else None,
                 "peran": [{"id": k} | v for k, v in PERAN.items()]}
 
     @app.post("/api/masuk")
@@ -717,14 +738,18 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
         if not demo:
             raise HTTPException(409, "login hanya dipakai di demo publik; aplikasi desktop dipakai satu operator")
         from urllib.parse import quote
-        p = PERAN[body.peran]
+        a = next((x for x in AKUN_DEMO if x["email"] == body.email.strip().lower()), None)
+        # Bandingkan sandi dengan waktu konstan, dan selalu bandingkan sesuatu agar email salah tidak lebih cepat ditolak.
+        ok = secrets.compare_digest(body.sandi.encode(), demo_password().encode())
+        if a is None or not ok:
+            raise HTTPException(401, "Email atau sandi salah.")
+        p = PERAN[a["peran"]]
         with ws.lock:
-            ws.state["masuk"] = {"peran": body.peran, "label": p["label"], "nama": body.nama.strip(),
-                                 "izin": p["izin"], "waktu": engine.now_iso()}
+            ws.state["masuk"] = {"peran": a["peran"], "label": p["label"], "nama": a["nama"], "email": a["email"],
+                                 "jabatan": a["jabatan"], "izin": p["izin"], "waktu": engine.now_iso()}
             ws.save()
-            ws.audit.append(ws.sid, "masuk", {"peran": body.peran, "nama": body.nama.strip()}, engine.now_iso())
-        response.set_cookie(ROLE_COOKIE, f"{body.peran}:{quote(body.nama.strip())}", httponly=True, samesite="lax",
-                            max_age=7 * 86400)
+            ws.audit.append(ws.sid, "masuk", {"peran": a["peran"], "nama": a["nama"], "email": a["email"]}, engine.now_iso())
+        response.set_cookie(ROLE_COOKIE, f"{a['peran']}:{quote(a['nama'])}", httponly=True, samesite="lax", max_age=7 * 86400)
         return ws.state["masuk"]
 
     @app.post("/api/keluar-peran")
@@ -734,6 +759,28 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
             ws.save()
         response.delete_cookie(ROLE_COOKIE)
         return {"ok": True}
+
+    # -------------------------------------------------------------- kontrol demo (Admin di demo publik)
+    @app.get("/api/demo/skenario")
+    def demo_catalog():
+        return {"skenario": demolab.katalog()}
+
+    @app.post("/api/demo/skenario/{sid}")
+    def demo_send(sid: str, ws: Workspace = Depends(workspace)):
+        """Kirim log serangan sintetis ke sesi ini; diproses parser + mesin yang sama dengan impor biasa."""
+        require(ws, "demo")
+        if not demo:
+            raise HTTPException(409, "kontrol demo hanya ada di demo publik")
+        try:
+            f = demolab.tulis_log(sid, ws.dir / "lab", len(ws.state["impor"]) + 1)
+        except KeyError:
+            raise HTTPException(404, f"skenario {sid} tidak ada") from None
+        imp = ws.import_files([f], label=f"lab: {sid}")
+        out = []
+        for kid in imp["kasus"]:
+            k = ws.get(kid)
+            out.append(_summary(ws, k))
+        return {"impor": imp["id"], "kasus": out}
 
     @app.post("/api/sesi/baru")
     def new_session(request: Request, response: Response):

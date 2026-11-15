@@ -89,10 +89,22 @@ REASON_RULES_LLM_OFF = ("Keputusan diambil dari aturan; LLM lokal tidak aktif di
                         "untuk kategori dan aksi")
 
 
+# Istilah mesin -> kata yang jelas untuk tampilan. "Amplop normal" (operating envelope) = rentang nilai sensor
+# saat proses berjalan normal. Teks asli mesin tidak diubah (kode mesin di-hash); ini hanya untuk layar.
+_PLAIN = [("aturan amplop normal", "aturan batas normal sensor"), ("di luar amplop normal", "di luar batas normal"),
+          ("di luar amplop", "di luar batas normal"), ("amplop normal", "batas normal sensor")]
+
+
+def plain(text: str) -> str:
+    for a, b in _PLAIN:
+        text = text.replace(a, b)
+    return text
+
+
 def reason_text(raw: str, llm_on: bool) -> str:
     if raw == ENGINE_NO_LLM:
         return REASON_RULES_LLM_ON if llm_on else REASON_RULES_LLM_OFF
-    return raw
+    return plain(raw)
 
 
 # Versi pendek untuk laporan: perisai.laporan memotong tiap alasan di 120 karakter.

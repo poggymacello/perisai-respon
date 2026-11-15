@@ -109,7 +109,7 @@ export async function render(page, _params, ctx) {
     card("Lisensi dan asal-usul", { icon: "file-text", flush: true },
       h("table", { class: "t" }, h("tbody", null, LICENSES.map(([a, b]) => h("tr", null, h("td", null, a), h("td", null, b))))),
       h("div", { class: "card-b" }, h("p", { class: "muted small" }, NOTE_LLAMA))),
-    card("Deklarasi (S&K Kartika Cyber Hackathon 2026, pasal 5.3–5.4)", { icon: "info" },
+    card("Deklarasi (Rulebook Kartika Cyber Hackathon 2026, bagian G: Ketentuan Karya)", { icon: "info" },
       kv(DECLARATION, "kv wide"), h("p", { class: "muted small mt" }, DEFENSIVE)));
   if (st.antarmuka === "browser") {
     const q = btn("Keluar aplikasi", { icon: "power", cls: "danger" });
