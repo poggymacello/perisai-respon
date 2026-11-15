@@ -8,9 +8,10 @@ import * as kasus from "./pages/kasus.js";
 import * as laporan from "./pages/laporan.js";
 import * as ot from "./pages/ot.js";
 import * as status from "./pages/status.js";
+import * as uji from "./pages/uji.js";
 
-const ROUTES = { antrean, impor, kasus, audit, laporan, ot, status };
-const TITLES = { antrean: "Antrean kasus", impor: "Impor log", kasus: "Detail kasus", audit: "Jejak audit",
+const ROUTES = { antrean, impor, kasus, uji, audit, laporan, ot, status };
+const TITLES = { antrean: "Antrean kasus", impor: "Impor log", kasus: "Detail kasus", uji: "Uji injeksi", audit: "Jejak audit",
   laporan: "Laporan CSIRT", ot: "Jalur OT", status: "Status sistem" };
 
 export const ctx = {
@@ -43,12 +44,13 @@ function renderPills() {
   const st = ctx.status;
   const el = clear(document.getElementById("top-pills"));
   if (!st) return;
-  if (st.mode === "demo") el.append(h("span", { class: "pill demo", title: "Server publik: hanya data contoh sintetis" }, "Demo publik · data sintetis"));
+  if (st.mode === "demo") el.append(h("span", { class: "pill demo keep", title: "Server publik: hanya data contoh sintetis" },
+    h("span", { class: "dot" }), "Demo publik · data sintetis"));
   const llmOn = st.mode_analisis === "llm";
-  el.append(h("span", { class: `pill ${llmOn ? "on" : ""}`, title: llmOn ? "Draf AI bisa dibuat per kasus" : (st.llm.alasan || "") },
+  el.append(h("span", { class: `pill hide-sm ${llmOn ? "on" : ""}`, title: llmOn ? "Draf AI bisa dibuat per kasus" : (st.llm.alasan || "") },
     h("span", { class: "dot" }), llmOn ? "LLM lokal aktif" : "Mode aturan"));
   const net = st.jaringan;
-  el.append(h("span", { class: "pill on", title: "Server hanya menerima koneksi dari perangkat ini; halaman tidak memanggil host lain" },
+  el.append(h("span", { class: "pill on hide-sm", title: "Server hanya menerima koneksi dari perangkat ini; halaman tidak memanggil host lain" },
     h("span", { class: "dot" }), net.lokal_saja ? `Offline · ${net.bind}${net.port ? ":" + net.port : ""}` : "Server demo"));
   document.getElementById("side-foot").textContent = `Aplikasi ${st.aplikasi.versi} · mesin v${st.mesin.versi}`;
 }
@@ -65,6 +67,8 @@ async function route() {
     if (active) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
   }
   document.title = `${TITLES[mod]} · PERISAI-RESPON`;
+  document.getElementById("where").textContent = TITLES[mod];
+  setNav(false);
   if (cleanup) { try { cleanup(); } catch (e) { /* */ } cleanup = null; }
   const main = clear(document.getElementById("main"));
   const page = h("div", { class: "page" }, loading());
@@ -81,8 +85,51 @@ async function route() {
   }
 }
 
+// ------------------------------------------------------------- shell: sidebar, drawer, tema
+const COLLAPSE_KEY = "perisai.sidebar.collapsed";
+
+function setNav(open) {
+  const app = document.getElementById("app");
+  if (!app) return;
+  if (open) app.setAttribute("data-nav-open", ""); else app.removeAttribute("data-nav-open");
+  const mb = document.getElementById("menu-btn");
+  if (mb) mb.setAttribute("aria-expanded", open ? "true" : "false");
+}
+
+function setCollapsed(on) {
+  const app = document.getElementById("app");
+  if (on) app.setAttribute("data-collapsed", ""); else app.removeAttribute("data-collapsed");
+  const b = document.getElementById("collapse-btn");
+  const label = on ? "Lebarkan sidebar" : "Ciutkan sidebar";
+  b.setAttribute("aria-label", label); b.title = label;
+  try { localStorage.setItem(COLLAPSE_KEY, on ? "1" : "0"); } catch (e) { /* mode privat */ }
+}
+
+function themeIcon() {
+  const b = document.getElementById("theme-btn");
+  const dark = window.perisaiTheme && window.perisaiTheme.current() === "dark";
+  clear(b).append(icon(dark ? "sun" : "moon"));
+  b.title = dark ? "Pakai tema terang" : "Pakai tema gelap";
+  b.setAttribute("aria-label", b.title);
+}
+
+function initShell() {
+  let collapsed = false;
+  try { collapsed = localStorage.getItem(COLLAPSE_KEY) === "1"; } catch (e) { /* */ }
+  setCollapsed(collapsed);
+  document.getElementById("collapse-btn").addEventListener("click", () =>
+    setCollapsed(!document.getElementById("app").hasAttribute("data-collapsed")));
+  document.getElementById("menu-btn").addEventListener("click", () =>
+    setNav(!document.getElementById("app").hasAttribute("data-nav-open")));
+  document.getElementById("scrim").addEventListener("click", () => setNav(false));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") setNav(false); });
+  document.getElementById("theme-btn").addEventListener("click", () => { window.perisaiTheme?.toggle(); themeIcon(); });
+  themeIcon();
+}
+
 window.addEventListener("hashchange", route);
 window.addEventListener("DOMContentLoaded", async () => {
+  initShell();
   await ctx.refreshStatus();
   ctx.refreshBadge();
   route();

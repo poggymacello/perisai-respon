@@ -3,30 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>PERISAI-RESPON</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/app.css">
+<script src="js/theme.js"></script>
 <script type="module" src="js/app.js"></script>
 </head>
 <body>
-<div class="app">
+<a class="skip" href="#main">Lewati ke konten</a>
+<div class="app" id="app">
+  <nav class="sidebar" id="sidebar" aria-label="Navigasi utama">
+    <div class="side-head">
+      <a class="brand" href="#/antrean" aria-label="PERISAI-RESPON, antrean kasus">
+        <span class="brand-mark" aria-hidden="true"><svg class="ic"><use href="vendor/lucide/icons.svg#i-shield-check"></use></svg></span>
+        <span class="brand-text">PERISAI-RESPON<small>triase insiden offline</small></span>
+      </a>
+      <span class="spacer"></span>
+      <button type="button" class="iconbtn collapse-btn" id="collapse-btn" aria-label="Ciutkan sidebar" title="Ciutkan sidebar"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-panel-left"></use></svg></button>
+    </div>
+    <div class="side-scroll">
+      <div class="nav-group">
+        <div class="nav-label">Kerja</div>
+        <ul class="nav" id="nav">
+          <li><a href="#/antrean" data-route="antrean" title="Antrean kasus"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-inbox"></use></svg><span class="lbl">Antrean kasus</span><span class="badge" id="nav-badge" hidden></span></a></li>
+          <li><a href="#/impor" data-route="impor" title="Impor log"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-upload"></use></svg><span class="lbl">Impor log</span></a></li>
+          <li><a href="#/uji" data-route="uji" title="Uji injeksi"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-crosshair"></use></svg><span class="lbl">Uji injeksi</span><span class="new">baru</span></a></li>
+          <li><a href="#/audit" data-route="audit" title="Jejak audit"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-link-2"></use></svg><span class="lbl">Jejak audit</span></a></li>
+          <li><a href="#/laporan" data-route="laporan" title="Laporan CSIRT"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-file-text"></use></svg><span class="lbl">Laporan CSIRT</span></a></li>
+        </ul>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">Sistem</div>
+        <ul class="nav">
+          <li><a href="#/ot" data-route="ot" title="Jalur OT"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-activity"></use></svg><span class="lbl">Jalur OT</span></a></li>
+          <li><a href="#/status" data-route="status" title="Status sistem"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-info"></use></svg><span class="lbl">Status sistem</span></a></li>
+          <li><a href="/landing/" title="Tentang PERISAI"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-home"></use></svg><span class="lbl">Tentang PERISAI</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="sidebar-foot">
+      <span class="ver" id="side-foot">Aplikasi 1.0.0 · mesin v1.2.2</span>
+      <button type="button" class="iconbtn" id="theme-btn" aria-label="Ganti tema" title="Ganti tema terang/gelap"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-moon"></use></svg></button>
+    </div>
+  </nav>
+  <div class="scrim" id="scrim"></div>
   <header class="topbar">
-    <div class="brand"><span class="brand-mark" aria-hidden="true">P</span>PERISAI-RESPON <small>triase insiden offline</small></div>
+    <button type="button" class="iconbtn menu-btn" id="menu-btn" aria-label="Buka menu" aria-controls="sidebar" aria-expanded="false"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-menu"></use></svg></button>
+    <div class="where"><span>PERISAI</span><span class="sep" aria-hidden="true">/</span><b id="where">Antrean kasus</b></div>
     <div class="spacer"></div>
     <div id="top-pills" class="actions" aria-live="polite"></div>
   </header>
-  <nav class="sidebar" aria-label="Navigasi utama">
-    <ul class="nav" id="nav">
-      <li><a href="#/antrean" data-route="antrean"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-inbox"></use></svg>Antrean kasus<span class="badge" id="nav-badge" hidden></span></a></li>
-      <li><a href="#/impor" data-route="impor"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-upload"></use></svg>Impor log</a></li>
-      <li><a href="#/audit" data-route="audit"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-link-2"></use></svg>Jejak audit</a></li>
-      <li><a href="#/laporan" data-route="laporan"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-file-text"></use></svg>Laporan CSIRT</a></li>
-      <li class="nav-sep" role="separator"></li>
-      <li><a href="#/ot" data-route="ot"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-activity"></use></svg>Jalur OT</a></li>
-      <li><a href="#/status" data-route="status"><svg class="ic" aria-hidden="true"><use href="vendor/lucide/icons.svg#i-info"></use></svg>Status sistem</a></li>
-    </ul>
-    <div class="sidebar-foot" id="side-foot">Aplikasi 1.0.0 · mesin v1.2.2</div>
-  </nav>
   <main id="main" tabindex="-1"></main>
 </div>
 <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
