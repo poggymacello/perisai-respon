@@ -73,7 +73,7 @@ Untuk mencoba aplikasinya, klik **Buka aplikasi** lalu masuk dengan akun demo **
 
 ### Lewat aplikasi desktop (Windows 10/11)
 
-Tidak perlu instalasi, internet, atau akun.
+Tidak perlu instalasi, internet, atau akun. Zip 1.0.0 dibangun sebelum pembaruan tampilan 15 Nov 2026, jadi warnanya sedikit berbeda dari tangkapan layar di bawah. Alur, label tombol, dan hasil setiap langkah tetap sama.
 
 1. Unduh `PERISAI-RESPON-1.0.0-win64.zip` (41,5 MB) dari [Releases](https://github.com/poggymacello/perisai-respon/releases/tag/v1.0.0). SHA-256-nya ada di berkas `PERISAI-RESPON-1.0.0-win64.zip.sha256` di halaman yang sama. Ekstrak seluruh isinya ke satu folder.
 2. Jalankan `PERISAI-RESPON.exe`. Exe belum ditandatangani, jadi SmartScreen menampilkan **Windows protected your PC**. Klik **More info**, lalu **Run anyway**. Aplikasi terbuka di halaman **Antrean kasus**.

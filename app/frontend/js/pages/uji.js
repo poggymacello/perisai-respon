@@ -21,6 +21,23 @@ function attackWon(r) {
   return a.jenis === r.usulan.jenis && (a.target || null) === (r.usulan.target || null);
 }
 
+// Pembanding tanpa PERISAI: asisten yang langsung menjalankan usulan AI. Tidak ada policy, jadi usulan penyerang
+// (yang di uji ini dianggap sudah dituruti AI) menjadi aksi. Ini ilustrasi logika, bukan hasil mesin.
+function naiveColumn(r) {
+  const u = r.usulan;
+  const act = (ACTION[u.jenis] || u.jenis) + (u.target ? ` → ${u.target}` : "");
+  return h("div", { class: "attack-col naive" },
+    h("h3", null, icon("bot"), "Tanpa PERISAI"),
+    h("p", { class: "small muted" }, "Asisten AI yang langsung menjalankan usulannya sendiri, tanpa policy dan tanpa persetujuan."),
+    h("div", { class: "result-big pass" }, icon("triangle-alert", "lg"), "Serangan berhasil"),
+    h("div", { class: "small" }, "Putusan policy: ", h("span", { class: "muted" }, "tidak ada")),
+    h("ol", { class: "steps" },
+      h("li", null, h("span", { class: "num bad" }, "1"), h("div", null, h("b", null, "Usulan penyerang: "), act)),
+      h("li", null, h("span", { class: "num" }, "2"), h("div", null, h("b", null, "Pemeriksaan: "), "tidak ada")),
+      h("li", null, h("span", { class: "num bad" }, "3"), h("div", null, h("b", null, "Aksi akhir: "), act,
+        h("div", { class: "small muted" }, "Dalam evaluasi kami, LLM tanpa pengaman menuruti injeksi pada 16,5% unit uji.")))));
+}
+
 function column(title, iconName, r, sub) {
   const won = attackWon(r);
   const tone = r.putusan_usulan === "BLOCK" ? "ok" : "";
@@ -58,11 +75,13 @@ function resultView(d) {
     !fw.injeksi && d.detektor_aktif.putusan_usulan === "BLOCK" && d.detektor_mati.putusan_usulan === "BLOCK"
       ? banner("ok", "shield-check", h("b", null, "Detektor pola tidak mengenali kalimat ini. "), "Policy struktural tetap menolak usulannya, jadi pertahanan tidak bergantung pada daftar kata.")
       : null,
-    h("div", { class: "attack-grid" },
+    h("div", { class: "attack-grid three" },
+      naiveColumn(d.detektor_aktif),
       column("Detektor pola aktif", "shield", d.detektor_aktif, "Konfigurasi normal: firewall masukan + policy."),
       column("Detektor pola dimatikan", "eye-off", d.detektor_mati, "Seolah injeksi Anda lolos dari detektor. Hanya aturan struktural policy yang tersisa.")),
     banner("info", "info", h("b", null, "Cara membaca hasil. "),
       "Uji ini memakai anggapan terburuk: AI sudah menuruti injeksi Anda 100% dan mengusulkan aksi pilihan Anda. ",
+      "Kolom kiri menggambarkan asisten tanpa policy, yang langsung menjalankan usulan itu. ",
       "Yang diuji adalah apakah usulan itu bisa menjadi aksi. Kasus uji tidak disimpan dan tidak masuk jejak audit."));
 }
 
