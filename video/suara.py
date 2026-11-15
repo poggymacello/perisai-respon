@@ -29,7 +29,7 @@ CACHE = HERE / "_suara"
 VOICE = "id-ID-ArdiNeural"
 RATE = "+0%"
 SR = 24000
-MAX_TEMPO = 1.3
+MAX_TEMPO = 1.2
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 
 
@@ -74,6 +74,7 @@ def main() -> int:
     total = video_len(VIDEO_IN)
     track = bytearray(int(total * SR) * 2)
     laporan = []
+    kursor = 0.0  # akhir suara baris sebelumnya; baris berikut tidak boleh menimpanya
     for i, (a, z, text) in enumerate(cues):
         key = hashlib.sha256(f"{VOICE}|{RATE}|{text}".encode()).hexdigest()[:16]
         mp3, wav = CACHE / f"{key}.mp3", CACHE / f"{key}.wav"
@@ -91,10 +92,12 @@ def main() -> int:
             wav, dur = fast, wav_len(fast)
         with wave.open(str(wav)) as w:
             pcm = w.readframes(w.getnframes())
-        start = int(a * SR) * 2
+        mulai = max(a, kursor + 0.05)
+        start = int(mulai * SR) * 2
         end = min(len(track), start + len(pcm))
         track[start:end] = pcm[: end - start]
-        laporan.append((i + 1, a, dur, room, tempo, dur > room + 0.05))
+        kursor = mulai + dur
+        laporan.append((i + 1, a, dur, room, tempo, mulai - a > 0.3))
     narasi = CACHE / "narasi.wav"
     with wave.open(str(narasi), "wb") as w:
         w.setnchannels(1)
@@ -107,9 +110,9 @@ def main() -> int:
     dipercepat = [r for r in laporan if r[4] > 1.0]
     terpotong = [r for r in laporan if r[5]]
     print(f"{len(cues)} baris; dipercepat {len(dipercepat)} (maks {max([r[4] for r in laporan]):.2f}x); "
-          f"masih melewati ruang {len(terpotong)}")
+          f"mulai bergeser > 0,3 dtk dari subtitle: {len(terpotong)}")
     for r in terpotong:
-        print(f"  baris {r[0]} @ {r[1]:.1f}s: {r[2]:.2f}s > ruang {r[3]:.2f}s")
+        print(f"  baris {r[0]} @ {r[1]:.1f}s")
     print(f"video: {VIDEO_OUT.name} ({video_len(VIDEO_OUT):.1f} s)")
     return 0
 

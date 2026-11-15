@@ -1,6 +1,6 @@
 # YOUTUBE: bahan unggah video demo PERISAI-RESPON
 
-Berkas video: `video\PERISAI-RESPON_demo_final.mp4` (hasil gabung suara, lihat `NASKAH_SULIH_SUARA.md`). Durasi 05:59.
+Berkas video: `video\PERISAI-RESPON_demo_final.mp4` (narasi suara sintetis, dibuat dengan `video\suara.py` sesudah `susun.py`). Durasi 06:43.
 Subtitle: `video\PERISAI-RESPON_demo.id.srt` (Bahasa Indonesia). Thumbnail: `video\thumbnail_youtube_1280x720.png`.
 
 ## Judul (70 karakter)
@@ -18,17 +18,18 @@ Slide penjelasan: https://github.com/poggymacello/perisai-respon/blob/main/aset_
 
 Chapter:
 00:00 Masalah: log bisa ditulis penyerang
-00:21 Kenapa penting untuk satuan
-01:06 Demo: antrean dan kasus injeksi
-02:13 Uji policy: isolasi DC01 ditolak
-02:33 Persetujuan analis, audit, laporan CSIRT
-03:33 Jalur OT
-03:59 Hasil uji, termasuk yang gagal
-05:00 Penerapan di satuan
-05:40 Batasan dan tautan
+00:24 Kenapa penting untuk satuan
+01:14 Demo: antrean dan kasus injeksi
+02:29 Uji policy: isolasi DC01 ditolak
+02:52 Persetujuan analis, audit, laporan CSIRT
+03:58 Jalur OT
+04:27 Hasil uji, termasuk yang gagal
+05:36 Penerapan di satuan
+06:21 Batasan dan tautan
 
 Data uji: OTRF Security-Datasets (log Windows) dan HAI 21.03 (CC BY-SA 4.0, telemetri proses). Data di video ini sintetis, dengan host fiktif *.batalyon.lab.
 Model: Qwen2.5-1.5B-Instruct (Apache-2.0), berjalan lokal di CPU. Llama tidak dipakai karena lisensinya melarang penggunaan militer.
+Narasi memakai suara sintetis (Microsoft Edge TTS, id-ID-ArdiNeural) yang membacakan naskah tim.
 Alat bantu AI dipakai saat pengembangan; rinciannya ada di bagian Deklarasi README repo.
 
 #keamanansiber #incidentresponse #promptinjection

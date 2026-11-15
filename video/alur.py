@@ -11,14 +11,14 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 FPS = 30
-CPS = 15.5          # kecepatan bicara narasi (karakter per detik), dipakai untuk durasi tiap baris
+CPS = 14.0          # kecepatan bicara narasi (karakter per detik); diukur dari suara Edge TTS Ardi 15 Nov 2026
 JEDA = 0.2          # jeda antarbaris narasi (detik)
 AWAL = 0.5          # narasi mulai sekian detik setelah potongan dimulai
 EKOR = 0.5          # sisa diam di akhir potongan
 
 
 def durasi_baris(teks: str) -> float:
-    return max(1.8, len(teks) / CPS + 0.35)
+    return max(1.8, len(teks) / CPS + 0.6)
 
 
 def butuh(narasi: list[str]) -> float:
