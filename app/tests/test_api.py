@@ -484,3 +484,27 @@ def test_demo_new_session_keeps_role_and_signout(tmp_path, monkeypatch):
 def test_desktop_has_no_login(client):
     assert client.get("/api/peran").json()["wajib"] is False
     assert client.post("/api/masuk", json={"peran": "analis", "nama": "AB"}, headers=H).status_code == 409
+
+
+def test_demo_role_survives_instance_switch(tmp_path, monkeypatch):
+    """Serverless: request berikutnya bisa jatuh ke instance lain tanpa folder sesi; peran dipulihkan dari cookie."""
+    monkeypatch.setenv("PERISAI_DATA_DIR", str(tmp_path / "a"))
+    a = TestClient(create_app(mode="demo", root=tmp_path / "a", bind="0.0.0.0"), base_url="https://demo.example")
+    with a:
+        a.get("/api/kasus")
+        assert a.post("/api/masuk", json={"peran": "analis", "nama": "Lettu A"}, headers=H).status_code == 200
+        cookies = dict(a.cookies)
+    b = TestClient(create_app(mode="demo", root=tmp_path / "b", bind="0.0.0.0"), base_url="https://demo.example", cookies=cookies)
+    with b:
+        m = b.get("/api/peran").json()["masuk"]
+        assert m["peran"] == "analis" and m["nama"] == "Lettu A"
+        k = next(x for x in b.get("/api/kasus").json()["kasus"] if x["status_mesin"] == "MENUNGGU_PERSETUJUAN")
+        r = b.post(f"/api/kasus/{k['id']}/tinjauan", json={"keputusan": "setujui", "analis": "Lettu A", "catatan": "dicek"}, headers=H)
+        assert r.status_code == 200
+        out = b.post("/api/keluar-peran", headers=H)
+        sc = out.headers.get("set-cookie", "")
+        assert "perisai_peran=" in sc and ("Max-Age=0" in sc or "expires=" in sc.lower())  # cookie peran dihapus
+    c = TestClient(create_app(mode="demo", root=tmp_path / "c", bind="0.0.0.0"), base_url="https://demo.example",
+                   cookies={"perisai_peran": "root:Hacker"})
+    with c:
+        assert c.get("/api/peran").json()["masuk"] is None   # cookie peran tidak sah diabaikan

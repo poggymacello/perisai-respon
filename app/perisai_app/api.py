@@ -107,6 +107,22 @@ PERAN = {
 IZIN_LABEL = {"tinjau": "meninjau kasus (setujui/tolak/tutup)", "lapor": "mengisi data pelaporan", "demo": "membuka kontrol demo"}
 
 
+ROLE_COOKIE = "perisai_peran"
+
+
+def _role_from_cookie(raw: str | None) -> dict | None:
+    """Cookie peran berbentuk 'peran:nama' (nama di-escape URL). Nilai yang tidak sah diabaikan."""
+    from urllib.parse import unquote
+    if not raw or ":" not in raw or len(raw) > 300:
+        return None
+    peran, nama = raw.split(":", 1)
+    nama = unquote(nama).strip()
+    if peran not in PERAN or not (2 <= len(nama) <= 80):
+        return None
+    p = PERAN[peran]
+    return {"peran": peran, "label": p["label"], "nama": nama, "izin": p["izin"]}
+
+
 class MasukIn(BaseModel):
     peran: Literal["operator", "analis", "admin"]
     nama: str = Field(min_length=2, max_length=80)
@@ -306,6 +322,14 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
             if created or not ws.state["kasus"]:
                 if not ws.state["impor"]:
                     ws.import_files(sample.sample_files(), label="data contoh")
+            # Hosting serverless (mis. Vercel) bisa memindah pengunjung ke instance lain tanpa folder sesinya.
+            # Peran dipulihkan dari cookie: memilih peran memang bebas di demo, dan izinnya tetap dicek server.
+            if not ws.state.get("masuk"):
+                m = _role_from_cookie(request.cookies.get(ROLE_COOKIE))
+                if m:
+                    with ws.lock:
+                        ws.state["masuk"] = m | {"waktu": engine.now_iso(), "dipulihkan": True}
+                        ws.save()
             if ws.sid != visitor:
                 response.set_cookie(DEMO_COOKIE, ws.sid, httponly=True, samesite="lax", max_age=7 * 86400)
         return ws
@@ -689,22 +713,26 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
                 "peran": [{"id": k} | v for k, v in PERAN.items()]}
 
     @app.post("/api/masuk")
-    def sign_in(body: MasukIn, ws: Workspace = Depends(workspace)):
+    def sign_in(body: MasukIn, response: Response, ws: Workspace = Depends(workspace)):
         if not demo:
             raise HTTPException(409, "login hanya dipakai di demo publik; aplikasi desktop dipakai satu operator")
+        from urllib.parse import quote
         p = PERAN[body.peran]
         with ws.lock:
             ws.state["masuk"] = {"peran": body.peran, "label": p["label"], "nama": body.nama.strip(),
                                  "izin": p["izin"], "waktu": engine.now_iso()}
             ws.save()
             ws.audit.append(ws.sid, "masuk", {"peran": body.peran, "nama": body.nama.strip()}, engine.now_iso())
+        response.set_cookie(ROLE_COOKIE, f"{body.peran}:{quote(body.nama.strip())}", httponly=True, samesite="lax",
+                            max_age=7 * 86400)
         return ws.state["masuk"]
 
     @app.post("/api/keluar-peran")
-    def sign_out(ws: Workspace = Depends(workspace)):
+    def sign_out(response: Response, ws: Workspace = Depends(workspace)):
         with ws.lock:
             ws.state.pop("masuk", None)
             ws.save()
+        response.delete_cookie(ROLE_COOKIE)
         return {"ok": True}
 
     @app.post("/api/sesi/baru")
