@@ -197,7 +197,7 @@ GitHub Actions ([`ci.yml`](.github/workflows/ci.yml)) menjalankan kedua rangkaia
 ## Struktur repo
 
 ```
-docs/          proposal, dokumentasi teknis, bukti evaluasi, rencana penerapan di satuan, tanya jawab
+docs/          proposal, dokumentasi teknis, bukti evaluasi, rencana penerapan di satuan
 app/
   perisai_app/ API FastAPI, sesi, laporan, peran demo, lab skenario
   frontend/    antarmuka (HTML/CSS/JS tanpa build step), halaman depan, font

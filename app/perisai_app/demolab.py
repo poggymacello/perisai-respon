@@ -93,7 +93,10 @@ def tulis_log(sid: str, folder: Path, seq: int) -> tuple[Path, str, int, str]:
     if s is None:
         raise KeyError(sid)
     host = f"{s['host']}.lab.batalyon.lab"
-    t0 = datetime.now(timezone.utc).replace(microsecond=0)
+    # Mulai di awal jendela 15 menit yang sedang berjalan (+1 menit), supaya semua event skenario (rentang < 2 menit)
+    # jatuh di jendela pengelompokan yang sama dan tidak terbelah menjadi dua kasus di dekat batas :00/:15/:30/:45.
+    now = datetime.now(timezone.utc).replace(second=0, microsecond=0)
+    t0 = now.replace(minute=now.minute - now.minute % 15) + timedelta(minutes=1)
     rows = ["<!-- SINTETIS: lab skenario Kontrol demo PERISAI-RESPON, host fiktif -->"]
     for eid, prov, chan, dt, fields in s["event"]:
         ts = (t0 + timedelta(seconds=dt)).strftime("%Y-%m-%dT%H:%M:%S.0000000Z")
