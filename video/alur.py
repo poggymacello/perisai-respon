@@ -103,8 +103,8 @@ URUTAN: list[Kartu | Rekam] = [
     ]),
     Rekam("c_draf_hasil", [
         "Draf ini berlabel bukan dasar keputusan.",
-        "Di sini draf menebak pergerakan lateral. Di percobaan lain, tebakannya pencurian kredensial.",
-        "Kategori tetap eksekusi kode dari aturan, jadi draf tidak menentukan aksi dan nilainya belum terbukti.",
+        "Cek silang membandingkan kategori yang disebut draf dengan temuan aturan.",
+        "Kalau berbeda, draf ditandai bertentangan dan dicatat di audit. Kategori tetap eksekusi kode dari aturan.",
     ], zoom=True),
     Rekam("d_usulan", [
         "Skenario terburuk: LLM sudah tersetir dan mengusulkan isolasi DC01.",

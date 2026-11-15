@@ -64,7 +64,7 @@ uv pip install --python app\.venv\Scripts\python.exe --only-binary=:all: -r app\
 
 app\.venv\Scripts\python app\run_desktop.py              # jendela aplikasi (dev)
 app\.venv\Scripts\python app\run_desktop.py --browser    # di browser
-cd app; .venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests      # 24 tes API
+cd app; .venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests      # 37 tes
 app\.venv\Scripts\python -I app\tools\build.py           # -> app\dist\PERISAI-RESPON-1.0.0-win64.zip
 ```
 Tangkapan layar diambil dengan exe yang sedang berjalan, memakai Edge headless (Playwright):
@@ -90,10 +90,10 @@ app/
     sampel/           log contoh sintetis
     engine_meta/      salinan hash beku prototype/frozen untuk cek integritas mesin
   frontend/           HTML/CSS/JS tanpa build step; ikon Lucide dibundel
-  tests/test_api.py   24 tes API
+  tests/              37 tes: API 26, cek silang draf 7, penjaga aset OT 4
   tools/              build.py, shoot.py, make_sample.py, make_icon.py, build_icons.py, make_space.py
   packaging/          spec PyInstaller + info versi exe
-  screenshots/        tangkapan layar 1920x1080 dari exe hasil build
+  screenshots/        tangkapan layar 1920x1080 (15 Nov 2026, LLM lokal aktif)
   Dockerfile          image demo publik
 ```
 

@@ -27,7 +27,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from . import APP_NAME, APP_VERSION, ENGINE_VERSION, engine, evtx, reportfmt, sample
+from . import APP_NAME, APP_VERSION, ENGINE_VERSION, asetot, cekdraf, engine, evtx, reportfmt, sample
 from .llmsvc import LLMService
 from .paths import app_mode, data_dir, display_path, frontend_dir
 from .store import REVIEW, ReviewError, Store, Workspace
@@ -46,7 +46,8 @@ DEMO_COOKIE = "perisai_demo"
 DEMO_UPLOAD_MSG = ("Mode demo publik: unggah log dinonaktifkan. Server publik tidak boleh menerima log asli satuan. "
                    "Unduh aplikasi desktop untuk memeriksa log sendiri secara offline.")
 WARNING_LABEL = {"INJEKSI_TERDETEKSI": "Injeksi terdeteksi", "DRAF_AI_DISUNTING": "Draf AI disunting",
-                 "RINGKASAN_DISUNTING": "Ringkasan disunting", "MODE_DEGRADASI": "Mode aturan"}
+                 "RINGKASAN_DISUNTING": "Ringkasan disunting", "MODE_DEGRADASI": "Mode aturan",
+                 "DRAF_AI_BERTENTANGAN": "Draf AI bertentangan dengan aturan"}
 CSP = ("default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; "
        "connect-src 'self'; object-src 'none'; frame-src 'self'; frame-ancestors 'self'; base-uri 'none'; "
        "form-action 'self'")
@@ -103,16 +104,43 @@ class KasusRingkas(BaseModel):
 def _summary(ws: Workspace, k: dict) -> dict:
     c, d = k["case"], k["decision"]
     meta = engine.case_meta(c)
-    tac = engine.ATTACK_TACTIC.get(d["kategori"], ("-", "-"))
+    cek = _draft_check(k)
+    tac =engine.ATTACK_TACTIC.get(d["kategori"], ("-", "-"))
     slot = c["case_id"].split("@", 1)[1] if "@" in c["case_id"] else None
     return {"id": k["id"], "case_id": c["case_id"], "host": c.get("primary_host") or "-",
             "waktu": meta["waktu_awal"] or slot, "kategori": d["kategori"],
             "kategori_id": engine.CATEGORY_ID.get(d["kategori"], d["kategori"]),
             "attack": {"id": tac[0], "nama": tac[1]}, "severity": meta["severity"], "severity_skor": meta["severity_skor"],
             "status_mesin": d["final_status"], "status_tinjauan": ws.review_status(k), "aksi": d["final_action"],
-            "peringatan": list(d["warnings"]), "aturan": [r["id"] for r in meta["aturan_terpicu"]],
-            "n_event": len(c["events"]), "aset_terlindungi": _policy.is_protected_host(c.get("primary_host")),
-            "ada_draf": bool(k.get("draf"))}
+            "peringatan": list(d["warnings"]) + (["DRAF_AI_BERTENTANGAN"] if (cek or {}).get("status") == "BERTENTANGAN"
+                                                 else []),
+            "aturan": [r["id"] for r in meta["aturan_terpicu"]],
+            "n_event": len(c["events"]), "aset_terlindungi": _policy.is_protected_host(c.get("primary_host"))
+            or bool(asetot.match(c.get("primary_host"))),
+            "ada_draf": bool(k.get("draf")), "cek_draf": (cek or {}).get("status")}
+
+
+def _draft_check(k: dict) -> dict | None:
+    """Hasil cek silang draf AI vs aturan. Draf dari versi sebelum fitur ini dicek saat dibuka (tanpa entri audit)."""
+    dr = k.get("draf")
+    if not dr:
+        return None
+    if not dr.get("cek_silang"):
+        dr["cek_silang"] = cekdraf.check_case(dr.get("draf_ai") or "", k["case"], k["decision"]["kategori"]) | {
+            "audit_seq": None, "dihitung_saat_dibuka": True}
+    return dr["cek_silang"]
+
+
+def _decision_for_report(k: dict) -> dict:
+    """Keputusan untuk laporan; draf yang bertentangan dengan aturan diberi tanda di teks laporan."""
+    d = k["decision"]
+    cek = _draft_check(k)
+    if not cek or cek["status"] != "BERTENTANGAN" or not d.get("draf_ai"):
+        return d
+    names = ", ".join(f"{b['attack']} {b['nama']}" for b in cek["bertentangan"])
+    note = (f" [DITANDAI: bertentangan dengan temuan aturan. Draf menyebut {names}; kategori aturan "
+            f"{cek['attack_aturan']['id']} {cek['attack_aturan']['nama']} tetap berlaku.]")
+    return {**d, "draf_ai": d["draf_ai"] + note}
 
 
 def _os_name() -> str:
@@ -256,6 +284,10 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
     # -------------------------------------------------------------- impor
     @app.post("/api/sampel", response_model=ImporHasil)
     def load_sample(ws: Workspace = Depends(workspace)):
+        # Idempoten: data contoh yang sudah dimuat di sesi ini tidak diimpor ulang (mencegah kasus ganda).
+        sudah = next((i for i in ws.state["impor"] if i.get("jenis") == "data contoh"), None)
+        if sudah is not None:
+            return sudah
         return ws.import_files(sample.sample_files(), label="data contoh")
 
     @app.get("/api/sampel/{nama}")
@@ -331,6 +363,7 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
             v["ditandai"] = [{"field": fld, "kode": flagged[(e["id"], fld)]["kode"]}
                              for fld in v["teks_bebas"] if (e["id"], fld) in flagged]
             events.append(v)
+        _draft_check(k)
         iso_ok, iso_rules = isolation_supported(c, d["kategori"])
         llm_on = llm.status()["tersedia"]
         entries = [{"seq": e["seq"], "ts": e["ts"], "kind": e["kind"], "hash": e["entry_hash"]}
@@ -385,7 +418,13 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
             d, r, _ = engine.decide_case(k["case"], _LockedAudit(ws), model)
             secs = round(time.perf_counter() - t0, 1)
             llm.last_case_seconds = secs
-            stage("menyaring draf dan mencatat ke audit")
+            stage("menyaring draf, cek silang dengan aturan, dan mencatat ke audit")
+            # Cek silang deterministik: draf yang menamai kategori lain dari temuan aturan ditandai. Keputusan tidak
+            # berubah; hasilnya dicatat sebagai entri audit sendiri, sesudah entri keputusan_v12 draf ini.
+            cek = cekdraf.check_case(d["draf_ai"], k["case"], d["kategori"])
+            ent = _LockedAudit(ws).append(k["case"]["case_id"], "cek_silang_draf", cekdraf.audit_payload(cek),
+                                          engine.now_iso())
+            cek |= {"audit_seq": ent["seq"], "audit_hash": ent["entry_hash"]}
             before = k["decision_rules"]["final_action"]
             info = {"ts": engine.now_iso(), "detik_llm": round(r.get("llm_seconds") or 0.0, 1), "detik_total": secs,
                     "draf_ai": d["draf_ai"], "dibuang": d.get("draf_dibuang_v12", []),
@@ -393,7 +432,8 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
                                     {x["kalimat"] for x in d.get("draf_dibuang_v12", [])}],
                     "galat_llm": r.get("error"), "usulan_llm": _strip_proposal(r.get("proposal")),
                     "verdict_usulan": d.get("v1_verdict"), "aksi_tidak_berubah": d["final_action"] == before,
-                    "token": {"prompt": r.get("prompt_tokens"), "keluaran": r.get("completion_tokens")}}
+                    "token": {"prompt": r.get("prompt_tokens"), "keluaran": r.get("completion_tokens")},
+                    "cek_silang": cek}
             ws.set_draft(kid, d, info)
             return {"kasus": kid, "detik": secs}
 
@@ -438,7 +478,7 @@ def create_app(mode: str | None = None, root: Path | None = None, bind: str = "1
 
     # -------------------------------------------------------------- laporan
     def build_report(ws: Workspace) -> tuple[str, str]:
-        items = [{"case": k["case"], "decision": k["decision"]} for k in ws.state["kasus"]]
+        items = [{"case": k["case"], "decision": _decision_for_report(k)} for k in ws.state["kasus"]]
         imp = ws.state["impor"]
         names = list(dict.fromkeys(b["nama"] for i in imp for b in i["berkas"]))
         llm_txt, chk = _llm_run_meta(ws, llm)

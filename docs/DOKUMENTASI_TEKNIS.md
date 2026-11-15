@@ -8,7 +8,7 @@ Aplikasi analis di atas mesin v1.2.2. Mesin dipanggil sebagai pustaka dan kodeny
 - **Mode LLM:** opsional. Model 0,92 GB ditaruh di folder `models` di samping exe; SHA-256 dicek sebelum dimuat. Draf AI dibuat per kasus atas permintaan analis, di latar belakang, dan diberi label "bukan dasar keputusan".
 - **Keamanan server lokal:** hanya `127.0.0.1`, cek header Host, header `X-Perisai` wajib untuk POST, CSP `connect-src 'self'`, tanpa CDN dan tanpa telemetri.
 - **Mode demo (Docker):** `app/Dockerfile`, `PERISAI_MODE=demo`, hanya data contoh dan unggahan ditolak. Langkah publikasi di `app/DEPLOY.md`.
-- **Tes:** `cd app; .venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests` (24 tes API). Panduan pengguna lengkap: `app/README.md`.
+- **Tes:** `cd app; .venv\Scripts\python -I -m pytest -q -p no:cacheprovider tests` (37 tes: API, cek silang draf, penjaga aset OT). Panduan pengguna lengkap: `app/README.md`.
 
 ## 1. Arsitektur
 | Lapis | Modul | Fungsi | Bergantung pada LLM? |

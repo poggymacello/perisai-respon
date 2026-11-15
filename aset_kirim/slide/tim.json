@@ -1,9 +1,19 @@
 {
-  "_catatan": "Sesuai email konfirmasi CODEPOLITAN 2 Nov 2026 (tim diterima). Anggota yang belum tercatat di sini diketik sendiri. Field kosong tidak ditampilkan di slide. Setelah mengubah: python buat_slide.py --pdf",
+  "_catatan": "Sesuai dasbor CODEPOLITAN Kartika Cyber Hackathon 2026 (dicek 15 Nov 2026). Field kosong tidak ditampilkan di slide. Setelah mengubah: python buat_slide.py --pdf",
   "nama_tim": "PERISAI Siber Ganesha",
   "anggota": [
-    {"nama": "Mohammad Ari Alexander Aziz", "peran": "Ketua tim"},
-    {"nama": "Poggy Macello Gultom", "peran": "Anggota"}
+    {
+      "nama": "Poggy Macello Gultom",
+      "peran": "Ketua tim"
+    },
+    {
+      "nama": "Mohammad Ari Alexander Aziz",
+      "peran": "Anggota"
+    },
+    {
+      "nama": "Hasri Fayadh Muqaffa",
+      "peran": "Anggota"
+    }
   ],
   "url_video": ""
 }

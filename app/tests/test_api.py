@@ -349,3 +349,18 @@ def test_evtx_conversion(client, tmp_path):
     assert r.status_code in (200, 422), r.text  # log Application biasanya tanpa temuan aturan
     if r.status_code == 200:
         assert r.json()["n_event"] >= 1
+
+def test_sample_load_is_idempotent(loaded):
+    n = len(loaded.get("/api/kasus").json()["kasus"])
+    r = loaded.post("/api/sampel", headers=H)
+    assert r.status_code == 200, r.text
+    assert len(loaded.get("/api/kasus").json()["kasus"]) == n == 10
+
+
+def test_demo_sample_click_does_not_duplicate(tmp_path, monkeypatch):
+    monkeypatch.setenv("PERISAI_DATA_DIR", str(tmp_path))
+    app = create_app(mode="demo", root=tmp_path, bind="0.0.0.0")
+    with TestClient(app, base_url="https://demo.example") as c:
+        assert len(c.get("/api/kasus").json()["kasus"]) == 10
+        assert c.post("/api/sampel", headers=H).status_code == 200
+        assert len(c.get("/api/kasus").json()["kasus"]) == 10

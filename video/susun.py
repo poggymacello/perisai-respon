@@ -405,12 +405,13 @@ Chapter:
 
 Data uji: OTRF Security-Datasets (log Windows) dan HAI 21.03 (CC BY-SA 4.0, telemetri proses). Data di video ini sintetis, dengan host fiktif *.batalyon.lab.
 Model: Qwen2.5-1.5B-Instruct (Apache-2.0), berjalan lokal di CPU. Llama tidak dipakai karena lisensinya melarang penggunaan militer.
+Narasi memakai suara sintetis (Microsoft Edge TTS, id-ID-ArdiNeural) yang membacakan naskah tim.
 Alat bantu AI dipakai saat pengembangan; rinciannya ada di bagian Deklarasi README repo.
 
 #keamanansiber #incidentresponse #promptinjection"""
     md = f"""# YOUTUBE: bahan unggah video demo PERISAI-RESPON
 
-Berkas video: `video\\PERISAI-RESPON_demo_final.mp4` (hasil gabung suara, lihat `NASKAH_SULIH_SUARA.md`). Durasi {ts_mmss(total)}.
+Berkas video: `video\\PERISAI-RESPON_demo_final.mp4` (narasi suara sintetis, dibuat dengan `video\suara.py` sesudah `susun.py`). Durasi {ts_mmss(total)}.
 Subtitle: `video\\PERISAI-RESPON_demo.id.srt` (Bahasa Indonesia). Thumbnail: `video\\thumbnail_youtube_1280x720.png`.
 
 ## Judul ({len(judul)} karakter)

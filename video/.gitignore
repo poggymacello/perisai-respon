@@ -7,3 +7,4 @@ rekaman/
 *.webm
 *.wav
 __pycache__/
+_suara/

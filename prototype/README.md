@@ -2,6 +2,24 @@
 
 Asisten triase insiden yang berjalan **offline** di laptop. LLM lokal **mengusulkan** ringkasan triase berbahasa Indonesia dan satu aksi dari daftar tertutup. **Policy engine yang memutuskan**, dan manusia menyetujui aksi berisiko. Semua langkah dicatat di log audit berantai hash. Produk ini **hanya defensif**: datanya log publik berlabel, injeksi berupa string uji di sistem sendiri, dan tidak ada sistem nyata yang disentuh.
 
+## Mana yang berlaku
+Folder ini menyimpan semua rencana uji (prareg), termasuk yang dibatalkan, karena berkas yang sudah di-hash tidak diubah atau dihapus. Status resmi setiap prareg ada di [`PRAREG_STATUS.md`](PRAREG_STATUS.md). Ringkasnya:
+
+| Berkas | Status | Isi |
+|---|---|---|
+| `PRAREG.md` (v1) | **Berlaku.** Dikunci SHA-256 dan dijalankan 29 Okt 2026. P1 lulus, P2 gagal | angka utama di README dan `docs/BUKTI_EVALUASI.md` |
+| `PRAREG_v3_HELDOUT.md` | **Berlaku.** Dijalankan 29 Okt. Deteksi pola 0 %, H-P1 v1 gagal | injeksi keluarga tertahan |
+| `PRAREG_v4_OT_BENIGN.md` | **Berlaku.** Dijalankan 29 Okt. 10/10 episode, tanda palsu 0/260.351 | jalur OT dan tanda palsu firewall |
+| `PRAREG_v24_DRAF_AI.md`, `PROKTOR_v24.md`, `PANDUAN_PENULIS_v24.md` | **Dibekukan 2 Nov, belum dijalankan.** Butuh penulis ringkasan manusia dan penilai dari luar tim | rancangan penilaian buta nilai draf AI |
+| `PRAREG_v2_DRAF_AI.md`, `PRAREG_v21_DRAF_AI.md`, `PRAREG_v22_DRAF_AI.md`, `PRAREG_v23_DRAF_AI.md`, `PROKTOR_v23.md` | **Batal, tidak pernah dijalankan.** Rancangannya tidak buta. Jangan dipakai | arsip saja. Hash dokumen v2.1 sampai v2.3 gagal karena catatan status ditulis sesudah pembekuan (diungkap) |
+
+Berkas pendukung:
+- `results/rating/` dan `results/rating_v21/` sampai `results/rating_v23/`: lembar penilaian buta untuk prareg v2 sampai v2.3 yang batal. Kolom nilainya kosong karena penilaian tidak pernah dilakukan. Kunci pembukanya (`kunci.csv`, berisi salt) sengaja tidak ikut git.
+- `results/rating_v24/tulis_ringkasan_aturan.csv`: lembar kosong untuk penulis ringkasan manusia v2.4. Lembar ini di-hash dalam keadaan kosong.
+- `scripts/make_rating_packet*.py`: pembuat lembar di atas, satu skrip per versi prareg.
+- `frozen/`: split dev/uji, manifes hash kasus uji, dan hash kode (`CODE_*.sha256`) yang dibuat sebelum run. Salinan tiga hash kode ada di `app/perisai_app/engine_meta/`, dan `app/tools/build.py` mencocokkan mesin dengan hash itu sebelum membangun exe.
+- Prareg dan hash yang dibekukan masih menyebut "juri P#" (mis. "juri P5 N21"). Artinya reviewer internal (simulasi) putaran 5, temuan no. 21: tinjauan kritis yang diadakan tim sendiri sebelum submisi, bukan penilaian juri lomba.
+
 ```
 log (OTRF, JSON) -> pembaca/normalisasi -> detektor gaya Sigma (pra-filter 8 event + temuan aturan)
    -> firewall masukan (sanitasi, dekode, pola injeksi EN/ID, redaksi, spotlighting «DATA»)
@@ -59,7 +77,7 @@ wevtutil qe Microsoft-Windows-Sysmon/Operational /c:500 /rd:true /f:xml > sysmon
 Keluarannya ada di `results\triase\<waktu>\laporan.md` (tidak masuk git). Contoh dari log sintetis: `results\contoh_laporan\laporan.md`. Log asli satuan jangan di-commit.
 
 ## v1.1 (pasca-evaluasi)
-`perisai/v11.py`: kategori + aksi dari aturan (P2 gagal), LLM hanya DRAF AI yang disaring per kalimat, tidak ada penutupan kasus otomatis. Kode v1 yang di-hash tidak diubah. Lihat `../docs/BUKTI_EVALUASI.md` §9 dan `PRAREG_v2_DRAF_AI.md`.
+`perisai/v11.py`: kategori + aksi dari aturan (P2 gagal), LLM hanya DRAF AI yang disaring per kalimat, tidak ada penutupan kasus otomatis. Kode v1 yang di-hash tidak diubah. Lihat `../docs/BUKTI_EVALUASI.md` §9 dan `PRAREG_v2_DRAF_AI.md` (batal, lihat "Mana yang berlaku").
 
 ## Struktur
 | Path | Isi |

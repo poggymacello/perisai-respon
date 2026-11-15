@@ -16,6 +16,7 @@ export const WARN = {
   DRAF_AI_DISUNTING: ["Draf AI disunting", "chip-warn-soft"],
   RINGKASAN_DISUNTING: ["Ringkasan disunting", "chip-warn-soft"],
   MODE_DEGRADASI: ["Mode aturan", "st-esc"],
+  DRAF_AI_BERTENTANGAN: ["Draf AI bertentangan dengan aturan", "chip-warn"],
 };
 export const ACTION = {
   isolate_host: "Isolasi host",
@@ -35,6 +36,8 @@ export const KIND = {
   usulan_llm: "Usulan LLM",
   keputusan_policy: "Keputusan policy v1",
   keputusan_v12: "Keputusan v1.2.2",
+  cek_silang_draf: "Cek silang draf AI",
+  penjaga_aset_ot: "Penjaga aset OT",
   tindakan_analis: "Tindakan analis",
 };
 export const CODE = {
@@ -69,7 +72,7 @@ export function reviewChip(st) {
 export function warnChips(ws) {
   return ws.map((w) => {
     const [l, c] = WARN[w] || [w, "chip-warn-soft"];
-    return h("span", { class: `chip ${c}` }, w === "INJEKSI_TERDETEKSI" ? icon("triangle-alert") : null, l);
+    return h("span", { class: `chip ${c}` }, w === "INJEKSI_TERDETEKSI" || w === "DRAF_AI_BERTENTANGAN" ? icon("triangle-alert") : null, l);
   });
 }
 

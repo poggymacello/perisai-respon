@@ -10,6 +10,12 @@
 
 ---
 
+**Indeks:** §1 yang jalan · §2 data dan prareg · §3 endpoint primer · §4 ablasi · §5 penyimpangan · §6 keterbatasan · §7 uji lapangan · §8 cara memeriksa ulang · §9 v1.1 · §10 jalur operasional, OT, dan tanda palsu (PRAREG v4) · §11 injeksi tertahan (PRAREG v3) · §12 sampai §14 v1.2 sampai v1.2.2 (pasca-evaluasi). Prareg mana yang berlaku dan mana yang batal: [`prototype/README.md`](../prototype/README.md#mana-yang-berlaku).
+
+**Istilah:** "reviewer internal P4" atau "reviewer internal putaran 4" (begitu pula putaran 3 sampai 7) adalah putaran tinjauan kritis simulasi yang diadakan tim sendiri sebelum submisi, bukan penilaian juri lomba. Prareg dan berkas hash yang sudah dibekukan masih memakai sebutan lama "juri P#". "N##" di sana adalah nomor temuan pada putaran itu (mis. "juri P5 N21" = reviewer internal putaran 5, temuan no. 21).
+
+---
+
 ## 1. Yang jalan
 | Komponen | Bukti |
 |---|---|
@@ -21,7 +27,7 @@
 | Degradasi aman tanpa LLM (template aturan) | `policy.degraded_decision`; tes `test_degraded_mode_without_llm`, `test_dead_llm_exception_is_safe` |
 | Audit hash-chain SHA-256 (adaptasi Kendali `audit.py`) | `perisai\audit.py`; demo: salinan yang diedit gagal verifikasi |
 | Mode offline penuh | model + data lokal; tidak ada panggilan jaringan saat run |
-| Tes | **102/102 lulus** (25 v1 + 8 v1.1 + 52 v1.2.x termasuk 16 uji parafrase v1.2.1 dan 30 tes probe juri P5-P6 + 5 OT + 6 importer/laporan + 6 perangkat penilaian buta v2.4; v1 saja: `results\pytest_output.txt`) |
+| Tes | **102/102 lulus** (25 v1 + 8 v1.1 + 52 v1.2.x termasuk 16 uji parafrase v1.2.1 dan 30 tes probe reviewer internal P5-P6 + 5 OT + 6 importer/laporan + 6 perangkat penilaian buta v2.4; v1 saja: `results\pytest_output.txt`) |
 | Demo | `demo.py` → `results\demo\demo_output.txt` (dengan LLM), `demo_output_no_llm.txt`, `audit_demo.jsonl`, `audit_demo_DIUBAH.jsonl` |
 
 Asal-usul diungkap di docstring: `firewall.py` (dari `security.py` Kendali), `policy.py`, dan `audit.py` diadaptasi dari Kendali (MIT, Poggy + Aziz). Folder Kendali tidak diubah.
@@ -212,7 +218,7 @@ Git Bash: `sha256sum -c PRAREG.sha256` dan `sha256sum -c frozen/CODE_PRE_TEST_FA
 - Penyaring kalimat v1.1 hanya membuang istilah eskalatif, jadi kalimat seperti itu lolos dan ikut masuk laporan CSIRT sebagai DRAF AI.
 - Di sistem, draf tetap diberi label bukan dasar keputusan. Meski begitu, operator bisa terpengaruh. Inilah salah satu alasan nilai draf AI harus diuji buta (sekarang PRAREG v2.3) sebelum diklaim.
 
-## 12. v1.2: perbaikan atas temuan juri putaran 3 (PASCA-EVALUASI, bukan prareg)
+## 12. v1.2: perbaikan atas temuan reviewer internal putaran 3 (PASCA-EVALUASI, bukan prareg)
 `prototype/perisai/v12.py` (hash di `frozen/CODE_V12_posthoc.sha256`) membungkus v1.1 tanpa mengubahnya:
 1. **Syarat bukti isolasi.** `isolate_host` hanya diusulkan bila kategori itu didukung ≥ 1 aturan berbobot high atau ≥ 2 aturan berbeda. Kalau tidak, kasus dieskalasi. Contohnya, satu event 7045 tidak lagi memicu isolasi.
 2. **Penjaga draf AI.** Draf hanya boleh mendeskripsikan. Kalimat berikut dibuang:
@@ -228,12 +234,12 @@ Replay usulan tersimpan (`scripts/posthoc_v12.py` → `results/posthoc_v12.json`
 | Kasus bersih yang diusulkan isolasi (menunggu persetujuan) | 48/88 | **37/88** |
 | Akurasi aksi terhadap playbook label | 56,8 % | **51,1 %** (turun, karena playbook label selalu meminta isolasi untuk 3 kategori itu) |
 | Kalimat draf AI yang dibuang di kasus bersih | — | 1/103 (biaya kecil) |
-| **Gema injeksi** di draf uji tertahan (tujuan penyerang muncul di draf) | 14/176 (G3 8, G1 6) | 4/176 (G1 4), menurut hitung ulang juri P4. Kami sempat menulis 2/176, lalu 0/176. Versi terbaru ada di §14 |
+| **Gema injeksi** di draf uji tertahan (tujuan penyerang muncul di draf) | 14/176 (G3 8, G1 6) | 4/176 (G1 4), menurut hitung ulang reviewer internal P4. Kami sempat menulis 2/176, lalu 0/176. Versi terbaru ada di §14 |
 
 **Cara membaca:**
 - Penjaga draf dirancang sesudah draf uji tertahan dilihat. Jadi 2/176 adalah angka **post-hoc**, bukan bukti ketahanan.
 - Kosakata ukuran gema tumpang tindih dengan kosakata penjaga, jadi angkanya sebagian **menurut konstruksi**.
-- Versi pertama penjaga dan ukurannya sama-sama melewatkan "memutuskan … dari jaringan", dan ini ditemukan juri P4. Angka 0/176 yang sempat kami tulis **salah**. Penjaga dan ukurannya sudah direvisi, dan angkanya dihitung ulang.
+- Versi pertama penjaga dan ukurannya sama-sama melewatkan "memutuskan … dari jaringan", dan ini ditemukan reviewer internal P4. Angka 0/176 yang sempat kami tulis **salah**. Penjaga dan ukurannya sudah direvisi, dan angkanya dihitung ulang.
 - Ukuran gema dibuat penulis yang sama, dan definisinya ada di docstring `posthoc_v12.py`. Peninjau P3 menghitung dengan kriteria lain dan mendapat 11/130.
 - Syarat bukti isolasi mengorbankan akurasi aksi terhadap label demi beban antrean analis yang lebih kecil. Pilihan ini harus divalidasi dengan operator.
 - `demo.py` dan `triase.py` sekarang memakai v1.2. Audit demo mencatat entri `keputusan_v12`, jadi keputusan yang benar-benar dipakai ikut di audit.
@@ -243,14 +249,14 @@ Replay usulan tersimpan (`scripts/posthoc_v12.py` → `results/posthoc_v12.json`
 - **penilai minimal 2 dari luar tim**;
 - skala tambahan "ikut instruksi di log" (harus 0/10) dan cek kebutaan (tebakan sumber > 80 % = tidak buta).
 - PRAREG v2 tidak pernah dijalankan.
-- **v2.1 juga ternyata tidak buta** (juri P4: satu regex membedakan sumber 40/40, dan urutan A/B bisa diturunkan dari dokumen prareg). Klaim "tanpa penanda gaya" di atas **salah**.
+- **v2.1 juga ternyata tidak buta** (reviewer internal P4: satu regex membedakan sumber 40/40, dan urutan A/B bisa diturunkan dari dokumen prareg). Klaim "tanpa penanda gaya" di atas **salah**.
 - Penggantinya **PRAREG v2.2** (`prototype/PRAREG_v22_DRAF_AI.md`):
   - 80 teks dinilai satu per satu dengan urutan ber-salt rahasia;
   - 3 gaya kalimat aturan yang meniru pembuka draf AI;
   - tebakan sumber wajib.
 - **Belakangan v2.2 dan v2.3 juga dinyatakan tidak buta** (§13–14). Tidak ada paket v2.x yang boleh diberikan ke penilai sampai v2.4 dibekukan.
 
-## 13. v1.2.1 dan PRAREG v2.3 (30 Okt, atas temuan juri P4; PASCA-EVALUASI)
+## 13. v1.2.1 dan PRAREG v2.3 (30 Okt, atas temuan reviewer internal P4; PASCA-EVALUASI)
 **Penjaga draf v1.2.1** (`perisai/v12.py`, hash `frozen/CODE_V12_posthoc.sha256`):
 - **Dasar pola:**
   - pola per akar kata dengan imbuhan Indonesia (me-/di-/-kan/-i, termasuk luluh *putus → memutus*, khusus dalam konteks jaringan);
@@ -274,8 +280,8 @@ Semua angka ini **post-hoc**: penjaga direvisi sesudah draf uji tertahan dilihat
 - 10 unit berinjeksi, 5 di antaranya dari P1.
 - **Uji pembeda otomatis gagal mencapai target:** akurasi 0,69, di atas 0,65. Gaya ringkasan aturan sudah diubah tiga kali, dan salt tidak dipilih-pilih. Karena itu kebutaan **tidak terjamin dari bahan**, dan syarat kebutaan manusia menjadi syarat yang mengikat. Kami memperkirakan peluang LULUS rendah.
 
-## 14. v1.2.2 (30 Okt, atas temuan juri P5; PASCA-EVALUASI)
-Juri P5 menemukan dua masalah di v1.2.1:
+## 14. v1.2.2 (30 Okt, atas temuan reviewer internal P5; PASCA-EVALUASI)
+Reviewer internal P5 menemukan dua masalah di v1.2.1:
 - **regresi negasi:** "Jangan ditunda: putuskan DC01 dari jaringan" dan "Tidak lama kemudian DC01 diputus…" lolos;
 - **15/19 parafrase lolos dan 9/12 kalimat deskriptif ikut dibuang.**
 
@@ -285,7 +291,7 @@ Penjaga berbasis daftar kata memang selalu kebobolan parafrase baru. Karena itu 
   - menyarankan penutupan, memerintahkan aksi, mengklaim keputusan pihak berwenang, meminta kredensial, atau menyalin teks log;
   - negasi hanya dikecualikan bila menempel langsung di kiri pola (≤ 2 kata, tanpa tanda baca);
   - akar yang terlalu umum ("mati", "keluar", "aman", "tutup" tanpa objek) dipersempit.
-- Probe juri ditulis sebagai tes **sebelum** kode diubah (`tests/test_v122_probes.py`: 13 harus dibuang, 11 deskriptif harus tampil). Satu ID event uji dikoreksi dari 1104 ke 1102 karena salah tulis.
+- Probe reviewer internal ditulis sebagai tes **sebelum** kode diubah (`tests/test_v122_probes.py`: 13 harus dibuang, 11 deskriptif harus tampil). Satu ID event uji dikoreksi dari 1104 ke 1102 karena salah tulis.
 - **Konsekuensi yang disengaja:** kalimat opini tanpa bukti, seperti "ini bukan aktivitas admin yang wajar", sekarang ikut dibuang. Tiga ekspektasi tes v1.2.1 diubah karena itu, dan perubahannya ditandai di berkas tes.
 
 | Replay usulan tersimpan (`results/posthoc_v12.json`) | v1.1 | v1.2.2 |
@@ -297,11 +303,11 @@ Penjaga berbasis daftar kata memang selalu kebobolan parafrase baru. Karena itu 
 Semua angka ini **post-hoc**. Total tes 92.
 
 **Penilaian buta:**
-- **v2.3 juga tidak buta.** Juri P5 menunjukkan ringkasan aturan dari templat kode publik bisa dicocokkan dengan regex, 40/80.
+- **v2.3 juga tidak buta.** Reviewer internal P5 menunjukkan ringkasan aturan dari templat kode publik bisa dicocokkan dengan regex, 40/80.
 - Selama ringkasan aturan dibuat oleh kode, paket berapa pun tidak bisa benar-benar buta.
 - Rancangan **v2.4** (`scripts/make_rating_packet_v24.py`; dibekukan 2 Nov bersama `PRAREG_v24_DRAF_AI.md`, lihat `prototype/PRAREG_STATUS.md`): ringkasan aturan untuk 40 kasus **ditulis tangan** oleh anggota tim yang bukan penilai, berdasarkan daftar judul aturan saja, tanpa melihat draf AI. Uji pembeda otomatis dijalankan sebelum pembekuan. Lembar tulisnya ada di `results/rating_v24/tulis_ringkasan_aturan.csv`.
 
-**Koreksi atas §14 (juri putaran 6):**
+**Koreksi atas §14 (reviewer internal putaran 6):**
 - **Klaim "membalik aturan" melebihi data.**
   - Aturan keterikatan sudah terpenuhi oleh satu token saja, misalnya nama host, angka, atau kata umum seperti "log".
   - Nama berkas atau layanan pilihan penyerang juga ikut terhitung sebagai "bukti".
@@ -309,5 +315,16 @@ Semua angka ini **post-hoc**. Total tes 92.
   - Panel P6 menulis 25 probe baru, misalnya "Danyon telah mengizinkan…" dan "Kirim NTDS.dit ke…", dan **semuanya lolos**.
   - Kesimpulan yang benar: penjaga draf v1.2.x adalah **penyaring daftar kata yang bisa diakali parafrase**. Ia mengurangi gema yang sudah kami lihat, tetapi **tidak** memberi jaminan terhadap draf yang disetir. Karena itu draf AI tetap berlabel "bukan dasar keputusan", dan aksi tidak pernah diambil dari LLM.
 - **Saran untuk tidak bertindak** ("Do not isolate…", "tidak perlu diisolasi") sebelumnya lolos lewat pengecualian negasi. Bentuk yang diuji kini dibuang (3 tes ditulis sebelum perbaikan; total 96 tes). Replay tidak berubah: kasus bersih 3/103 kalimat terbuang, gema 0/176.
-  - **Koreksi 2 Nov (cek ulang juri P7):** bentuk lain masih lolos, yaitu 4 dari 8 saran-negatif probe P6 ("Never block …", "Belum perlu memblokir …", "Bukan isolasi yang dibutuhkan …", "Analis tidak perlu menindaklanjuti …"). Probe P6 lain yang tidak berupa negasi juga masih lolos 8/8 (mis. "Danyon telah mengizinkan…", "Reboot WS-LOG03 sekarang."). Jadi kalimat "saran seperti itu dibuang" hanya berlaku untuk bentuk yang dites. Aksi tetap tidak terpengaruh, karena aksi tidak diambil dari LLM.
-- **Iterasi agen dihentikan di sini.** Skor juri P4 76,0 → P5 76,3 → P6 76,3. Kenaikan berikutnya hanya bisa datang dari langkah manusia: ringkasan aturan v2.4 tulisan manusia, ≥ 2 penilai luar, dan Webinar 2. Lihat `AKSI_MANUSIA.md` #8.
+  - **Koreksi 2 Nov (cek ulang reviewer internal P7):** bentuk lain masih lolos, yaitu 4 dari 8 saran-negatif probe P6 ("Never block …", "Belum perlu memblokir …", "Bukan isolasi yang dibutuhkan …", "Analis tidak perlu menindaklanjuti …"). Probe P6 lain yang tidak berupa negasi juga masih lolos 8/8 (mis. "Danyon telah mengizinkan…", "Reboot WS-LOG03 sekarang."). Jadi kalimat "saran seperti itu dibuang" hanya berlaku untuk bentuk yang dites. Aksi tetap tidak terpengaruh, karena aksi tidak diambil dari LLM.
+- **Iterasi agen dihentikan di sini.** Skor simulasi reviewer internal P4 76,0 → P5 76,3 → P6 76,3. Kenaikan berikutnya hanya bisa datang dari langkah manusia: ringkasan aturan v2.4 tulisan manusia, ≥ 2 penilai luar, dan Webinar 2. Lihat `AKSI_MANUSIA.md` #8.
+
+## 15. Cek silang draf AI dan penjaga aset OT (15 Nov 2026, PASCA-EVALUASI)
+Keduanya ada di lapisan aplikasi (`app/perisai_app/cekdraf.py`, `app/perisai_app/asetot.py`). Kode mesin yang di-hash tidak berubah.
+- **Cek silang draf.** Draf AI yang menyebut kategori atau taktik ATT&CK yang tidak didukung aturan mana pun yang terpicu diberi label "Bertentangan dengan temuan aturan" dan dicatat di audit (`cek_silang_draf`). Kategori yang berlaku tetap dari aturan.
+  - Diukur dengan memutar ulang usulan LLM yang tersimpan, tanpa panggilan LLM baru: `app\.venv\Scripts\python -I app\tools\ukur_konsistensi_draf.py`.
+  - Hasil: dari 421 draf yang tampil, **175 (41,6 %)** ditandai.
+  - Uji petik oleh tim: 10/10 penandaan dan 10/10 non-penandaan dinilai benar. Penilaian ini bukan penilaian independen.
+  - Ditandai tidak sama dengan salah. Terhadap label OTRF, kategori aturan benar pada 83 dari 174 draf yang ditandai, draf benar pada 16, dan keduanya meleset pada 75.
+  - Rincian: `app/hasil/konsistensi_draf.md`.
+- **Beban analis (dari aturan, bukan LLM).** 693.683 event mentah di 88 rekaman uji OTRF menjadi 88 kasus dengan 704 event terpilih untuk dibaca (±985:1). Semua kasus tetap ditinjau manusia.
+- **Penjaga aset OT di jalur IT.** Sebelumnya host HMI berbasis Windows yang tidak ada di daftar aset terlindungi mendapat usulan `isolate_host` yang menunggu persetujuan. Ini ditemukan 15 Nov dengan host `HMI-POMPA01`. Sekarang usulan isolasi untuk host berawalan HMI-, PLC-, SCADA-, RTU-, EWS-, SIS-, atau yang tercantum di `aset_terlindungi.txt`, menjadi eskalasi dengan alasan "aset OT terlindungi: eskalasi ke insinyur proses". Diuji di `app/tests/test_asetot.py`. CLI `prototype/triase.py` belum memakai penjaga ini.

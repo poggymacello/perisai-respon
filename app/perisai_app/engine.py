@@ -64,6 +64,11 @@ def decide_case(case: dict, audit: AuditLog, llm=None) -> tuple[dict, dict, dict
     no_prop = r.get("error") or ("keluaran LLM tidak valid" if llm is not None else "LLM dimatikan")
     d = decide_v12(case, p, fw, None if p else no_prop)
     audit.append(case["case_id"], "keputusan_v12", {k: d[k] for k in V12_KEYS}, now_iso())
+    # Penjaga aset OT lapisan aplikasi (asetot.py): entri audit terpisah, sesudah keputusan mesin yang asli.
+    from . import asetot
+    g = asetot.guard_decision(case, d)
+    if g:
+        audit.append(case["case_id"], "penjaga_aset_ot", g, now_iso())
     return d, r, _fw_dump(fw)
 
 
@@ -136,8 +141,14 @@ def simulate(case: dict, jenis: str, target: str | None, bukti: list[str], detek
             "bukti": bukti, "keyakinan": 0.9}
     v1 = policy.decide(case, prop, fw)
     d = decide_v12(case, prop, fw)
+    from . import asetot
+    asetot.guard_decision(case, d)
+    verdict, alasan = v1.verdict, list(v1.reasons)
+    ot_block = asetot.guard_proposal(jenis, target, case)
+    if ot_block:
+        verdict, alasan = "BLOCK", alasan + [ot_block]
     return {"usulan": prop["aksi"] | {"bukti": bukti}, "detektor_aktif": detektor_aktif,
-            "putusan_usulan": v1.verdict, "alasan_usulan": v1.reasons, "peringatan_usulan": v1.warnings,
+            "putusan_usulan": verdict, "alasan_usulan": alasan, "peringatan_usulan": v1.warnings,
             "aksi_akhir": d["final_action"], "status_akhir": d["final_status"], "alasan_akhir": d["reasons"],
             "peringatan_akhir": d["warnings"]}
 

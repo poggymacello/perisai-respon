@@ -54,7 +54,7 @@ function decisionCard(d) {
       ["Severity", sevChip(d.ringkas.severity)],
       ["Sumber keputusan", k.sumber === "rules_v12" ? "aturan v1.2.2 (bukan LLM)" : k.sumber],
       ["Syarat bukti isolasi", iso.terpenuhi ? `terpenuhi (${iso.aturan.join(", ")})` : `tidak terpenuhi (${iso.aturan.join(", ") || "tanpa aturan"})`],
-      d.ringkas.aset_terlindungi ? ["Aset", "terlindungi (DC/SIEM/DNS/gateway): tidak pernah diisolasi otomatis"] : null,
+      d.ringkas.aset_terlindungi ? ["Aset", "terlindungi (DC/SIEM/DNS/gateway, aset OT HMI/PLC/SCADA/RTU/EWS, atau daftar satuan): tidak pernah diisolasi otomatis"] : null,
       k.usulan_llm ? ["Usulan LLM", `${actionText(k.usulan_llm.aksi)} · putusan policy: ${VERDICT[k.verdict_usulan_v1] || k.verdict_usulan_v1}`] : null,
     ].filter(Boolean), "kv wide"),
     h("h3", { class: "mt" }, "Alasan policy"),
@@ -177,6 +177,26 @@ function simulationCard(d) {
     out);
 }
 
+// Cek silang draf AI vs kategori aturan (perisai_app/cekdraf.py). Hanya tampilan; keputusan tetap dari aturan.
+function crossCheckLabel(cek) {
+  if (!cek) return "";
+  if (cek.status === "BERTENTANGAN") {
+    return h("div", { class: "actions xcheck", id: "cek-silang" },
+      h("span", { class: "chip chip-warn" }, icon("triangle-alert"), cek.label),
+      h("span", { class: "small muted" }, `kategori yang berlaku: ${cek.attack_aturan.id} ${cek.attack_aturan.nama} (dari aturan)`));
+  }
+  const ok = cek.status === "SESUAI";
+  return h("div", { class: "actions xcheck", id: "cek-silang" },
+    h("span", { class: `chip ${ok ? "st-ok" : "st-esc"}` }, ok ? icon("circle-check") : null, cek.label),
+    h("span", { class: "small muted" }, ok ? `cek silang dengan ${cek.attack_aturan.id} ${cek.attack_aturan.nama}` : "cek silang: tidak ada kategori untuk dibandingkan"));
+}
+
+function crossCheckDetail(cek) {
+  if (!cek || cek.status !== "BERTENTANGAN") return "";
+  return banner("bad", "triangle-alert", h("div", null, h("b", null, "Draf dikesampingkan untuk kategori. "), cek.alasan,
+    cek.audit_seq != null ? h("div", { class: "small muted" }, `Dicatat di jejak audit #${cek.audit_seq}.`) : null));
+}
+
 function aiCard(d, ctx, rerender) {
   const st = ctx.status;
   const llmOn = st && st.mode_analisis === "llm";
@@ -188,7 +208,10 @@ function aiCard(d, ctx, rerender) {
       h("p", { class: "muted small" }, `Dibuat ${fmtTime(dr.ts)} oleh Qwen2.5-1.5B lokal (${fmtNum(dr.detik_llm, 1)} dtk di CPU). `,
         "Disaring per kalimat oleh guard_draft v1.2.2: kalimat harus menyebut bukti terstruktur, dan tidak boleh menyarankan aksi, ",
         "membenarkan penutupan, mengklaim keputusan atasan, atau menyalin teks log."),
-      dr.draf_ai ? h("blockquote", { class: "inert", id: "draf-ai" }, dr.draf_ai) : h("p", { id: "draf-ai" }, h("i", null, "Tidak ada kalimat yang lolos penyaring.")),
+      dr.draf_ai ? crossCheckLabel(dr.cek_silang) : "",
+      dr.draf_ai ? h("blockquote", { class: `inert${dr.cek_silang && dr.cek_silang.status === "BERTENTANGAN" ? " conflict" : ""}`, id: "draf-ai" }, dr.draf_ai)
+        : h("p", { id: "draf-ai" }, h("i", null, "Tidak ada kalimat yang lolos penyaring.")),
+      dr.draf_ai ? crossCheckDetail(dr.cek_silang) : "",
       dr.galat_llm ? banner("warn", "triangle-alert", `LLM: ${dr.galat_llm}`) : "",
       kv([["Usulan LLM", dr.usulan_llm ? actionText(dr.usulan_llm.aksi) : "tidak valid / kosong"],
         ["Putusan policy atas usulan", VERDICT[dr.verdict_usulan] || dr.verdict_usulan || "-"],
@@ -262,7 +285,7 @@ export async function render(page, params, ctx) {
       ". Teks ini diperlakukan sebagai data: tidak disalin ke laporan, disunting sebelum dibaca LLM, dan aksi berisiko tidak diusulkan. Kasus dieskalasi ke analis."));
   } else if (r.aset_terlindungi) {
     page.append(banner("warn", "server", h("b", null, `${r.host} termasuk aset terlindungi. `),
-      "Isolasi otomatis tidak pernah diusulkan untuk DC, SIEM, DNS, dan gateway; keputusan ada pada komandan/analis."));
+      "Isolasi otomatis tidak pernah diusulkan untuk DC, SIEM, DNS, gateway, dan aset OT (HMI/PLC/SCADA/RTU/EWS); keputusan ada pada komandan/analis, dan untuk aset OT pada insinyur proses."));
   }
 
   const rules = d.aturan_terpicu;
