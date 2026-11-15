@@ -19,6 +19,28 @@ Asisten triase insiden siber yang berjalan offline di laptop posko. Penyerang bi
 
 PERISAI mendeteksi serangan dari log Windows dan sensor OT, mencegah alat pertahanan dibajak lewat isi log, dan menyiapkan respons yang diputuskan manusia.
 
+## Kenapa cocok untuk satuan
+
+| Kebutuhan di posko siber satuan | Jawaban PERISAI |
+|---|---|
+| Log satuan tidak boleh keluar dari perangkat | Berjalan penuh di laptop, server hanya mendengar di `127.0.0.1`, tanpa telemetri, dan halaman dilarang memanggil host lain |
+| Tanggap insiden bertahap dari tingkat organisasi ke atas (Perpres 47/2023 Pasal 21) | Triase dilakukan di posko, lalu hasilnya menjadi laporan yang siap diteruskan ke TTIS di atasnya |
+| Isi minimal laporan insiden: kontak pelapor, deskripsi, kronologi, dampak (Peraturan BSSN 1/2024 Pasal 15 ayat 4) | Laporan CSIRT memuat keempatnya, ditambah hash audit per kasus dan catatan persetujuan analis |
+| Personel siber terbatas | Antarmuka berbahasa Indonesia, alasan setiap keputusan ditampilkan, tetap jalan tanpa model AI, pelatihan cukup satu hari |
+| Jaringan IT dan OT di lingkungan yang sama | Jalur OT terpisah. PLC, HMI, dan RTU tidak pernah diputus sistem; keputusan diserahkan ke insinyur proses |
+| Keputusan harus bisa dipertanggungjawabkan | Setiap langkah dan persetujuan terikat rantai hash SHA-256 yang bisa diverifikasi kapan saja |
+| Alat keamanan tidak boleh menjadi celah rantai pasok | Sidik SHA-256 model dan kode mesin dicek saat berjalan. Model yang lisensinya melarang penggunaan militer tidak dipakai |
+
+Pemetaan lengkap ke Perpres 47/2023, Peraturan BSSN 1/2024, NIST SP 800-61r3, dan ISA/IEC 62443, beserta rencana pilot 30 hari, ada di [`docs/PENERAPAN_SATUAN.md`](docs/PENERAPAN_SATUAN.md).
+
+## Apa yang baru
+
+- **Ancaman yang belum banyak dijawab.** Asisten AI untuk SOC biasanya diuji terhadap serangan ke jaringan. PERISAI menguji serangan ke asistennya sendiri, lewat kalimat yang ditanam di isi log, dan mengukurnya dengan model sungguhan.
+- **Pertahanan yang tidak bergantung pada daftar kata.** Uji dengan detektor pola dimatikan (0,6%) dan uji injeksi baru yang ditulis ulang (0 aksi palsu lolos) menunjukkan bahwa yang menahan serangan adalah aturan struktural. Penyerang yang menemukan kalimat baru tetap tidak bisa membuat sistem mengisolasi DC01.
+- **AI dipakai sesuai hasil ukur.** Saat model kalah akurat dari aturan dalam menentukan kategori (35,2% vs 50,0%), kewenangan itu dicabut dari model. Model tetap dipakai untuk pekerjaan yang lambat bagi manusia, yaitu menulis ringkasan, dan setiap drafnya dicek silang terhadap temuan aturan.
+- **Pola injeksi berbahasa Indonesia** dan normalisasi teks (homoglyph, karakter tersembunyi, base64) yang bisa dicoba langsung di Kontrol demo.
+- **Rencana uji dikunci sebelum diuji.** Hipotesis dan metrik di-hash SHA-256 pada 29 Okt 2026, dan hasil yang gagal tetap dilaporkan.
+
 ## Coba dalam 3 menit
 
 ### Lewat browser
