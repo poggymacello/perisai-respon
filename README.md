@@ -3,7 +3,8 @@
 Asisten triase insiden siber yang berjalan offline di laptop posko. Penyerang bisa menulis perintah ke dalam log, tetapi isi log tidak bisa menyetir sistem ini. Model bahasa lokal hanya menulis draf, aturan di kode yang memutuskan, dan analis yang menyetujui.
 
 **Demo web:** https://perisai-respon.vercel.app  
-**Aplikasi Windows:** [Releases v1.0.0](https://github.com/poggymacello/perisai-respon/releases/tag/v1.0.0)  
+**Versi terbaru:** [v1.1.0](https://github.com/poggymacello/perisai-respon/releases/tag/v1.1.0) (demo web, uji injeksi, pembagian peran)  
+**Aplikasi Windows:** zip di [Releases v1.0.0](https://github.com/poggymacello/perisai-respon/releases/tag/v1.0.0)  
 **Kategori:** Penangkalan, Kartika Cyber Hackathon 2026 · **Lisensi:** MIT
 
 ![Antrean kasus PERISAI-RESPON dengan kategori ATT&CK, severity, status, dan tanda injeksi terdeteksi](app/screenshots/01_antrean.png)
@@ -179,8 +180,8 @@ Model (0,92 GB), data OTRF (101 MB), dan data HAI (142 MB) tidak disimpan di rep
 ### Demo web dengan Docker
 
 ```bash
-docker build -f app/Dockerfile -t perisai-respon-demo:1.0.0 .
-docker run --rm -p 127.0.0.1:7860:7860 perisai-respon-demo:1.0.0
+docker build -f app/Dockerfile -t perisai-respon-demo:1.1.0 .
+docker run --rm -p 127.0.0.1:7860:7860 perisai-respon-demo:1.1.0
 ```
 
 Halaman depan ada di http://127.0.0.1:7860 dan aplikasinya di http://127.0.0.1:7860/app/ (sandi akun demo `perisai-demo`). Panduan penerbitan ada di [`app/DEPLOY.md`](app/DEPLOY.md). Versi Vercel memakai `api/index.py` dan `vercel.json`.
