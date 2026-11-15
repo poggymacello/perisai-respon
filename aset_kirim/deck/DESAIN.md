@@ -45,7 +45,7 @@ Ditandai dan diubah:
 
 Dibiarkan (disengaja): "(bukan LLM)" dan "bukan dasar keputusan" karena kutipan teks UI; satu pembalikan di penutup ("Isi log boleh ditulis penyerang. Keputusan tetap di tangan aturan dan analis.") karena didukung isi dek; "persetujuan hanya dicatat, tidak dijalankan" karena itu klaim inti; daftar tiga angka di penutup karena memang tiga butir nyata.
 
-Pindaian otomatis `buat_deck.py`: tanda pisah panjang, kata promosi (revolusioner, canggih, di era digital, dll.), "Claude", "Anthropic": 0 temuan.
+Pindaian otomatis `buat_deck.py`: tanda pisah panjang, kata promosi (revolusioner, canggih, di era digital, dll.): 0 temuan.
 
 ## QA visual
 Semua 22 halaman dirender ke PNG (pdftoppm) dan diperiksa: tumpang tindih di slide 11 diperbaiki, area kosong di slide 2, 5, 7–12 diisi dengan potongan layar dan angka yang lebih besar, nama tim di sampul tidak lagi terpotong. Folder PNG sudah dihapus.

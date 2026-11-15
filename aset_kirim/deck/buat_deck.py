@@ -824,7 +824,7 @@ def main():
     for w in dk.fit_report(prs, min_size=15):
         print("  fit:", w)
     hits = scan(prs)
-    print(f"Pindai kata terlarang, tanda pisah panjang, Claude/Anthropic: {len(hits)} temuan")
+    print(f"Pindai kata terlarang dan tanda pisah panjang: {len(hits)} temuan")
     for h in hits:
         print("  ", h)
     if a.pdf:
